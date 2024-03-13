@@ -7,9 +7,9 @@
 }
 
 .navbar-logo img {
-    max-width: 100%; /* Garante que a logo não ultrapasse a largura da barra de navegação */
+    max-width: 100%;
     width: 50px;
-    height: auto; /* Mantém a proporção da imagem */
+    height: auto;
 }
 
 .nav-link {
@@ -44,10 +44,6 @@ h3.frase {
     transform: translateX(-50%);
 }
 
-body {
-    background-image: url("images/background.jpg");
-}
-
 main {
     display: flex;
     align-items: center;
@@ -58,15 +54,18 @@ main {
 .opcoes-container {
     display: flex;
     justify-content: center;
-    gap: 50px; /* Espaçamento entre as opções */
-    margin-top: 50px; /* Margem superior ajustada */
+    gap: 50px;
+    margin-top: 90vh;
 }
 
 .opcao {
-    flex: 1; /* As opções ocuparão o mesmo espaço */
+    position: relative;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     padding: 20px;
     background-color: saddlebrown;
     border: 3px solid white;
@@ -90,6 +89,10 @@ main {
     color: white;
     font-size: 24px;
     margin-bottom: 10px;
+}
+
+.opcao a {
+    text-decoration: none;
 }
 
 .opcao p {
