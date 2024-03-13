@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
-
-body{
-    background-image: url(./imagens/background.jpg);
+body {
+    background-color: navajowhite !important;
 }
+
+
+main {
+   background-color: navajowhite;
+}
+
 .navbar {
-    background-color: saddlebrown !important;
+    background-color: rgb(168, 122, 89) !important;
     opacity: 0.9 !important;
     padding: 10px 0 !important;
 }
@@ -71,7 +76,7 @@ main {
     justify-content: center;
     text-align: center;
     padding: 20px;
-    background-color: saddlebrown;
+    background-color: rgb(168, 122, 89) !important;
     border: 3px solid white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
