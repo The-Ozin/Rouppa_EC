@@ -9,7 +9,7 @@
 }
 body{
     background-size: 1495px;
-    background-image: url(images/background.jpg);
+    background-image: url(../images/background.jpg);
 }
 #quadrocadastro {
     position: absolute;
@@ -20,7 +20,7 @@ body{
     background-color: rgb(168, 122, 89);
     color: white;
     left: 50%;
-    top: 60vh;
+    top: 54%;
     transform: translate(-50%, -50%);
 }
 #logo{
