@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
 #titulo{
     font-family: "Playfair Display", serif;
     color: brown;
@@ -20,7 +22,7 @@ body {
     background-color: rgb(168, 122, 89);
     color: white;
     left: 50%;
-    top: 54%;
+    top: 60vh;
     transform: translate(-50%, -50%);
 }
 #logo{

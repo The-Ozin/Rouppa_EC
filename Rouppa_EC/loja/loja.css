@@ -1,0 +1,50 @@
+body {
+    background-color: navajowhite !important;
+}
+
+.navbar {
+    background-color: rgb(168, 122, 89) !important;
+    opacity: 0.9 !important;
+    padding: 10px 0 !important;
+}
+
+.navbar-logo img {
+    max-width: 100%;
+    width: 50px;
+    height: auto;
+}
+
+.nav-link {
+    font-size: 16px !important;
+    color: #fff !important;
+    margin-right: 20px !important;
+}
+
+
+.d-flex {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+.sale {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 400px;
+    font-weight: 400;
+    gap: 50px;
+    margin-top: -50vh;
+    background-color: orangered;
+    height: 100px;
+    width: 100%;
+}
