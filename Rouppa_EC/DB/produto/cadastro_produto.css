@@ -1,29 +1,37 @@
-#titulo{
+body {
+    background-size: cover;
+    background-image: url(../images/background.jpg);
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; 
+}
+
+#titulo {
     font-family: "Playfair Display", serif;
     color: brown;
+    font-size: 3em; 
     position: absolute;
-    font-size: 150px;
-    top: -120px;
+    top: 10%; 
     left: 50%;
     transform: translateX(-50%);
 }
-body{
-    background-size: 1495px;
-    background-image: url(../images/background.jpg);
-}
+
 #quadrocadastro {
     position: absolute;
     max-width: 400px;
-    padding: 60px;
+    padding: 3em;
     border: 1px solid saddlebrown;
     border-radius: 12px;
     background-color: rgb(168, 122, 89);
     color: white;
+    top: 50%;
     left: 50%;
-    top: 54%;
     transform: translate(-50%, -50%);
 }
-#logo{
+
+#logo {
+    display: block;
+    margin: 0 auto; 
     height: 90px;
     width: 90px;
 }
@@ -32,7 +40,7 @@ body{
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 20px;
+    font-size: 1.2em; 
     border-radius: 6px;
     cursor: pointer;
 }
