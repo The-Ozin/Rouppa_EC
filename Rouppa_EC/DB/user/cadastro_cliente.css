@@ -1,42 +1,72 @@
-#titulo{
+body {
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-image: url(../images/background.jpg);
+    font-family: Arial, sans-serif; 
+}
+
+.error {
+    border-color: red;
+}
+
+#titulo {
     font-family: "Playfair Display", serif;
     color: brown;
-    position: absolute;
-    font-size: 150px;
-    top: -120px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-body {
-        background-color: navajowhite !important;
+    font-size: 50px; 
+    text-align: center; 
+    margin-top: 20px; 
 }
 
 #quadrocadastro {
     position: absolute;
-    max-width: 400px;
-    padding: 60px;
+    width: 300px; 
+    padding: 30px;
     border: 1px solid saddlebrown;
     border-radius: 12px;
-    background-color: rgb(168, 122, 89);
+    background-color: rgb(168, 122, 89); 
     color: white;
     left: 50%;
-    top: 54%;
+    top: 50%; 
     transform: translate(-50%, -50%);
+    box-sizing: border-box; 
 }
-#logo{
+
+#logo {
+    display: block;
+    margin: 0 auto; 
     height: 90px;
     width: 90px;
 }
-#botao {
-    background-color: brown;
+
+#quadrocadastro label {
+    display: block;
+    margin-bottom: 10px;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 20px;
-    border-radius: 6px;
-    cursor: pointer;
 }
 
-#botao:hover {
+#quadrocadastro input[type="text"],
+#quadrocadastro input[type="password"],
+#quadrocadastro input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#quadrocadastro button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: brown;
+    color: white;
+}
+
+#quadrocadastro button[type="submit"]:hover {
     background-color: darkred;
 }

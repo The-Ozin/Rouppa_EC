@@ -1,17 +1,17 @@
 body {
-    margin: 0;
-    padding: 0;
     background-size: cover;
     background-image: url(../images/background.jpg);
-    font-family: Arial, sans-serif; /* Fonte de fallback */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; 
 }
 
 #titulo {
     font-family: "Playfair Display", serif;
     color: brown;
-    font-size: 100px;
+    font-size: 3em; 
     position: absolute;
-    top: 50px;
+    top: 10%; 
     left: 50%;
     transform: translateX(-50%);
 }
@@ -19,27 +19,28 @@ body {
 #quadrocadastro {
     position: absolute;
     max-width: 400px;
-    padding: 60px;
+    padding: 3em;
     border: 1px solid saddlebrown;
     border-radius: 12px;
     background-color: rgb(168, 122, 89);
     color: white;
-    top: 54%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 #logo {
+    display: block;
+    margin: 0 auto; 
     height: 90px;
     width: 90px;
 }
-
 #botao {
     background-color: brown;
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 20px;
+    font-size: 1.2em; 
     border-radius: 6px;
     cursor: pointer;
 }
