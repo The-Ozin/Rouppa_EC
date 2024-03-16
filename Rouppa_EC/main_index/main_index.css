@@ -64,7 +64,7 @@ main {
     display: flex;
     justify-content: center;
     gap: 50px;
-    margin-top: 80vh;
+    margin-top: 60vh;
 }
 
 .opcao {
@@ -108,4 +108,49 @@ main {
     color: white;
     font-size: 18px;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 5px 0 !important;
+    }
+    .navbar-logo img {
+        width: 40px;
+    }
+    .nav-link {
+        font-size: 14px !important;
+        margin-right: 15px !important;
+    }
+
+    h1.titulo {
+        margin-top: 10px;
+        font-size: 80px;
+        top: 20px;
+    }
+    h3.frase {
+        font-size: 20px;
+        top: 150px;
+    }
+
+    .opcoes-container {
+        
+        margin-top: 110px;
+        flex-direction: column;
+    }
+    .opcao {
+        margin-bottom: 10px;
+        width: 80%;
+        max-width: 300px; 
+    }
+    .opcao img {
+        width: 100%;
+        max-height: 200px; 
+        height: auto;
+    }
+    .opcao h2 {
+        font-size: 18px;
+    }
+    .opcao p {
+        font-size: 14px;
+    }
 }
