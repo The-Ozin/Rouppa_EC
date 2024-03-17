@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 body {
     background-color: navajowhite !important;
+    margin: 0; /* Adicione isso para remover margens padrão */
+    padding: 0; /* Adicione isso para remover padding padrão */
 }
 
 .navbar {
@@ -27,24 +31,53 @@ body {
     transform: translateX(-50%);
 }
 
+
 main {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    margin: 0;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 .sale {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Anton', sans-serif;
-    font-size: 400px;
-    font-weight: 400;
-    gap: 50px;
-    margin-top: -50vh;
     background-color: orangered;
-    height: 100px;
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: 80px;
+    height: 200px; /* Altura ajustável conforme necessário */
     width: 100%;
+    margin-top: -68vh;
+    position: relative; /* Para posicionar as seções abaixo dela */
+    border: 1px solid black;
+}
+
+/* Estilos para as seções de homem e mulher */
+.sections {
+    display: flex;
+    justify-content: center; /* Centralize horizontalmente as seções */
+    flex-wrap: wrap; /* Permita que as seções se movam para a próxima linha se não couberem */
+    position: absolute; /* Posicione as seções abaixo da linha vermelha */
+    top: 40vh; /* Posicione as seções abaixo da linha vermelha */
+    width: 100%; /* Certifique-se de que as seções ocupem toda a largura */
+}
+
+.section {
+    flex: 1;
+    margin: 20px; /* Adicione margem para separar as seções */
+    text-align: center; /* Centralize o conteúdo */
+}
+
+.section img {
+    max-width: 100%;
+    height: 700px; /* Defina uma altura fixa para as imagens */
+    width: auto;
+    border: 1px solid black;
+}
+
+.sm a, .sf a {
+    color: black;
 }
