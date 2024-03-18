@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produto</title>
+    <link rel="stylesheet" href="cad_produto.css">
+</head>
+<body>
+<a href="http://localhost:63342/Rouppa_EC/Rouppa_EC/main_index/main_index.html">
+    <img src="/Rouppa_EC/main_index/imagens/logo1.jpg" alt="logo">
+</a>
+<h1 id="titulo">Cadastre seu Produto</h1>
+<div id="quadrocadastro">
+    <form id="formCadProduto" enctype="multipart/form-data">
+        <label for="nome_produto">Nome do Produto</label><br>
+        <input type="text" id="nome_produto" name="nome_produto" required>
+        <br><br>
+        <label for="tamanho">Tamanho</label><br>
+        <select id="tamanho" name="tamanho" required>
+            <option value="">Selecione o tamanho</option>
+            <option value="PP">PP</option>
+            <option value="P">P</option>
+            <option value="M">M</option>
+            <option value="G">G</option>
+            <option value="GG">GG</option>
+        </select>
+        <br><br>
+        <label for="categoria">Categoria</label><br>
+        <select id="categoria" name="categoria" required>
+            <option value="">Selecione a categoria</option>
+            <option value="Camisa">Camisa</option>
+            <option value="Camiseta">Camiseta</option>
+            <option value="Agasalho">Agasalho</option>
+            <option value="Calça">Calça</option>
+            <option value="Bermuda">Bermuda</option>
+            <option value="Acessório">Acessório</option>
+        </select>
+        <br><br>
+        <fieldset>
+            <legend>Gênero</legend>
+            <label><input type="radio" name="genero" value="Feminino" required> Feminino</label>
+            <label><input type="radio" name="genero" value="Masculino" required> Masculino</label>
+            <label><input type="radio" name="genero" value="Unissex" required> Unissex</label>
+        </fieldset>
+        <br>
+        <label for="condicao">Condição</label><br>
+        <select id="condicao" name="condicao" required>
+            <option value="">Selecione a condição</option>
+            <option value="Novo">Novo</option>
+            <option value="Semi novo">Semi-novo</option>
+            <option value="Usado">Usado</option>
+        </select>
+        <br><br>
+        <label for="descricao">Descrição</label><br>
+        <textarea id="descricao" name="descricao" required></textarea>
+        <br><br>
+        <label for="preco">Preço</label><br>
+        <input type="number" id="preco" name="preco" required>
+        <br><br>
+        <label for="imagem_produto">Imagem do Produto</label><br>
+        <input type="file" id="imagem_produto" name="imagem_produto" accept="image/*" required>
+        <br><br>
+        <button type="button" id="botao">Cadastrar</button>
+    </form>
+</div>
+<div id="produtosCadastrados"></div>
+<script src="cad_produto.js"></script>
+</body>
+</html>
