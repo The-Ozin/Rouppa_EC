@@ -2,14 +2,12 @@
     font-family: "Playfair Display", serif;
     color: brown;
     position: absolute;
-    font-size: 150px;
-    top: -120px;
+    font-size: 70px;
     left: 50%;
     transform: translateX(-50%);
 }
-body{
-    background-size: 1495px;
-    background-image: url(../images/background.jpg);
+body {
+    background-color: navajowhite !important;
 }
 #quadrocadastro {
     position: absolute;
