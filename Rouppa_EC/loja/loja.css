@@ -1,40 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
-body {
-    background-color: navajowhite !important;
-}
-
-.navbar {
-    background-color: rgb(168, 122, 89) !important;
-    opacity: 0.9 !important;
-    padding: 10px 0 !important;
-}
-
-.navbar-logo img {
-    max-width: 100%;
-    width: 50px;
-    height: auto;
-}
-
-.nav-link {
-    font-size: 16px !important;
-    color: #fff !important;
-    margin-right: 20px !important;
-}
-
-.d-flex {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .sale {
@@ -87,7 +58,7 @@ main {
     color: brown;
     position: absolute;
     top: 150vh;
-    left: 10vh;
+    left: 7vh;
     width: 100%;
 }
 
@@ -97,7 +68,7 @@ main {
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
-    margin-top: 250vh;
+    margin-top: 302vh;
 }
 
 .brand_images img {
@@ -105,6 +76,35 @@ main {
     height: 300px;
     margin: 30px;
 }
+
+.arrived {
+    font-family: "Playfair Display", serif;
+    font-size: 44px;
+    font-weight: bold;
+    color: brown;
+    position: absolute;
+    top: 210vh;
+    left: 7vh;
+    width: 100%;
+}
+
+.arrived_images {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 10vh;
+}
+
+.arrived_images img {
+    width: 300px;
+    height: 300px;
+    margin: 30px;
+}
+
+
+
 
 
 
