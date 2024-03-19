@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="redirecionamento.css">
+    <title>Redirecionamento</title>
+</head>
+<body>
+    <h1>Escolha uma opção:</h1>
+
+    <div id="usuarioDiv">
+        <h2>Usuário</h2>
+        <button onclick="pagUsuarioLogin()">Já tenho login</button>
+        <button onclick="pagUsuarioCadastro()">Fazer Cadastro</button>
+    </div>
+
+    <div id="lojaDiv">
+        <h2>Loja</h2>
+        <button onclick="pagLojaLogin()">Já tenho login</button>
+        <button onclick="pagLojaCadastro()">Fazer Cadastro</button>
+    </div>
+
+    <div id="administradorDiv">
+        <h2>Administrador</h2>
+        <button onclick="pagAdmLogin()">Já tenho login</button>
+        <button onclick="pagAdmCadastro()">Fazer Cadastro</button>
+    </div>
+
+</body>
+</html>
+
+<script>
+    function pagUsuarioLogin() {
+        window.location.href = "user/login_usuario.html"; 
+    }
+
+    function pagUsuarioCadastro() {
+        window.location.href = "user/cadastro_user.html"; 
+    }
+
+    function pagLojaLogin() {
+        window.location.href = "loja_db/login_loja.html"; 
+    }
+
+    function pagLojaCadastro() {
+        window.location.href = "loja_db/cadastro_loja.html"; 
+    }
+
+    function pagAdmLogin() {
+        window.location.href = "adm/login_adm.html"; 
+    }
+
+    function pagAdmCadastro() {
+        window.location.href = "adm/cadastro_adm.html"; 
+    }
+</script>
