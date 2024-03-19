@@ -8,8 +8,7 @@
     transform: translateX(-50%);
 }
 body{
-    background-size: 1495px;
-    background-image: url(../images/background.jpg);
+    background-color: bisque;
 }
 #quadrocadastro {
     position: absolute;
