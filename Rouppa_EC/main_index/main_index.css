@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 .d-flex {
-    position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -119,3 +118,12 @@ h3.frase {
         font-size: 14px;
     }
 }
+
+.bg-body-tertiary {
+    margin-top: 400px;
+    border-top:black 2px solid ;
+}
+
+
+
+

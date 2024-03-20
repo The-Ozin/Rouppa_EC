@@ -1,12 +1,9 @@
-body {
-    background-color: navajowhite !important;
+@media (max-width: 768px) {
+    /* Estilos específicos para telas menores */
 }
 
-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+body {
+   background-color: navajowhite !important;
 }
 
 .navbar {
@@ -35,7 +32,13 @@ main {
 }
 
 .d-flex {
-    position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
+
+.homelink {
+    color: brown;
+}
+
+
+

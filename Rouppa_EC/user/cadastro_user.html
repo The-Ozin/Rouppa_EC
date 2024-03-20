@@ -16,7 +16,7 @@
 <body>
     <h1 id="titulo">Cadastro de Usuário</h1>
     <div id="quadrocadastro">
-        <form action="process_form.php" method="post" onsubmit="return validar_cadastro_cliente()">
+        <form action="http://localhost:63342/Rouppa_EC/Rouppa_EC/main_index/main_index.html" method="post" onsubmit="return validar_cadastro_cliente()">
             <label for="email">E-mail *</label>
             <input type="email" id="email" name="email" placeholder="exemplo@email.com" required><br>
             <label for="data">Data de Nascimento *</label>
@@ -76,7 +76,7 @@
             return formularioValido;
         }
         function redirecionar(){
-            window.location.href("main_index.html")
+            window.location.href("http://localhost:63342/Rouppa_EC/Rouppa_EC/main_index/main_index.html")
         }
 
         logo=document.getElementById("logo")

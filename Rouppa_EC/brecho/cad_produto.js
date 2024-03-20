@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function adicionarProdutoAoJSON(novoProduto) {
-    // Simular uma requisição assíncrona para adicionar o novo produto
     setTimeout(() => {
         // Recuperar a lista de produtos do armazenamento local
         const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
@@ -42,7 +41,6 @@ function adicionarProdutoAoJSON(novoProduto) {
         // Atualizar a lista de produtos no armazenamento local
         localStorage.setItem('produtos', JSON.stringify(produtos));
 
-        // Notificar o usuário
         alert("Produto cadastrado com sucesso!");
 
         // Redirecionar para a página do brechó
