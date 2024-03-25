@@ -10,7 +10,7 @@ main {
 }
 
 .navbar {
-    background-color: rgb(168, 122, 89) !important;
+    background-color: rgb(90, 29, 0);!important;
     opacity: 0.9 !important;
     padding: 10px 0 !important;
 }
@@ -23,7 +23,6 @@ main {
     max-width: 100%;
     width: 50px;
     height: auto;
-    border: 2px solid white;
     border-radius: 50%;
     padding: 0;
 }
