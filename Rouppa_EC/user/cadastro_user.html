@@ -16,27 +16,35 @@
 <body>
     <h1 id="titulo">Cadastro de Usuário</h1>
     <div id="quadrocadastro">
-        <form action="http://localhost:63342/Rouppa_EC/Rouppa_EC/main_index/main_index.html" method="post" onsubmit="return validar_cadastro_cliente()">
+        <form action="user_cadastro.php" method="post" onsubmit="return validar_cadastro_cliente()">
+            <label for="nome">Nome *</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite aqui o seu nome..." required><br>
+
             <label for="email">E-mail *</label>
             <input type="email" id="email" name="email" placeholder="exemplo@email.com" required><br>
+
             <label for="data">Data de Nascimento *</label>
             <input type="date" id="data" name="data" required><br>
+
             <label for="senha">Senha *</label>
             <input type="password" id="senha" name="senha" required><br>
             <label for="senha2">Repita sua Senha *</label>
             <input type="password" id="senha2" name="senha2" required><br>
+
             <label for="cpf">CPF *</label>
             <input type="text" id="cpf" name="cpf" placeholder="123.456.789-00" required><br>
+
             <label>Foto de Perfil do Usuário</label>
             <input type="file" name="imagem_perfil" accept="image/*"><br>
             <br><br>
             <button id="botao" type="submit" onclick="redirecionar()">Cadastrar-se</button>
-            <p>* Campos obrigatorios.</p>
+            <p>* Campos obrigatórios.</p>
         </form>
     </div>
 
     <script>
         function validar_cadastro_cliente() {
+            var nome = document.getElementById("nome").value;
             var email = document.getElementById("email").value;
             var cpf = document.getElementById("cpf").value;
             var senha1 = document.getElementById("senha").value;
@@ -46,6 +54,11 @@
             var idadeMinima = 18; 
 
             var formularioValido = true;
+
+            if (!nome.trim()) {
+                alert("Por favor, insira seu nome.");
+                formularioValido = false;
+            }
 
             if (!email.includes('@') || !email.includes('.')) {
                 alert("Por favor, insira um e-mail válido.");
