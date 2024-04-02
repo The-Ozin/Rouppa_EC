@@ -19,22 +19,31 @@
 <div id="quadrocadastro">
     <div id="cadl">Cadastro de loja</div>
     <br>
-    <form action="" method="post" onsubmit="validar_cadastro(event)" name="caixacadastro">
+    <form action="cadastro_loja.php" method="post" onsubmit="validar_cadastro(event)" name="caixacadastro">
+        <label>nome da loja</label><br>
+        <input type="text" name="nome" required>
+        <br><br>
+
         <label>e-mail</label><br>
         <input type="text" name="email" required>
         <br><br>
+
         <label>cnpj</label><br>
         <input type="text" name="cnpj" required>
         <br><br>
+
         <label>cep</label><br>
         <input type="text" name="cep" required>
         <br><br>
+
         <label>senha</label><br>
         <input type="password" name="senha" required>
         <br><br>
+
         <label> repita sua senha</label><br>
         <input type="password" name="senha2" required>
         <br><br>
+
         <button id="botao" type="submit">cadastrar-se</button>
     </form>
 </div>
