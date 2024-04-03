@@ -1,4 +1,4 @@
-#titulo{
+#titulo {
     font-family: "Playfair Display", serif;
     color: brown;
     position: absolute;
@@ -24,10 +24,12 @@ body {
     top: 80%;
     transform: translate(-50%, -50%);
 }
-#logo{
+
+#logo {
     height: 90px;
     width: 90px;
 }
+
 #botao {
     background-color: brown;
     color: white;
@@ -41,3 +43,13 @@ body {
 #botao:hover {
     background-color: darkred;
 }
+
+.alerta {
+    color: white;
+    font-weight: bold;
+    display: none;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+

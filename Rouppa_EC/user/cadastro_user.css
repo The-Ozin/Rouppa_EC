@@ -65,3 +65,21 @@ input[type="file"] {
 #botao:hover {
     background-color: darkred;
 }
+
+.alert-error {
+    color: white;
+    display: none;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.alert-success {
+    color: green;
+    display: none;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
