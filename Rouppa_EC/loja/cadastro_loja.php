@@ -2,17 +2,17 @@
 include("../connect.php");
 $nome = $_POST["nome"];
 $email = $_POST["email"];
-$data_nsc = $_POST["data"];
+$cep = $_POST["cep"];
 $senha = $_POST["senha"];
-$cpf = $_POST["cpf"];
+$cnpj = $_POST["cnpj"];
 
-$sql = "INSERT INTO usuario(cpf, nome, email, data_nascimento, senha) VALUES('$cpf', '$nome', '$email', '$data_nsc', '$senha')";
+$sql = "INSERT INTO loja(cnpj, nome_loja, email_comercial, cep, senha) VALUES('$cnpj', '$nome', '$email', '$cep', '$senha')";
 $result = $conn->query($sql);
 
 if ($result === TRUE) {
     ?>
     <script>
-        alert('Cliente cadastrado');
+        alert('loja cadastrada');
     </script>
     <?php
 } else {

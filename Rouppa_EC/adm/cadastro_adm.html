@@ -14,16 +14,19 @@
     <h2 id="titulo">Cadastro</h2>
     <p id="subtitulo">Pagina destinada apenas aos adminstradores do site</p>
     <div id="quadrocadastro">
-        <form action="" method="post" onsubmit="validar_cadastro(event)" name="caixacadastro">
+        <form action="cadastro_adm.php" method="post" onsubmit="validar_cadastro(event)" name="caixacadastro">
             <label for="id_adm">ID de administrador *</label><br>
             <input type="text" name="id_adm" required>
             <br><br>
+
             <label for="senha">Senha *</label><br>
             <input type="password" name="senha" required>
             <br><br>
+
             <label for="senha2">Repita sua senha *</label><br>
             <input type="password" name="senha2" required>
             <br><br>
+
             <label for="cpf">CPF *</label><br>
             <input type="text" name="cpf" required><br><br>
             <button id="botao" type="submit">Cadastrar-se</button>
