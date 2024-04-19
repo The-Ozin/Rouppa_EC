@@ -40,11 +40,12 @@ h3.frase {
     justify-content: center;
     text-align: center;
     padding: 20px;
-    background-color: rgb(90, 29, 0)!important;
+    background-color: rgb(90, 29, 0);!important;
     opacity: 0.9 !important;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
+
 .opcao:hover {
     transform: scale(1.05);
 }

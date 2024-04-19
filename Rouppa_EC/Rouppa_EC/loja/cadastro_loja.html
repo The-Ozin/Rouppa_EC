@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro da loja</title>
+    <link rel="stylesheet" href="cadastro_loja.css">
+</head>
+
+<header>
+    <img src="./loja_images/logo1.jpg" id="logo" onclick="window.location.href='../main_index/main_index.html'">
+</header>
+
+<body>
+<a href="/main_index/main_index.html">
+    <img src="/images/logo.png" id="logo">
+</a>
+<h1 id="titulo">Rouppa</h1>
+<div id="quadrocadastro">
+    <div id="cadl">Cadastro de loja</div>
+    <br>
+    <form action="cadastro_loja.php" method="post" onsubmit="return validarCadastro(event)" name="caixacadastro">
+        <label>Nome da loja *</label><br>
+        <input type="text" name="nome" required>
+        <div id="nome-alerta" class="alerta"></div>
+        <br>
+
+        <label>E-mail *</label><br>
+        <input type="email" name="email" required>
+        <div id="email-alerta" class="alerta"></div>
+        <br>
+
+        <label>CNPJ *</label><br>
+        <input type="text" name="cnpj" required>
+        <div id="cnpj-alerta" class="alerta"></div>
+        <br>
+
+        <label>CEP *</label><br>
+        <input type="text" name="cep" required>
+        <div id="cep-alerta" class="alerta"></div>
+        <br>
+
+        <label>Senha *</label><br>
+        <input type="password" name="senha" required>
+        <div id="senha-alerta" class="alerta"></div>
+        <br>
+
+        <label>Repita sua senha *</label><br>
+        <input type="password" name="senha2" required>
+        <div id="senha2-alerta" class="alerta"></div>
+        <br>
+
+        <button id="botao" type="submit">Cadastrar-se</button>
+    </form>
+</div>
+
+<script>
+    function validarCadastro(event) {
+        var formularioValido = true;
+
+        formularioValido &= validarCampo('nome', 'nome-alerta', 'Por favor, insira o nome da loja');
+        formularioValido &= validarCampo('email', 'email-alerta', 'Por favor, insira um e-mail válido');
+        formularioValido &= validarCampoFormato('cnpj', 'cnpj-alerta', 'Por favor, insira um CNPJ no formato válido (00.000.000/0000-00)', /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/);
+        formularioValido &= validarCampoFormato('cep', 'cep-alerta', 'Por favor, insira um CEP no formato válido (00000-000)', /^\d{5}-\d{3}$/);
+        formularioValido &= validarSenhas();
+
+        if (!formularioValido) {
+            event.preventDefault(); // Evita o envio do formulário caso a validação falhe
+        }
+        return formularioValido;
+    }
+
+    function validarCampo(campoId, alertaId, mensagem) {
+        var campo = document.getElementsByName(campoId)[0];
+        var alerta = document.getElementById(alertaId);
+
+        if (!campo.value.trim()) {
+            exibirAlerta(alerta, mensagem);
+            return false;
+        }
+
+        return true;
+    }
+
+    function validarCampoFormato(campoId, alertaId, mensagem, regex) {
+        var campo = document.getElementsByName(campoId)[0];
+        var alerta = document.getElementById(alertaId);
+
+        if (!campo.value.trim()) {
+            exibirAlerta(alerta, mensagem);
+            return false;
+        }
+
+        if (!campo.value.match(regex)) {
+            exibirAlerta(alerta, mensagem);
+            return false;
+        }
+
+        return true;
+    }
+
+    function validarSenhas() {
+        var senha1 = document.getElementsByName("senha")[0].value;
+        var senha2 = document.getElementsByName("senha2")[0].value;
+        var senhaAlerta = document.getElementById("senha2-alerta");
+
+        if (senha1 !== senha2) {
+            exibirAlerta(senhaAlerta, "As duas senhas não estão iguais");
+            return false;
+        }
+        return true;
+    }
+
+    function exibirAlerta(elemento, mensagem) {
+        elemento.textContent = mensagem;
+        elemento.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
