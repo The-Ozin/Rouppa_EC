@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro do administrador</title>
+    <link rel="stylesheet" href="cadastro_adm.css">
+</head>
+<header>
+    <img src="./imagens/logo1.jpg" id="logo" onclick="window.location.href='../main_index/main_index.html'">
+</header>
+<body>
+    <img src="../images/Logo.png" id="logo" alt="">
+    <h2 id="titulo">Cadastro</h2>
+    <p id="subtitulo">Pagina destinada apenas aos adminstradores do site</p>
+    <div id="quadrocadastro">
+        <form action="cadastro_adm.php" method="post" onsubmit="validar_cadastro(event)" name="caixacadastro">
+            <label for="id_adm">ID de administrador *</label><br>
+            <input type="text" name="id_adm" required>
+            <br><br>
+
+            <label for="senha">Senha *</label><br>
+            <input type="password" name="senha" required>
+            <br><br>
+
+            <label for="senha2">Repita sua senha *</label><br>
+            <input type="password" name="senha2" required>
+            <br><br>
+
+            <label for="cpf">CPF *</label><br>
+            <input type="text" name="cpf" required><br><br>
+            <button id="botao" type="submit">Cadastrar-se</button>
+            <p>* Campos obrigatorios.</p>
+        </form>
+    </div>   
+</body>
+<script>
+function validar_cadastro(event){
+    var cpf = document.getElementsByName("cpf")[0].value;
+    var senha1 = document.getElementsByName("senha")[0].value;
+    var senha2 = document.getElementsByName("senha2")[0].value;
+
+    var regex_cpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+
+    var formularioValido = true;
+
+    if (!regex_cpf.test(cpf)) {
+        alert("Este CPF é inválido");
+        formularioValido = false;
+    }
+
+    if (senha1 !== senha2){
+        alert("As duas senhas não estão iguais");
+        formularioValido = false;
+    }
+
+    if (!formularioValido){
+        event.preventDefault();
+    }
+}
+</script>
+</html>
