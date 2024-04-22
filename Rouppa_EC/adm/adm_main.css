@@ -1,3 +1,5 @@
+
+
 @media only screen and (max-width: 600px) {
     #usuarioDiv,
     #lojaDiv,
@@ -5,6 +7,8 @@
         max-width: 300px;
     }
 }
+
+
 
 #logo {
     width: 100px;
@@ -43,7 +47,7 @@ h2 {
 }
 
 button {
-    background-color:antiquewhite;
+    background-color: antiquewhite;
     color: brown;
     padding: 10px 20px;
     border: none;
@@ -58,3 +62,39 @@ button {
 button:hover {
     background-color: rgb(168, 122, 89);
 }
+
+.listas{
+    width: 100%;
+    max-height: 100px;
+    max-width: 400px;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    border-color: saddlebrown;
+    background-color: rgb(170, 105, 0);
+}
+
+#lista_adm{
+    position: relative;
+    top: -190px;
+}
+
+#lista_loja{
+    position: relative;
+    top: -540px;
+    left: 1000px;
+}
+
+#lista_usuario{
+    position: relative;
+    top: -440px;
+    left: 500px;
+    width: 500px;
+}
+
+.scrollable {
+
+    overflow-y: auto; 
+}
+
