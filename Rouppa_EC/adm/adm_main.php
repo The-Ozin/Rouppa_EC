@@ -11,84 +11,84 @@
 </head>
 <body>
 
-<div id="opções">
-    <img src="./imagens/logo1.jpg" id="logo" onclick="window.location.href='../main_index/main_index.html'">
-    <h2>Usuário</h2>
-    <button onclick="pagUsuarioLogin()">editar usuario</button>
-    <button onclick="pagUsuarioCadastro()">editar produtos usuario</button>
-    <br><br>
-    <h2>Loja</h2>
-    <button onclick="pagLojaLogin()">editar Loja</button>
-    <button onclick="pagLojaCadastro()">editar produto da loja</button>
-    <br><br>
-    <h2>Administrador</h2>
-    <button onclick="pagAdmLogin()">editar adm</button>
-</div>
+    <div id="opcoes">
+        <img src="./imagens/logo1.jpg" id="logo" onclick="window.location.href='../main_index/main_index.html'">
+        <h2>Usuário</h2>
+        <button onclick="window.location.href='./paginas_edição/usuario/edição_usuario.php'">editar usuario</button>
+        <button onclick="window.location.href='./paginas_edição/usuario/edição_brechó.php'">editar brechó</button>
+        <br><br>
+        <h2>Loja</h2>
+        <button onclick="window.location.href='./paginas_edição/loja/edição_loja.php'">editar Loja</button>
+        <button onclick="window.location.href='./paginas_edição/loja/edição_produto.php'">editar produto da loja</button>
+        <br><br>
+        <h2>Administrador</h2>
+        <button onclick="window.location.href='./paginas_edição/editar_adm.php'">editar adm</button>
+    </div>
 
 
-<div  class="listas scrollable" id="lista_usuario">
-    <h2 id="titulo1">Lista de Usuários</h2>
-    <ul>
-        <?php
-            include "../connect.php";
+    <div  class="listas scrollable" id="lista_usuario">
+        <h2 id="titulo1">Lista de Usuários</h2>
+        <ul>
+            <?php
+                include "../connect.php";
 
-            $sql = "SELECT * FROM usuario";
-            $result = $conn->query($sql);
+                $sql = "SELECT * FROM usuario";
+                $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<li>" . $row["nome"]. "    /    " .$row["cpf"]. "</li>";
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<li>" . $row["nome"]. "    /    " .$row["cpf"]. "</li>";
+                    }
+                } else {
+                    echo "Nenhum usuário encontrado";
                 }
-            } else {
-                echo "Nenhum usuário encontrado";
-            }
 
-        ?>
-    </ul>
-</div>
+            ?>
+        </ul>
+    </div>
 
-<div class="listas scrollable" id="lista_loja">
-    <h2 id="titulo2">Lista de lojas</h2>
-    <ul>
-        <?php
-            include "../connect.php";
+    <div class="listas scrollable" id="lista_loja">
+        <h2 id="titulo2">Lista de lojas</h2>
+        <ul>
+            <?php
+                include "../connect.php";
 
-            $sql = "SELECT * FROM loja";
-            $result = $conn->query($sql);
+                $sql = "SELECT * FROM loja";
+                $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<li>" . $row["nome_loja"]."    /    ".$row["cnpj"] . "</li>";
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<li>" . $row["nome_loja"]."    /    ".$row["cnpj"] . "</li>";
+                    }
+                } else {
+                    echo "Nenhuma loja encontrada";
                 }
-            } else {
-                echo "Nenhuma loja encontrada";
-            }
 
-        ?>
-    </ul>
-</div>
+            ?>
+        </ul>
+    </div>
 
-<div class="listas scrollable" id="lista_adm">
+    <div class="listas scrollable" id="lista_adm">
 
-    <ul>
-        <h2 id="titulo3">Lista de adms</h2>
-        <?php
-            include "../connect.php";
+        <ul>
+            <h2 id="titulo3">Lista de adms</h2>
+            <?php
+                include "../connect.php";
 
-            $sql = "SELECT * FROM adm";
-            $result = $conn->query($sql);
+                $sql = "SELECT * FROM adm";
+                $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<li>" . $row["id_adm"]."    /    ".$row["cpf"] . "</li>";
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<li>" . $row["id_adm"]."    /    ".$row["cpf"] . "</li>";
+                    }
+                } else {
+                    echo "Nenhum usuário encontrado";
                 }
-            } else {
-                echo "Nenhum usuário encontrado";
-            }
 
-        ?>
-    </ul>
-</div>
-
+            ?>
+        </ul>
+    </div>
+    
 </body>
 </html>

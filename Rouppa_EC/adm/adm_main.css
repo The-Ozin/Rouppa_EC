@@ -24,11 +24,12 @@ body {
     
 }
 
-#opções {
-    width: 100%;
-    max-width: 400px;
+#opcoes {
+
+    width: 300px;
+    max-width: 900px;
     margin: 10px;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
     text-align: center;
@@ -47,7 +48,7 @@ h2 {
 }
 
 button {
-    background-color: antiquewhite;
+    background-color: rgb(255, 210, 162);
     color: brown;
     padding: 10px 20px;
     border: none;
@@ -64,6 +65,7 @@ button:hover {
 }
 
 .listas{
+    position: fixed;
     width: 100%;
     max-height: 100px;
     max-width: 400px;
@@ -72,25 +74,25 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 20px;
     border-color: saddlebrown;
-    background-color: rgb(170, 105, 0);
+    background-color: rgb(170, 94, 0);
 }
 
 #lista_adm{
-    position: relative;
-    top: -190px;
+    height: 534px;
+    max-height: 534px;
+    left: 350px;
 }
 
 #lista_loja{
-    position: relative;
-    top: -540px;
-    left: 1000px;
+    height: 534px;
+    max-height:534px;
+    left: 1250px;
 }
 
 #lista_usuario{
-    position: relative;
-    top: -440px;
-    left: 500px;
-    width: 500px;
+    height: 534px;
+    max-height: 534px;
+    left: 800px;
 }
 
 .scrollable {
