@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <title>Cadastro de Produto</title>
     <link rel="stylesheet" href="cad_produto.css">
-    <link rel="stylesheet" href="/main1.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Adicione o CSS do SweetAlert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.min.css">
 </head>
 <body>
 <header>
-    <a class="homelink" href="http://localhost:63342/Rouppa_EC/Rouppa_EC/main_index/main_index.html">Home</a>
+    <a class="mainbrecho" href="main_brecho.html">Brehó</a>
 </header>
 <div class="container">
     <h1>Cadastro de Produto</h1>
-    <form id="cadastroForm" enctype="multipart/form-data">
+    <form id="cadastroForm" method="post" enctype="multipart/form-data" onsubmit="return validarCadastro()"> <!-- Adicionei o método e o enctype -->
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" required>
@@ -44,7 +45,12 @@
         </div>
         <div class="mb-3">
             <label for="genero" class="form-label">Gênero:</label>
-            <input type="text" class="form-control" id="genero" name="genero" required>
+            <select class="form-select" id="genero" name="genero" required>
+                <option value="">Selecione o gênero</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Unissex">Unissex</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="descricao" class="form-label">Descrição:</label>
@@ -57,9 +63,38 @@
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
-<script src="cad_produto.js"></script>
+<!-- Adicione o script do SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
+<script>
+    function validarCadastro() {
+        var nome = document.getElementById("nome").value;
+        var categoria = document.getElementById("categoria").value;
+        var tamanho = document.getElementById("tamanho").value;
+        var preco = document.getElementById("preco").value;
+        var genero = document.getElementById("genero").value;
+        var descricao = document.getElementById("descricao").value;
+        var foto = document.getElementById("foto").value;
+
+        // Verifica se todos os campos foram preenchidos
+        if (!nome || !categoria || !tamanho || !preco || !genero || !descricao || !foto) {
+            // Utilize o SweetAlert para exibir uma mensagem de erro
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: 'Por favor, preencha todos os campos.'
+            });
+            return false; // Impede o envio do formulário
+        }
+
+        // Se todos os campos foram preenchidos, retorna true para enviar o formulário
+        return true;
+    }
+</script>
 </body>
 </html>
+
+
+
 
 
 

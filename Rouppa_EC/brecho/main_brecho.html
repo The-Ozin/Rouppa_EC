@@ -143,7 +143,48 @@
     <!-- Copyright -->
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="brecho.js"></script>
+<script>
+    // Função para carregar os produtos da API
+    function carregarProdutos() {
+        axios.get('/caminho/para/seu/arquivo/php/que/retorna/produtos.php')
+            .then(function (response) {
+                // Limpa o conteúdo atual dos produtosContainer
+                document.getElementById('produtosContainer').innerHTML = '';
+
+                // Itera sobre os produtos recebidos da API
+                response.data.forEach(function (produto) {
+                    // Cria um elemento de div para cada produto
+                    var produtoDiv = document.createElement('div');
+                    produtoDiv.classList.add('col-md-4', 'mb-4');
+
+                    // Monta o HTML do produto
+                    var produtoHTML = `
+                        <div class="card">
+                            <img src="../imagens/produtos/${produto.imagem}" class="card-img-top" alt="${produto.nome}">
+                            <div class="card-body">
+                                <h5 class="card-title">${produto.nome}</h5>
+                                <p class="card-text">${produto.descricao}</p>
+                                <p class="card-text">Preço: R$ ${produto.preco}</p>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    `;
+
+                    // Define o HTML do elemento de div do produto
+                    produtoDiv.innerHTML = produtoHTML;
+
+                    // Adiciona o elemento de div do produto ao container de produtos
+                    document.getElementById('produtosContainer').appendChild(produtoDiv);
+                });
+            })
+            .catch(function (error) {
+                console.error('Erro ao carregar produtos:', error);
+            });
+    }
+
+    // Chama a função para carregar os produtos ao carregar a página
+    carregarProdutos();
+</script>
 </body>
 </html>
 

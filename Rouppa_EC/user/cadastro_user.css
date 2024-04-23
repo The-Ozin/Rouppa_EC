@@ -1,16 +1,15 @@
 #titulo {
     font-family: "Playfair Display", serif;
     color: brown;
-    position: absolute;
     font-size: 50px;
-    top: 30vh;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center; /* Centralizando o texto */
+    margin-top: 10vh; /* Margem superior para dar espaço ao formulário */
 }
 
 body {
     background-color: navajowhite !important;
 }
+
 input[type="text"],
 input[type="password"],
 input[type="date"],
@@ -29,16 +28,13 @@ input[type="file"] {
 }
 
 #quadrocadastro {
-    position: absolute;
     max-width: 350px;
+    margin: 0 auto; /* Centralizando o formulário horizontalmente */
     padding: 15px;
     border: 1px solid saddlebrown;
     border-radius: 12px;
     background-color: rgb(168, 122, 89);
     color: white;
-    left: 50%;
-    top: 100vh;
-    transform: translate(-50%, -50%);
 }
 
 #logo {
@@ -51,7 +47,6 @@ label {
     margin-bottom: 10px;
     font-size: 18px;
 }
-
 
 #botao {
     background-color: brown;
@@ -85,5 +80,6 @@ label {
     padding: 5px 10px;
     border-radius: 6px;
     background-color: #d4edda;
-    border: 1px solid #c3e6cb;
+    border: 1px solid #c3e6cb;
 }
+
