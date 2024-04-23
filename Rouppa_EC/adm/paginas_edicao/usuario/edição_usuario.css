@@ -1,0 +1,73 @@
+body{
+    background-color: navajowhite;
+}
+
+h2{
+    color: brown;
+}
+
+#tabela-scroll {
+    max-height: 1000px; 
+    overflow-y: auto; 
+}
+
+#mesa{
+    left: 40px;
+    height: 1000px;
+    font-family: arial;
+    width: 1000px;
+    padding: 10px;
+    border-width: 1px;
+    border-color: beige;
+    border-radius: 20px;
+    background-color: rgb(168, 122, 89);
+    color: white;
+}
+
+#op_mudar{
+    left: 20px;
+}
+
+#botão{
+    color: white;
+    background-color: brown;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#cx_ipt{
+    padding: 3px;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+#opcoes{
+    left: 1080px;
+    position: fixed;
+    width: 500px;
+    max-width: 900px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    color: black;
+    background-color:rgb(168, 122, 89);
+    border: 3px solid saddlebrown;
+}
+
+button {
+    background-color: rgb(255, 210, 162);
+    color: brown;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+    font-family: "Playfair Display", serif;
+    font-size: medium;
+}

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro do administrador</title>
     <link rel="stylesheet" href="cadastro_adm.css">
+    <!-- Adicione o CSS do SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.min.css">
 </head>
 <header>
     <img src="./imagens/logo1.jpg" id="logo" onclick="window.location.href='../main_index/main_index.html'">
@@ -14,7 +16,7 @@
     <h2 id="titulo">Cadastro</h2>
     <p id="subtitulo">Pagina destinada apenas aos adminstradores do site</p>
     <div id="quadrocadastro">
-        <form action="cadastro_adm.php" method="post" onsubmit="validar_cadastro(event)" name="caixacadastro">
+        <form action="cadastro_adm.php" method="post" onsubmit="return validar_cadastro()" name="caixacadastro">
             <label for="id_adm">ID de administrador *</label><br>
             <input type="text" name="id_adm" required>
             <br><br>
@@ -30,33 +32,41 @@
             <label for="cpf">CPF *</label><br>
             <input type="text" name="cpf" required><br><br>
             <button id="botao" type="submit">Cadastrar-se</button>
-            <p>* Campos obrigatorios.</p>
+            <p>* Campos obrigatórios.</p>
         </form>
     </div>   
 </body>
+<!-- Adicione o script do SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
 <script>
-function validar_cadastro(event){
+function validar_cadastro() {
     var cpf = document.getElementsByName("cpf")[0].value;
     var senha1 = document.getElementsByName("senha")[0].value;
     var senha2 = document.getElementsByName("senha2")[0].value;
 
     var regex_cpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 
-    var formularioValido = true;
-
     if (!regex_cpf.test(cpf)) {
-        alert("Este CPF é inválido");
-        formularioValido = false;
+        // Alerta SweetAlert2 para CPF inválido
+        Swal.fire({
+            icon: 'error',
+            title: 'CPF inválido',
+            text: 'Por favor, insira um CPF válido.'
+        });
+        return false; // Retorna false para evitar o envio do formulário
     }
 
-    if (senha1 !== senha2){
-        alert("As duas senhas não estão iguais");
-        formularioValido = false;
+    if (senha1 !== senha2) {
+        // Alerta SweetAlert2 para senhas diferentes
+        Swal.fire({
+            icon: 'error',
+            title: 'Senhas diferentes',
+            text: 'As senhas digitadas não estão iguais.'
+        });
+        return false; // Retorna false para evitar o envio do formulário
     }
 
-    if (!formularioValido){
-        event.preventDefault();
-    }
+    return true; // Retorna true para enviar o formulário se todas as validações passarem
 }
 </script>
 </html>

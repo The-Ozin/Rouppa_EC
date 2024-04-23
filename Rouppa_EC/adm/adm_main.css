@@ -19,7 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color:rgb(206, 167, 136) !important;
+    background-color:navajowhite !important;
     margin: 0;
     
 }
@@ -34,7 +34,7 @@ body {
     border-radius: 8px;
     text-align: center;
     color: black;
-    background-color:saddlebrown;
+    background-color:rgb(168, 122, 89);
     border: 3px solid saddlebrown;
     
 }
@@ -72,9 +72,10 @@ button:hover {
     margin: 10px;
     padding: 20px;
     border: 1px solid #ccc;
+    border-width: 3px;
     border-radius: 20px;
     border-color: saddlebrown;
-    background-color: rgb(170, 94, 0);
+    background-color: rgb(211, 131, 74);
 }
 
 #lista_adm{
@@ -96,7 +97,6 @@ button:hover {
 }
 
 .scrollable {
-
     overflow-y: auto; 
 }
 

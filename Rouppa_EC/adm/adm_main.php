@@ -14,15 +14,15 @@
     <div id="opcoes">
         <img src="./imagens/logo1.jpg" id="logo" onclick="window.location.href='../main_index/main_index.html'">
         <h2>Usuário</h2>
-        <button onclick="window.location.href='./paginas_edição/usuario/edição_usuario.php'">editar usuario</button>
-        <button onclick="window.location.href='./paginas_edição/usuario/edição_brechó.php'">editar brechó</button>
+        <button onclick="window.location.href='./paginas_edicao/usuario/edição_usuario.php'">editar usuario</button>
+        <button onclick="window.location.href='./paginas_edicao/usuario/edição_brechó.php'">editar brechó</button>
         <br><br>
         <h2>Loja</h2>
-        <button onclick="window.location.href='./paginas_edição/loja/edição_loja.php'">editar Loja</button>
-        <button onclick="window.location.href='./paginas_edição/loja/edição_produto.php'">editar produto da loja</button>
+        <button onclick="window.location.href='./paginas_edicao/loja/edição_loja.php'">editar Loja</button>
+        <button onclick="window.location.href='./paginas_edicao/loja/edição_produto.php'">editar produto da loja</button>
         <br><br>
         <h2>Administrador</h2>
-        <button onclick="window.location.href='./paginas_edição/editar_adm.php'">editar adm</button>
+        <button onclick="window.location.href='./paginas_edicao/editar_adm.php'">editar adm</button>
     </div>
 
 

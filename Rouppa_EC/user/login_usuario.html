@@ -6,12 +6,8 @@
     <title>Login de usuario</title>
     <link rel="stylesheet" href="login_usuario.css">
 </head>
-<header>
-    <img src="./imagens/logo1.jpg" id="logo" onclick="window.location.href='../main_index/main_index.html'">
-
-</header>
 <body>
-    <img src="../images/Logo.png" id="logo" alt="">
+        <img src="imagens/logo1.jpg" id="logo" alt="">
     <h1 id="titulo">Login de Usuário</h1>
     <div id="quadrocadastro">
         <form action="login_usuario.php" method="post" onsubmit="validar_login_usuario(event)" name="caixalogin">
@@ -22,14 +18,19 @@
             <input type="password" name="senha" required>
             <br><br>
             <button id="botao" type="submit">Enviar</button>
-        </form>
-    </div>   
 
+        </form>
+        <div id="botoes-redirecionamento">
+            <a href="../loja/login_loja.html">Login Loja</a>
+            <p></p>
+            <a href="../user/cadastro_user.html">Cadastro de Usuário</a>
+        </div>
+        
+    </div>   
     <script>
         function validar_login_usuario(event) {
             var email = document.getElementsByName("email")[0].value;
             var senha = document.getElementsByName("senha")[0].value;
-
             if (!email || !senha) {
                 alert("Por favor, preencha todos os campos.");
                 event.preventDefault();
