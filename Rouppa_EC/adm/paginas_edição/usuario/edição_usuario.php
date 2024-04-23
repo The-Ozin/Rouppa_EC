@@ -7,67 +7,72 @@
 
 <h2>Lista de Usuários</h2>
 
-<table border="1">
+<table id="mesa" border="1">
     <tr>
-        <th>ID</th>
+        <th>CPF</th>
         <th>Nome</th>
         <th>Email</th>
+
         <th>Editar</th>
     </tr>
     <?php
+    // Inclui o arquivo de conexão com o banco de dados
     include ("./connect.php");
+    // Consulta SQL para selecionar todos os usuários
     $query = "SELECT * FROM usuario";
+    // Executa a consulta SQL
     $result = $conn->query($query);
+    $user = array();
 
     if ($result->num_rows > 0) {
+
         while ($user = $result->fetch_assoc()) {
             ?>
             <tr>
+
                 <td><?php echo $user['cpf']; ?></td>
+
                 <td><?php echo $user['nome']; ?></td>
+
                 <td><?php echo $user['email']; ?></td>
-                <td><?php echo $user['data_nascimento']; ?></td>
-                <td><a href="?id=<?php echo $user['cpf']; ?>">Editar</a></td>
+
+
+
+                <td>
+                    <form action="processar_edição.php" method="post">
+
+
+                        <form id="botão_excluir" action="processar_edição.php" method="post">
+                                <input type="hidden" name="excluir" value="1">
+                                <input type="hidden" name="cpf" value="<?php echo $user['cpf']; ?>">
+                                <input type="submit" value="Excluir usuario">
+                                
+                        </form>
+                        <!-- Campo oculto para enviar o CPF original do usuário -->
+                        <input type="hidden" name="cpf_original" value="<?php echo $user['cpf']; ?>">
+                        <!-- Campo para editar o CPF do usuário -->
+                        CPF: <input type="text" name="cpf_novo" value=""><br>
+                        <!-- Campo para editar o nome do usuário -->
+                        Nome: <input type="text" name="nome" value=""><br>
+                        <!-- Campo para editar o email do usuário -->
+                        Email: <input type="email" name="email" value=""><br>
+                        <!-- Botão para enviar o formulário -->
+                        <input type="submit" value="Salvar">
+
+                    </form>
+                </td>
+
+
             </tr>
+            
             <?php
         }
     } else {
+
         echo "Nenhum usuário encontrado.";
     }
     ?>
 </table>
-
-<?php
-include "./connect.php";
-if(isset($_GET['cpf'])) {
-
-    $user_id = $_GET['cpf'];
-
-
-    $query = "SELECT * FROM usuario WHERE cpf = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if($result->num_rows > 0) {
-
-        $user = $result->fetch_assoc();
-
-        ?>
-        <h2>Edição de Usuário</h2>
-        <form action="processar_edicao.php" method="post">
-            <input type="hidden" name="cpf" value="<?php echo $user['cpf']; ?>">
-            Nome: <input type="text" name="nome" value="<?php echo $user['nome']; ?>"><br>
-            Email: <input type="email" name="email" value="<?php echo $user['email']; ?>"><br>
-            <input type="submit" value="Salvar">
-        </form>
-        <?php
-    } else {
-        echo "Usuário não encontrado.";
-    }
-}
-?>
 
 </body>
 </html>
