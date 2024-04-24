@@ -1,5 +1,6 @@
 <?php
 include("../connect.php");
+
 $nome = $_POST["nome"];
 $email = $_POST["email"];
 $data_nsc = $_POST["data"];
@@ -23,19 +24,10 @@ $sql = "INSERT INTO usuario(cpf, nome, email, data_nascimento, senha) VALUES('$c
 $result = $conn->query($sql);
 
 if ($result === TRUE) {
-?>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        Swal.fire({
-            title: "Cliente cadastrado",
-            icon: "success"
-        }).then(() => {
-            window.location = "login_usuario.html";
-        });
-    </script>
-<?php
-} 
-else {
+    // Redirecionamento para main_index após o cadastro bem-sucedido
+    header("Location: ../main_index/main_index1.php");
+    exit();
+} else {
 ?>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -48,4 +40,5 @@ else {
     </script>
 <?php
 }
-?> 
+?>
+
