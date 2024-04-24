@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->query($sql) === TRUE) {
             echo "Produto cadastrado com sucesso.";
             // Redireciona para a página principal do brechó após o cadastro
-            header("Location: ../brecho/main_brecho.html");
+            header("Location: ./main_brecho.html");
         } else {
             echo "Erro ao cadastrar o produto: " . $conn->error;
         }

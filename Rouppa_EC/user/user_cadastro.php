@@ -30,7 +30,7 @@ if ($result === TRUE) {
             title: "Cliente cadastrado",
             icon: "success"
         }).then(() => {
-            window.location = "login_user.html";
+            window.location = "login_usuario.html";
         });
     </script>
 <?php

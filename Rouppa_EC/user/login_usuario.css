@@ -20,7 +20,7 @@ body {
     background-color: rgb(168, 122, 89);
     color: white;
     left: 50%;
-    top: 54%;
+    top: 70%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
@@ -28,6 +28,12 @@ body {
 #logo {
     height: 90px;
     width: 90px;
+}
+
+label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 18px;
 }
 
 #botao {
@@ -84,3 +90,4 @@ body {
         font-size: 30px;
     }
 }
+

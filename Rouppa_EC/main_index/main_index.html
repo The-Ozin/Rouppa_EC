@@ -40,7 +40,10 @@
                         <li class="nav-item">
                             <a class="nav-link disabled">Disabled</a>
                         </li>
+                        <!-- Elemento para exibir o nome do usuário -->
+                        <li class="nav-item" id="usuario-logado"></li>
                     </ul>
+                    
                     <form class="d-flex">
                         <div class="input-group">
                             <input class="form-control me-2 border-0 rounded-0" type="search" placeholder="Search" aria-label="Search">
@@ -48,13 +51,8 @@
                         </div>
                     </form>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../user/login_usuario.html">Login</a>
-                        </li>
                     </ul>
+                    
                 </div>
             </div>
         </nav>
@@ -157,5 +155,32 @@
         </div>
         <!-- Copyright -->
     </footer>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Função para fazer a requisição AJAX
+            function carregarNomeUsuario() {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            var resposta = xhr.responseText;
+                            // Divide a resposta nos dados da sessão e no nome do usuário
+                            var dados = resposta.split(' ');
+                            var nomeUsuario = dados[1];
+                            // Atualiza o conteúdo do elemento com o nome do usuário
+                            document.getElementById('usuario-logado').textContent = nomeUsuario;
+                        } else {
+                            console.error('Ocorreu um erro ao carregar o nome do usuário.');
+                        }
+                    }
+                };
+                xhr.open('GET', '../user/verificar_sessao.php', true);
+                xhr.send();
+            }
+    
+            // Chama a função para carregar o nome do usuário quando a página é carregada
+            carregarNomeUsuario();
+        });
+    </script>                
 </body>
 </html>
