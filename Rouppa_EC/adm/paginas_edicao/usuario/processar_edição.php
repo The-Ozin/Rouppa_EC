@@ -1,42 +1,52 @@
 <?php
+include("connect.php");
 
-include "connect.php";
-
- $excluir=$_POST['excluir'];
-
-if($excluir == '1'){
-    $cpf=$_POST['cpf'];
-    $sql="DELETE FROM usuario WHERE cpf = '$cpf' ";
-    if ($conn->query($sql) === TRUE) {
-        echo "Registro deletado com sucesso!";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    if (isset($_POST['excluir']) && $_POST['excluir'] == '1') {
+        $cpf = $_POST['cpf'];
+        $sql = "DELETE FROM usuario WHERE cpf = '$cpf'";
+        if ($conn->query($sql) === TRUE) {
+            header("location: edição_usuario.php");
+        } else {
+            echo "Erro ao excluir usuário: " . $conn->error;
+        }
     } else {
-        echo "Erro ao deletar registro: " . $conn->error;
+        $cpf_original = $_POST['cpf_original'];
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $nova_senha = $_POST['nova_senha'];
+
+        if (!empty($nova_senha)) {
+            
+            $senha_criptografada = password_hash($nova_senha, PASSWORD_DEFAULT);
+        }
+        
+        $sql = "UPDATE usuario SET ";
+        
+        if (!empty($nome)) {
+            $sql .= "nome = '$nome', ";
+        }
+        
+        if (!empty($email)) {
+            $sql .= "email = '$email', ";
+        }
+        
+        if (isset($senha_criptografada)) {
+            $sql .= "senha = '$senha_criptografada', ";
+        }
+        
+        $sql = rtrim($sql, ", ");
+        
+        $sql .= " WHERE cpf = '$cpf_original'";
+
+        if ($conn->query($sql) === TRUE) {
+            header("location: edição_usuario.php");
+        } else {
+            echo "Erro ao atualizar usuário: " . $conn->error;
+        }
     }
 }
 
-elseif(isset($_POST['cpf']) && isset($_POST['nome']) && isset($_POST['email'])) {
-
-    $cpf = $_POST['cpf'];
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-
-    $query = "UPDATE usuario SET nome = ?, email = ? WHERE cpf = ?";
-
-    $stmt = $conn->prepare($query);
-
-    $stmt->bind_param("sss", $nome, $email, $cpf);
-
-    if($stmt->execute()) {
-
-        header("Location: edição_usuario.php");
-        exit();
-    } else {
-
-        echo "Erro ao processar a edição do usuário.";
-    }
-}
- else {
-
-    echo "Dados do formulário incompletos.";
-}
+$conn->close();
 ?>
