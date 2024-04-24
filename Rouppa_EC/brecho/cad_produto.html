@@ -14,7 +14,7 @@
 </header>
 <div class="container">
     <h1>Cadastro de Produto</h1>
-    <form id="cadastroForm" method="post" enctype="multipart/form-data" onsubmit="return validarCadastro()"> <!-- Adicionei o método e o enctype -->
+    <form id="cadastroForm" action="cad_produto.php" method="post" enctype="multipart/form-data" onsubmit="return validarCadastro()"> <!-- Adicionei o método e o enctype -->
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" required>
