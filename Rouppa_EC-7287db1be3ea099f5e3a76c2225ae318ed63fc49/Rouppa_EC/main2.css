@@ -1,0 +1,50 @@
+@media (max-width: 768px) {
+    /* Estilos específicos para telas menores */
+}
+
+body {
+   background-color: navajowhite !important;
+}
+
+.navbar {
+    background-color: rgb(90, 29, 0);!important;
+    opacity: 0.9 !important;
+    padding: 10px 0 !important;
+}
+
+.navbar-logo img {
+    max-width: 100%;
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.nav-link {
+    font-size: 16px !important;
+    color: #fff !important;
+    margin-right: 20px !important;
+}
+
+.d-flex {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.homelink {
+    color: brown;
+}
+
+.bg-body-tertiary {
+    position: relative;
+    margin-top: 40px;
+    border-top:black 2px solid;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-lg-3,
+.col-md-6 {
+    text-align: center;
+}
+
