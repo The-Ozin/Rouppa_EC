@@ -12,169 +12,187 @@ User
 <body>
     <main>
         @section('content')
-            <form id="registerForm" method="POST" enctype="multipart/form-data" action="../welcome.blade.php">
-                @csrf
+                                    <!-- Pills navs -->
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a
+                class="nav-link active"
+                id="tab-login"
+                data-mdb-pill-init
+                href="#pills-login"
+                role="tab"
+                aria-controls="pills-login"
+                aria-selected="true"
+                >Login</a
+                >
+            </li>
+            <li class="nav-item" role="presentation">
+                <a
+                class="nav-link"
+                id="tab-register"
+                data-mdb-pill-init
+                href="#pills-register"
+                role="tab"
+                aria-controls="pills-register"
+                aria-selected="false"
+                >Register</a
+                >
+            </li>
+            </ul>
+            <!-- Pills navs -->
 
-                <div>
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" pattern=".{2,}" title="O nome deve conter no mínimo 2 caracteres" required>
-                    <span id="nameError" style="color: red;"></span>
+            <!-- Pills content -->
+            <div class="tab-content">
+            <div
+                class="tab-pane fade show active"
+                id="pills-login"
+                role="tabpanel"
+                aria-labelledby="tab-login"
+            >
+                <form>
+                <div class="text-center mb-3">
+                    <p>Sign in with:</p>
+                    <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                    </button>
+
+                    <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                    </button>
+
+                    <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                    </button>
+
+                    <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                    </button>
                 </div>
 
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <span id="emailError" style="color: red;"></span>
+                <p class="text-center">or:</p>
+
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="loginName" class="form-control" />
+                    <label class="form-label" for="loginName">Email or username</label>
                 </div>
 
-                <div>
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="A senha deve conter pelo menos 8 caracteres, incluindo pelo menos uma letra, um número e um caractere especial" required>
-                    <span id="passwordError" style="color: red;"></span>
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="loginPassword" class="form-control" />
+                    <label class="form-label" for="loginPassword">Password</label>
                 </div>
 
-                <div>
-                    <label for="password_confirmation">Repetir Senha:</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" required>
-                    <span id="confirmPasswordError" style="color: red;"></span>
+                <!-- 2 column grid layout -->
+                <div class="row mb-4">
+                    <div class="col-md-6 d-flex justify-content-center">
+                    <!-- Checkbox -->
+                    <div class="form-check mb-3 mb-md-0">
+                        <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="loginCheck"
+                        checked
+                        />
+                        <label class="form-check-label" for="loginCheck"> Remember me </label>
+                    </div>
+                    </div>
+
+                    <div class="col-md-6 d-flex justify-content-center">
+                    <!-- Simple link -->
+                    <a href="#!">Forgot password?</a>
+                    </div>
                 </div>
 
-                <div>
-                    <label for="birthdate">Data de Nascimento:</label>
-                    <input type="date" id="birthdate" name="birthdate" required>
-                    <span id="birthdateError" style="color: red;"></span>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                    <p>Not a member? <a href="#!">Register</a></p>
+                </div>
+                </form>
+            </div>
+            <div
+                class="tab-pane fade"
+                id="pills-register"
+                role="tabpanel"
+                aria-labelledby="tab-register"
+            >
+                <form>
+                <div class="text-center mb-3">
+                    <p>Sign up with:</p>
+                    <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                    </button>
+
+                    <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                    </button>
+
+                    <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                    </button>
+
+                    <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                    </button>
                 </div>
 
-                <div>
-                    <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" name="cpf" pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" title="O CPF deve estar no formato 000.000.000-00 ou 00000000000" required>
-                    <span id="cpfError" style="color: red;"></span>
+                <p class="text-center">or:</p>
+
+                <!-- Name input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="registerName" class="form-control" />
+                    <label class="form-label" for="registerName">Name</label>
                 </div>
 
-                <div>
-                    <label for="photo">Adicionar Foto:</label>
-                    <input type="file" id="photo" name="photo">
+                <!-- Username input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="registerUsername" class="form-control" />
+                    <label class="form-label" for="registerUsername">Username</label>
                 </div>
 
-                <div>
-                    <button type="submit">Registrar</button>
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="registerEmail" class="form-control" />
+                    <label class="form-label" for="registerEmail">Email</label>
                 </div>
-            </form>
 
-            <script>
-                function validateForm() {
-                    var name = document.getElementById("name").value;
-                    var email = document.getElementById("email").value;
-                    var password = document.getElementById("password").value;
-                    var confirmPassword = document.getElementById("password_confirmation").value;
-                    var birthdate = document.getElementById("birthdate").value;
-                    var cpf = document.getElementById("cpf").value;
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="registerPassword" class="form-control" />
+                    <label class="form-label" for="registerPassword">Password</label>
+                </div>
 
-                    var isValid = true;
+                <!-- Repeat Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="registerRepeatPassword" class="form-control" />
+                    <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+                </div>
 
-                    // Validate name
-                    if (name.length < 2) {
-                        document.getElementById("nameError").innerText = "O nome deve conter no mínimo 2 caracteres";
-                        isValid = false;
-                    } else {
-                        document.getElementById("nameError").innerText = "";
-                    }
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input
+                    class="form-check-input me-2"
+                    type="checkbox"
+                    value=""
+                    id="registerCheck"
+                    checked
+                    aria-describedby="registerCheckHelpText"
+                    />
+                    <label class="form-check-label" for="registerCheck">
+                    I have read and agree to the terms
+                    </label>
+                </div>
 
-                    // Validate email
-                    if (!validateEmailFormat(email)) {
-                        document.getElementById("emailError").innerText = "O email deve ser válido";
-                        isValid = false;
-                    } else {
-                        document.getElementById("emailError").innerText = "";
-                    }
-
-                    // Validate password
-                    if (!validatePasswordFormat(password)) {
-                        document.getElementById("passwordError").innerText = "A senha deve conter pelo menos 8 caracteres, incluindo pelo menos uma letra, um número e um caractere especial";
-                        isValid = false;
-                    } else {
-                        document.getElementById("passwordError").innerText = "";
-                    }
-
-                    // Validate confirm password
-                    if (password !== confirmPassword) {
-                        document.getElementById("confirmPasswordError").innerText = "As senhas não coincidem";
-                        isValid = false;
-                    } else {
-                        document.getElementById("confirmPasswordError").innerText = "";
-                    }
-
-                    // Validate birthdate
-                    if (!validateBirthdateFormat(birthdate)) {
-                        document.getElementById("birthdateError").innerText = "Insira uma data válida";
-                        isValid = false;
-                    } else {
-                        document.getElementById("birthdateError").innerText = "";
-                    }
-
-                    // Validate CPF
-                    if (!validateCPFFormat(cpf)) {
-                        document.getElementById("cpfError").innerText = "O CPF deve estar no formato 000.000.000-00 ou 00000000000";
-                        isValid = false;
-                    } else {
-                        document.getElementById("cpfError").innerText = "";
-                    }
-
-                    return isValid;
-                }
-
-                function validateEmailFormat(email) {
-                    var emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-                    return emailRegex.test(email);
-                }
-
-                function validatePasswordFormat(password) {
-                    var passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                    return passwordRegex.test(password);
-                }
-
-                function validateBirthdateFormat(birthdate) {
-                    var birthdateObj = new Date(birthdate);
-                    var today = new Date();
-                    
-                    // Verificar se a data de nascimento está no futuro
-                    if (birthdateObj > today) {
-                        document.getElementById("birthdateError").innerText = "A data de nascimento não pode ser no futuro";
-                        return false;
-                    }
-
-                    var age = today.getFullYear() - birthdateObj.getFullYear();
-                    var monthDiff = today.getMonth() - birthdateObj.getMonth();
-                    
-                    // Ajustar a idade se o mês atual for anterior ao mês de nascimento ou se estiver no mesmo mês mas o dia atual for anterior ao dia de nascimento
-                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdateObj.getDate())) {
-                        age--;
-                    }
-
-                    // Verificar se o usuário tem menos de 18 anos
-                    if (age < 18) {
-                        document.getElementById("birthdateError").innerText = "Você deve ser maior de 18 anos para se registrar";
-                        return false;
-                    }
-
-                    // Se todas as condições forem atendidas, a data é considerada válida
-                    return true;
-                }
-
-                function validateCPFFormat(cpf) {
-                    var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
-                    return cpfRegex.test(cpf);
-                }
-                
-                document.getElementById("registerForm").addEventListener("submit", function(e) {
-                    if (!validateForm()) {
-                        e.preventDefault();
-                    } else {
-
-                        window.location.href = "welcome.blade.php";
-                    }
-                });
-            </script>
+                <!-- Submit button -->
+                <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+                </form>
+            </div>
+            </div>
+<!-- Pills content -->
         @endsection
     </main>
 </body>
