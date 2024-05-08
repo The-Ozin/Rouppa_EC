@@ -1,0 +1,17 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: navajowhite;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: 90vh;
+    color: white;
+}
+
+
+
