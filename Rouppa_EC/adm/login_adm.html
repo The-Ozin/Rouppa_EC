@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login do adm</title>
+    <link rel="stylesheet" href="login_adm.css">
+</head>
+<header>
+    <img src="./imagens/logo1.jpg" id="logo" onclick="window.location.href='../main_index/main_index1.php'">
+
+</header>
+<body>
+    <h1 id="titulo">Rouppa</h1>
+    <div id="quadrocadastro">
+        <form action="adm_login.php" method="post" onsubmit="validar_login(event)" name="caixalogin">
+            <label for="id_adm">id do adm</label><br>
+            <input type="text" name="id_adm" required>
+            <br><br>
+            <label for="senha">senha</label><br>
+            <input type="password" name="senha" required>
+            <br><br>
+            <button id="botao" type="submit">cadastrar-se</button>
+        </form>
+    </div>   
+
+    <script>
+        function validar_login(event) {
+            var id_adm = document.getElementsByName("id_adm")[0].value;
+            var senha = document.getElementsByName("senha")[0].value;
+
+            if (!id_adm || !senha) {
+                alert("Por favor, preencha todos os campos.");
+                event.preventDefault();
+            }
+        }
+    </script>
+</body>
+</html>

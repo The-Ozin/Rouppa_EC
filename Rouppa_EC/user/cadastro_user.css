@@ -1,0 +1,85 @@
+#titulo {
+    font-family: "Playfair Display", serif;
+    color: brown;
+    font-size: 50px;
+    text-align: center; /* Centralizando o texto */
+    margin-top: 10vh; /* Margem superior para dar espaço ao formulário */
+}
+
+body {
+    background-color: navajowhite !important;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+#quadrocadastro {
+    max-width: 350px;
+    margin: 0 auto; /* Centralizando o formulário horizontalmente */
+    padding: 15px;
+    border: 1px solid saddlebrown;
+    border-radius: 12px;
+    background-color: rgb(168, 122, 89);
+    color: white;
+}
+
+#logo {
+    height: 90px;
+    width: 90px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+#botao {
+    background-color: brown;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#botao:hover {
+    background-color: darkred;
+}
+
+.alert-error {
+    color: navajowhite;
+    display: none;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.alert-success {
+    color: tomato;
+    display: none;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
