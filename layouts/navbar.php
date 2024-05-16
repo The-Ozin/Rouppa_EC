@@ -1,4 +1,3 @@
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
     <!-- Container wrapper -->
@@ -81,13 +80,13 @@
                     aria-labelledby="navbarDropdownMenuLink"
                 >
                     <li>
-                        <a class="dropdown-item" href="#">Some news</a>
+                        <a class="dropdown-item" href="#">Alguma notícia</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">Another news</a>
+                        <a class="dropdown-item" href="#">Outra notícia</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Algo mais aqui</a>
                     </li>
                 </ul>
             </div>
@@ -102,26 +101,30 @@
                     aria-expanded="false"
                 >
                     <i class="fas fa-user" style="color: white;"></i>
+                    <!-- Exibição do nome do usuário -->
+                    <?php if(isset($_SESSION['nome'])): ?>
+                        <span style="color: white; margin-left: 5px;"><?php echo $_SESSION['nome']; ?></span>
+                    <?php endif; ?>
                 </a>
                 <ul
                     class="dropdown-menu dropdown-menu-end"
                     aria-labelledby="navbarDropdownMenuAvatar"
                 >
                     <li>
-                        <a class="dropdown-item" href="http://localhost/Rouppa/user/profile.php">My profile</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="http://localhost/Rouppa/user/user_login.php">Login/Cadastro</a>
+                        <!-- Se o usuário estiver logado, exibe uma saudação personalizada -->
+                        <?php if(isset($_SESSION['nome'])): ?>
+                            <a class="dropdown-item" href="#">Olá, <?php echo $_SESSION['nome']; ?></a>
+                        <?php else: ?>
+                            <a class="dropdown-item" href="./user/user_login.php">Login/Cadastro</a>
+                        <?php endif; ?>
                     </li>
                     <li>
                         <a class="dropdown-item" href="#">Logout</a>
                     </li>
                 </ul>
             </div>
-        </div>
         <!-- Right elements -->
     </div>
     <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
-

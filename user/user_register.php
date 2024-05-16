@@ -46,7 +46,7 @@
     </head>
     <body>
         <div class="d-flex justify-content-center">
-            <form id="registerForm">
+            <form id="registerForm" action="../user/user.php" method="post">
                 <div class="text-center mb-3">
                     <p>Sign up with:</p>
                     <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1">
@@ -67,26 +67,26 @@
                 <!-- Name input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="registerName">Name</label>
-                    <input type="text" id="registerName" class="form-control border border-dark" style="width: 100%;" required />
+                    <input type="text" name="registerName" class="form-control border border-dark" style="width: 100%;" required />
                 </div>
 
                 <!-- Email input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" class="form-control border border-dark" style="width: 100%;" required />
+                    <input type="email" name="registerEmail" class="form-control border border-dark" style="width: 100%;" required />
                 </div>
 
                 <!-- CPF input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="registerCPF">CPF</label>
-                    <input type="text" id="registerCPF" class="form-control border border-dark" style="width: 100%;" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required />
+                    <input type="text" name="registerCPF" class="form-control border border-dark" style="width: 100%;" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required />
                 </div>
 
                  <!-- Password input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="registerPassword">Password</label>
                     <div class="input-group">
-                        <input type="password" id="registerPassword" class="form-control border border-dark" style="width: 100%;" required />
+                        <input type="password" name="registerPassword" class="form-control border border-dark" style="width: 100%;" required />
                         <button class="btn border border-dark" type="button" id="togglePasswordVisibility">
                             <i class="fas fa-eye"></i>
                         </button>
@@ -97,7 +97,7 @@
                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="registerRepeatPassword">Repeat password</label>
                     <div class="input-group">
-                        <input type="password" id="registerRepeatPassword" class="form-control border border-dark" style="width: 100%;" required />
+                        <input type="password" name="registerRepeatPassword" class="form-control border border-dark" style="width: 100%;" required />
                         <button class="btn border border-dark" type="button" id="toggleRepeatPasswordVisibility">
                             <i class="fas fa-eye"></i>
                         </button>
@@ -107,7 +107,7 @@
                 <!-- Birthdate input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="registerBirthdate">Data de Nascimento</label>
-                    <input type="date" id="registerBirthdate" class="form-control border border-dark" style="width: 100%;" required />
+                    <input type="date" name="registerBirthdate" class="form-control border border-dark" style="width: 100%;" required />
                 </div>
 
                 <!-- Photo input -->
