@@ -1,4 +1,3 @@
-
  <?php 
  @include('./layouts/navbar.php');
   ?>
@@ -148,6 +147,8 @@
     footer {
         margin-top: 120vh;
     }
+
+
 </style>
 
 

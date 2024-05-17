@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "Simba8!#";
+$password = "wordpass";
 $database = "rouppa"; // <-- Corrected variable name
 
 $conn = new mysqli($servername, $username, $password, $database); // <-- Use $database here

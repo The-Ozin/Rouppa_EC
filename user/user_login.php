@@ -1,6 +1,37 @@
-<?php 
- @include('../layouts/navbar.php');
-  ?>
+<?php
+session_start();
+@include('../layouts/navbar.php');
+@include('../connect.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST['loginName']);
+    $password = trim($_POST['loginPassword']);
+
+    $sql = "SELECT cpf, email, senha FROM usuario WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['senha'])) {
+            $_SESSION['user_id'] = $row['cpf']; 
+            $_SESSION['email'] = $row['email'];
+            header("Location: welcome.php");
+            exit(); 
+        } else {
+            $error_message = "Senha incorreta.";
+        }
+    } else {
+        $error_message = "Usuário não encontrado.";
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +101,7 @@
 
                     <!-- Email input -->
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <label class="form-label" for="loginName">Email or username</label>
+                        <label class="form-label" for="loginName">Email</label>
                         <input type="email" id="loginName" class="form-control border border-dark" style="width: 100%;" required/>
                     </div>
 
@@ -118,17 +149,43 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const loginPasswordField = document.querySelector('#loginPassword');
-            const toggleLoginVisibilityButton = document.querySelector('#toggleLoginPasswordVisibility');
+            const loginForm = document.querySelector('#loginForm');
+            const togglePasswordBtn = document.querySelector('#toggleLoginPasswordVisibility');
+            const passwordInput = document.querySelector('#loginPassword');
 
-            toggleLoginVisibilityButton.addEventListener('click', function() {
-                if (loginPasswordField.type === 'password') {
-                    loginPasswordField.type = 'text';
-                    this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-                } else {
-                    loginPasswordField.type = 'password';
-                    this.innerHTML = '<i class="fas fa-eye"></i>';
-                }
+            togglePasswordBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+
+            loginForm.addEventListener('submit', function(event) {
+                // Impedir o envio padrão do formulário
+                event.preventDefault();
+
+                // Realizar a submissão do formulário via AJAX
+                const formData = new FormData(this);
+
+                fetch('user_login.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Redirecionar para a página de boas-vindas se o login for bem-sucedido
+                        window.location.href = '../welcome.php';
+                    } else {
+                        // Exibir mensagem de erro se o login falhar
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Login inválido. Verifique suas credenciais e tente novamente.',
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao processar a solicitação:', error);
+                });
             });
         });
     </script>
