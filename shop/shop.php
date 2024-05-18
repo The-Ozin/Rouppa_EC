@@ -1,7 +1,6 @@
-
 <?php 
- @include('../layouts/navbar.php');
-  ?>
+@include('../layouts/navbar.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +26,7 @@
 <body>
     <div class="sale"> ! 20% OFF EM TODA A COMPRA ! </div>
     <h1>SNKRS</h1>
-    <?php @include('../layouts/products.php'); ?>
+    <?php @include('products_shop.php'); ?>
     <!-- Adicione a inicialização do componente do carrossel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
     <!-- Adicione a inicialização do componente do carrossel -->
