@@ -1,10 +1,10 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "Simba8!#";
-$database = "rouppa"; // <-- Corrected variable name
+$password = "PUC@1234";
+$database = "rouppa";
 
-$conn = new mysqli($servername, $username, $password, $database); // <-- Use $database here
+$conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
