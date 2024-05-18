@@ -1,3 +1,8 @@
+<?php 
+session_start();
+?>
+
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
     <!-- Container wrapper -->
@@ -15,7 +20,6 @@
             <i class="fas fa-bars"></i>
         </button>
 
-        <!-- Left elements -->
         <div class="d-flex align-items-center">
             <!-- Navbar title -->
             <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
@@ -36,11 +40,10 @@
                 ></span>
             </form>
         </div>
-        <!-- Left elements -->
 
-        <!-- Center elements -->
+
         <div class="d-flex justify-content-center align-items-center" style="position: absolute; left: 50%; transform: translateX(-50%);">
-            <!-- Links -->
+
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: white;">Dashboard</a>
@@ -53,9 +56,7 @@
                 </li>
             </ul>
         </div>
-        <!-- Center elements -->
 
-        <!-- Right elements -->
         <div class="d-flex align-items-center">
             <!-- Icon -->
             <a class="text-reset me-3" href="#">
@@ -90,39 +91,35 @@
                     </li>
                 </ul>
             </div>
-            <!-- Avatar -->
-            <div class="dropdown">
-                <a
-                    data-mdb-dropdown-init
-                    class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                    href="#"
-                    id="navbarDropdownMenuAvatar"
-                    role="button"
-                    aria-expanded="false"
-                >
-                    <i class="fas fa-user" style="color: white;"></i>
-                    <!-- Exibição do nome do usuário -->
+        <!-- Avatar -->
+        <div class="dropdown">
+            <a
+                data-mdb-dropdown-init
+                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                aria-expanded="false"
+            >
+                <i class="fas fa-user" style="color: white;"></i>
+                
+            </a>
+            <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuAvatar"
+            >
+                <li>
+                    <!-- Se o usuário estiver logado, exibe uma saudação personalizada -->
                     <?php if(isset($_SESSION['nome'])): ?>
-                        <span style="color: white; margin-left: 5px;"><?php echo $_SESSION['nome']; ?></span>
-                    <?php endif; ?>
-                </a>
-                <ul
-                    class="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="navbarDropdownMenuAvatar"
-                >
-                    <li>
-                        <!-- Se o usuário estiver logado, exibe uma saudação personalizada -->
-                        <?php if(isset($_SESSION['nome'])): ?>
-                            <a class="dropdown-item" href="#">Olá, <?php echo $_SESSION['nome']; ?></a>
-                        <?php else: ?>
-                            <a class="dropdown-item" href="./user/user_login.php">Login/Cadastro</a>
-                        <?php endif; ?>
-                    </li>
-                    <li>
+                        <a class="dropdown-item" href="#">Olá, <?php echo $_SESSION['nome']; ?></a>
                         <a class="dropdown-item" href="#">Logout</a>
-                    </li>
-                </ul>
-            </div>
+                    <?php else: ?>
+                        <a class="dropdown-item" href="./user/user_login.php">Login/Cadastro</a>
+                    <?php endif; ?>
+                </li>
+
+            </ul>
+        </div>
         <!-- Right elements -->
     </div>
     <!-- Container wrapper -->

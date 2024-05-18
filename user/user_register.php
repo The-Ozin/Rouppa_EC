@@ -83,7 +83,7 @@
                 </div>
 
                  <!-- Password input -->
-                <div data-mdb-input-init class="form-outline mb-4">
+                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="registerPassword">Password</label>
                     <div class="input-group">
                         <input type="password" name="registerPassword" class="form-control border border-dark" style="width: 100%;" required />
@@ -93,7 +93,6 @@
                     </div>
                 </div>
 
-                <!-- Repeat Password input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="registerRepeatPassword">Repeat password</label>
                     <div class="input-group">
@@ -103,6 +102,7 @@
                         </button>
                     </div>
                 </div>
+
 
                 <!-- Birthdate input -->
                 <div data-mdb-input-init class="form-outline mb-4">
@@ -137,32 +137,30 @@
 </html>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-        const passwordField = document.querySelector('#registerPassword');
-        const repeatPasswordField = document.querySelector('#registerRepeatPassword');
+            const passwordField = document.querySelector('#registerPassword');
+            const repeatPasswordField = document.querySelector('#registerRepeatPassword');
 
-        const togglePasswordVisibilityButton = document.querySelector('#togglePasswordVisibility');
-        const toggleRepeatVisibilityButton = document.querySelector('#toggleRepeatPasswordVisibility');
+            const togglePasswordVisibilityButton = document.querySelector('#togglePasswordVisibility');
+            const toggleRepeatVisibilityButton = document.querySelector('#toggleRepeatPasswordVisibility');
 
-        togglePasswordVisibilityButton.addEventListener('click', function() {
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-            } else {
-                passwordField.type = 'password';
-                this.innerHTML = '<i class="fas fa-eye"></i>';
+            togglePasswordVisibilityButton.addEventListener('click', function() {
+                togglePasswordVisibility(passwordField, this);
+            });
+
+            toggleRepeatVisibilityButton.addEventListener('click', function() {
+                togglePasswordVisibility(repeatPasswordField, this);
+            });
+
+            function togglePasswordVisibility(field, button) {
+                if (field.type === 'password') {
+                    field.type = 'text';
+                    button.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                } else {
+                    field.type = 'password';
+                    button.innerHTML = '<i class="fas fa-eye"></i>';
+                }
             }
         });
-
-        toggleRepeatVisibilityButton.addEventListener('click', function() {
-            if (repeatPasswordField.type === 'password') {
-                repeatPasswordField.type = 'text';
-                this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-            } else {
-                repeatPasswordField.type = 'password';
-                this.innerHTML = '<i class="fas fa-eye"></i>';
-            }
-        });
-    });
 
 function validateRegisterForm() {
     const nameField = document.querySelector('#registerName');
@@ -171,7 +169,7 @@ function validateRegisterForm() {
     const repeatPasswordField = document.querySelector('#registerRepeatPassword');
     const birthdateField = document.querySelector('#registerBirthdate');
     const cpfField = document.querySelector('#registerCPF'); // Novo campo de CPF
-
+    
     const name = nameField.value.trim();
     const email = emailField.value.trim();
     const password = passwordField.value.trim();
@@ -246,8 +244,7 @@ function showAlert(message, icon = 'error') {
 }
 
 function sendRegisterData() {
-    // Aqui você pode enviar os dados do formulário de registro para o servidor
-    // Por simplicidade, este é apenas um exemplo simulado
+
     showAlert('Cadastro realizado com sucesso!', 'success');
 }
 </script>
