@@ -1,6 +1,6 @@
 <?php
 include('../connect.php');
-session_start(); // Inicie a sessão
+session_start();
 
 $email = $_POST['email'];
 $senha = $_POST['senha'];
@@ -15,12 +15,12 @@ try {
         $_SESSION['user_name'] = $usuario['nome'];
         $_SESSION['email'] = $usuario['email'];
         $_SESSION['id'] = $usuario['id'];
-
+        $_SESSION['foto'] = $usuario['foto']; // Armazena o caminho relativo da foto do usuário
+    
         // Redireciona para a página de boas-vindas
         header("Location: ../welcome.php");
-        exit(); // Certifique-se de sair após o redirecionamento para evitar que o código adicional seja executado
+        exit();
     } else {
-        // Se as credenciais estiverem incorretas, retornar JSON com mensagem de erro
         echo json_encode(["success" => false, "error" => "Credenciais inválidas. Tente novamente."]);
     }
 } catch (PDOException $e) {

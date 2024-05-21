@@ -85,7 +85,6 @@
                 <input type="date" name="registerBirthdate" id="registerBirthdate" class="form-control border border-dark" style="width: 100%;" required />
             </div>
 
-            <!-- Photo input -->
             <div class="mb-4">
                 <label for="registerPhoto" class="form-label">Photo</label>
                 <input type="file" class="form-control border border-dark" id="registerPhoto" name="registerPhoto" style="width: 100%;" required>

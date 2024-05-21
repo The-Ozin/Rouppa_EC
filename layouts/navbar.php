@@ -1,11 +1,11 @@
 <?php
-session_start(); // Inicie a sessão
+session_start();
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
     <div class="container-fluid">
         <!-- Navbar title -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa_EC/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
+        <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
             Rouppa
         </a>
 
@@ -76,7 +76,13 @@ session_start(); // Inicie a sessão
                         role="button"
                         aria-expanded="false"
                     >
-                        <i class="fas fa-user" style="color: white;"></i>
+                    <?php if (isset($_SESSION['foto']) && $_SESSION['foto']): ?>
+                        <img src="<?php echo 'http://localhost/Rouppa/pfp/' . $_SESSION['foto']; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
+                    <?php else: ?>
+
+
+                            <i class="fas fa-user" style="color: white;"></i>
+                        <?php endif; ?>
                         <span class="ms-2" style="color: white;">
                             <?php echo isset($_SESSION['user_name']) ? "Olá, " . $_SESSION['user_name'] . "!" : "Bem-vindo, visitante!"; ?>
                         </span>
@@ -85,10 +91,10 @@ session_start(); // Inicie a sessão
                         class="dropdown-menu dropdown-menu-end"
                         aria-labelledby="navbarDropdownMenuAvatar"
                     >
-                        <?php if(isset($_SESSION['user_name'])): ?>
-                            <li><a class="dropdown-item" href="?logout">Logout</a></li>
+                        <?php if (isset($_SESSION['user_name'])): ?>
+                            <li><a class="dropdown-item" href="http://localhost/Rouppa/user/user_login.php">Logout</a></li>
                         <?php else: ?>
-                            <li><a class="dropdown-item" href="./user/user_login.php">Login/Cadastro</a></li>
+                            <li><a class="dropdown-item" href="http://localhost/Rouppa/user/user_login.php">Login/Cadastro</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -97,10 +103,12 @@ session_start(); // Inicie a sessão
     </div>
 </nav>
 <?php
+
+session_destroy();
 if (isset($_GET['logout'])) {
-    session_start();
     session_destroy();
-    header("Location: ./user/user_login.php");
+    header("Location: http://localhost/Rouppa/user/user_login.php");
     exit();
 }
 ?>
+
