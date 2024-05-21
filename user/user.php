@@ -1,5 +1,5 @@
 <?php
-@include('../connect.php'); 
+@include('../connect.php'); // Include the database connection script
 
 session_start();
 
@@ -44,29 +44,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "INSERT INTO usuario (nome, email, senha, cpf, data_nascimento, foto) VALUES (?, ?, ?, ?, ?, ?)";
 
-    $stmt = $conn->prepare($sql);
+    $stmt = $pdo->prepare($sql); // Use $pdo instead of $conn
     if ($stmt) {
         $null = NULL;
-        $stmt->bind_param("ssssss", $nome, $email, $hashedPassword, $cpf, $data_nascimento, $null);
+        $stmt->bindParam(1, $nome);
+        $stmt->bindParam(2, $email);
+        $stmt->bindParam(3, $hashedPassword);
+        $stmt->bindParam(4, $cpf);
+        $stmt->bindParam(5, $data_nascimento);
+        $stmt->bindParam(6, $null, PDO::PARAM_LOB);
 
         if ($fotoContent) {
-            $stmt->send_long_data(5, $fotoContent);
-        } else {
-            $stmt->send_long_data(5, $null);
+            $stmt->bindValue(6, $fotoContent, PDO::PARAM_LOB);
         }
 
         if ($stmt->execute()) {
             header("Location: ../user/user_login.php");
         } else {
-            echo "Erro ao cadastrar: " . $stmt->error;
+            echo "Erro ao cadastrar: " . $stmt->errorInfo()[2];
         }
 
-        $stmt->close();
+        $stmt->closeCursor();
     } else {
-        echo "Erro no preparo da declaração: " . $conn->error;
+        echo "Erro no preparo da declaração: " . $pdo->errorInfo()[2];
     }
-
-    $conn->close();
 } else {
     echo "Método de requisição inválido.";
 }
