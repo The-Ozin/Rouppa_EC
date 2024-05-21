@@ -96,8 +96,8 @@ include('../layouts/navbar.php');
     </div>
 </div>
 
-<footer>
-    <?php include('../layouts/footer.php');?>
-</footer>
+    <footer>
+        <?php include('../layouts/footer.php');?>
+    </footer>
 </body>
 </html>
