@@ -1,4 +1,5 @@
  <?php 
+ session_start();
  @include('./layouts/navbar.php');
   ?>
 
@@ -72,6 +73,8 @@
         </footer>
     </body>
 </html>
+
+
 
 <style>
     .titulo {

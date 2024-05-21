@@ -1,20 +1,8 @@
-<?php 
-session_start();
-
-// Verifica se o usuário está fazendo logout
-if(isset($_GET['logout'])) {
-    // Remove todas as variáveis de sessão
-    session_unset();
-    // Destroi a sessão
-    session_destroy();
-    // Redireciona para a página de login
-    header("Location: ./user/user_login.php");
-    exit;
-}
+<?php
+session_start(); // Inicie a sessão
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
-    <!-- Container wrapper -->
     <div class="container-fluid">
         <!-- Navbar title -->
         <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
@@ -89,9 +77,9 @@ if(isset($_GET['logout'])) {
                         aria-expanded="false"
                     >
                         <i class="fas fa-user" style="color: white;"></i>
-                        <?php if(isset($_SESSION['user_name'])): ?>
-                            <span class="ms-2" style="color: white;"><?php echo $_SESSION['user_name']; ?></span>
-                        <?php endif; ?>
+                        <span class="ms-2" style="color: white;">
+                            <?php echo isset($_SESSION['user_name']) ? "Olá, " . $_SESSION['user_name'] . "!" : "Bem-vindo, visitante!"; ?>
+                        </span>
                     </a>
                     <ul
                         class="dropdown-menu dropdown-menu-end"
@@ -104,11 +92,15 @@ if(isset($_GET['logout'])) {
                         <?php endif; ?>
                     </ul>
                 </div>
-
             </div>
         </div>
-        <!-- Collapsible wrapper -->
     </div>
-    <!-- Container wrapper -->
 </nav>
-<!-- Navbar -->
+<?php
+if (isset($_GET['logout'])) {
+    session_start();
+    session_destroy();
+    header("Location: ./user/user_login.php");
+    exit();
+}
+?>

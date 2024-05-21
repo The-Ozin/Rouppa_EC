@@ -1,5 +1,6 @@
 <?php
 include('../connect.php');
+session_start(); // Inicie a sessão
 
 $email = $_POST['email'];
 $senha = $_POST['senha'];
@@ -10,10 +11,12 @@ try {
     $usuario = $stmt->fetch();
 
     if ($usuario && password_verify($senha, $usuario['senha'])) {
-        // Define a variável de sessão com o nome do usuário
-        $_SESSION['nome'] = $usuario['nome'];
+        // Define as variáveis de sessão após o login bem-sucedido
+        $_SESSION['user_name'] = $usuario['nome'];
+        $_SESSION['email'] = $usuario['email'];
+        $_SESSION['id'] = $usuario['id'];
 
-        // Redireciona para a página de boas-vindas se o login for bem-sucedido
+        // Redireciona para a página de boas-vindas
         header("Location: ../welcome.php");
         exit(); // Certifique-se de sair após o redirecionamento para evitar que o código adicional seja executado
     } else {
