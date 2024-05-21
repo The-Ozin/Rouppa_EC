@@ -1,10 +1,15 @@
 <?php
 include('../connect.php');
 
+// Define the query
 $query = "SELECT * FROM produto";
-$result = mysqli_query($conn, $query);
 
-if ($result) {  // Verifica se a consulta foi executada com sucesso
+$result = mysqli_query($conn, $query);
+if ($result === false) {
+    die("Error executing query: " . mysqli_error($conn));
+}
+
+if ($result) {  
     if (mysqli_num_rows($result) > 0) {
         echo '<div class="d-flex justify-content-center">';
         $counter = 1;
@@ -40,5 +45,16 @@ if ($result) {  // Verifica se a consulta foi executada com sucesso
     }
 } else {
     echo '<p>Erro ao executar a consulta: ' . mysqli_error($conn) . '</p>';
+}
+?>
+
+<?php
+session_start(); // Inicia a sessão
+
+// Verifica se a variável de sessão 'user_name' não está definida
+if (!isset($_SESSION['user_name'])) {
+    // Redireciona o usuário de volta para a página de login
+    header("Location: http://localhost/Rouppa/user/user_login.php");
+    exit();
 }
 ?>
