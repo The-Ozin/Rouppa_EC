@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cpf = trim($_POST['registerCPF']);
     $data_nascimento = trim($_POST['registerBirthdate']);
     $foto = isset($_FILES['registerPhoto']) ? $_FILES['registerPhoto']['tmp_name'] : null;
-
+    
     if (empty($nome) || strlen($nome) < 3) {
         echo "O nome deve ter pelo menos 3 letras.";
         exit();

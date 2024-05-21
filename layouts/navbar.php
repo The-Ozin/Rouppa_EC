@@ -1,12 +1,26 @@
 <?php 
 session_start();
+
+// Verifica se o usuário está fazendo logout
+if(isset($_GET['logout'])) {
+    // Remove todas as variáveis de sessão
+    session_unset();
+    // Destroi a sessão
+    session_destroy();
+    // Redireciona para a página de login
+    header("Location: ./user/user_login.php");
+    exit;
+}
 ?>
 
-
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
     <!-- Container wrapper -->
     <div class="container-fluid">
+        <!-- Navbar title -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
+            Rouppa
+        </a>
+
         <!-- Toggle button -->
         <button
             data-mdb-collapse-init
@@ -20,30 +34,9 @@ session_start();
             <i class="fas fa-bars"></i>
         </button>
 
-        <div class="d-flex align-items-center">
-            <!-- Navbar title -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
-                Rouppa
-            </a>
-
-            <!-- Search form -->
-            <form class="input-group w-auto my-auto d-none d-sm-flex">
-                <input
-                autocomplete="off"
-                type="search"
-                class="form-control rounded"
-                placeholder="Search"
-                style="min-width: 125px;"
-                />
-                <span class="input-group-text border-0 d-none d-lg-flex"
-                ><i class="fas fa-search" style="color: white;"></i
-                ></span>
-            </form>
-        </div>
-
-
-        <div class="d-flex justify-content-center align-items-center" style="position: absolute; left: 50%; transform: translateX(-50%);">
-
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: white;">Dashboard</a>
@@ -55,72 +48,66 @@ session_start();
                     <a class="nav-link" href="#" style="color: white;">Projects</a>
                 </li>
             </ul>
-        </div>
 
-        <div class="d-flex align-items-center">
-            <!-- Icon -->
-            <a class="text-reset me-3" href="#">
-                <i class="fas fa-shopping-cart" style="color: white;"></i>
-            </a>
-
-            <!-- Notifications -->
-            <div class="dropdown">
-                <a
-                    data-mdb-dropdown-init
-                    class="text-reset me-3 dropdown-toggle hidden-arrow"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    role="button"
-                    aria-expanded="false"
-                >
-                    <i class="fas fa-bell" style="color: white;"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
+                <!-- Icon -->
+                <a class="text-reset me-3" href="#">
+                    <i class="fas fa-shopping-cart" style="color: white;"></i>
                 </a>
-                <ul
-                    class="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="navbarDropdownMenuLink"
-                >
-                    <li>
-                        <a class="dropdown-item" href="#">Alguma notícia</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Outra notícia</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Algo mais aqui</a>
-                    </li>
-                </ul>
-            </div>
-        <!-- Avatar -->
-        <div class="dropdown">
-            <a
-                data-mdb-dropdown-init
-                class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                href="#"
-                id="navbarDropdownMenuAvatar"
-                role="button"
-                aria-expanded="false"
-            >
-                <i class="fas fa-user" style="color: white;"></i>
-                
-            </a>
-            <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownMenuAvatar"
-            >
-                <li>
-                    <!-- Se o usuário estiver logado, exibe uma saudação personalizada -->
-                    <?php if(isset($_SESSION['nome'])): ?>
-                        <a class="dropdown-item" href="#">Olá, <?php echo $_SESSION['nome']; ?></a>
-                        <a class="dropdown-item" href="#">Logout</a>
-                    <?php else: ?>
-                        <a class="dropdown-item" href="./user/user_login.php">Login/Cadastro</a>
-                    <?php endif; ?>
-                </li>
 
-            </ul>
+                <!-- Notifications -->
+                <div class="dropdown">
+                    <a
+                        data-mdb-dropdown-init
+                        class="text-reset me-3 dropdown-toggle hidden-arrow"
+                        href="#"
+                        id="navbarDropdownMenuLink"
+                        role="button"
+                        aria-expanded="false"
+                    >
+                        <i class="fas fa-bell" style="color: white;"></i>
+                        <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                    </a>
+                    <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdownMenuLink"
+                    >
+                        <li>
+                            <a class="dropdown-item" href="#">Alguma notícia</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Avatar -->
+                <div class="dropdown">
+                    <a
+                        data-mdb-dropdown-init
+                        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                        href="#"
+                        id="navbarDropdownMenuAvatar"
+                        role="button"
+                        aria-expanded="false"
+                    >
+                        <i class="fas fa-user" style="color: white;"></i>
+                        <?php if(isset($_SESSION['user_name'])): ?>
+                            <span class="ms-2" style="color: white;"><?php echo $_SESSION['user_name']; ?></span>
+                        <?php endif; ?>
+                    </a>
+                    <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdownMenuAvatar"
+                    >
+                        <?php if(isset($_SESSION['user_name'])): ?>
+                            <li><a class="dropdown-item" href="?logout">Logout</a></li>
+                        <?php else: ?>
+                            <li><a class="dropdown-item" href="./user/user_login.php">Login/Cadastro</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+
+            </div>
         </div>
-        <!-- Right elements -->
+        <!-- Collapsible wrapper -->
     </div>
     <!-- Container wrapper -->
 </nav>
