@@ -1,48 +1,68 @@
 <?php
+include('../connect.php'); 
+
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nome = trim($_POST['nome']);
+    $tamanho = trim($_POST['tamanho']);
+    $descricao = trim($_POST['descricao']);
+    $preco = trim($_POST['preco']);
+    $foto = isset($_FILES['foto']) ? $_FILES['foto']['tmp_name'] : null;
+    $condicao_uso = isset($_POST['condicao_uso']) ? 1 : 0;
+    $estado_peca = trim($_POST['estado_peca']);
+    $fk_loja_cnpj = trim($_POST['fk_loja_cnpj']);
+    $fk_usuario_cpf = $_SESSION['cpf']; // Assuming you have stored user's CPF in session
+    $fk_adm_id = null; // Assuming this is not needed for product creation
 
-    if (isset($_POST['nome']) && isset($_POST['productCategory']) && isset($_POST['tamanho']) && isset($_POST['descricao']) && isset($_POST['preco']) && isset($_POST['condicao_uso']) && isset($_POST['estado_peca']) && isset($_POST['fk_loja_cnpj']) && isset($_FILES['foto'])) {
+    // Verifique se todos os campos são preenchidos corretamente
+    if (empty($nome) || empty($tamanho) || empty($descricao) || empty($preco) || empty($estado_peca) || empty($fk_loja_cnpj)) {
+        echo "Por favor, preencha todos os campos.";
+        exit();
+    }
 
-        // Conexão com o banco de dados (substitua pelas suas credenciais)
-        $servername = "localhost";
-        $username = "root";
-        $password = "Simba8!#";
-        $dbname = "rouppa";
+    // Verifique se a foto foi carregada corretamente
+    if (!$foto) {
+        echo "Por favor, faça o upload de uma foto.";
+        exit();
+    }
 
-        // Crie uma conexão
-        $conn = new mysqli($servername, $username, $password, $dbname);
+    // Verifique se o arquivo de foto é uma imagem válida
+    $check = getimagesize($foto);
+    if ($check === false) {
+        echo "O arquivo enviado não é uma imagem válida.";
+        exit();
+    }
 
-        // Verifica a conexão
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }   
+    // Prepara a consulta SQL para inserir os dados do produto
+    $sql = "INSERT INTO produto (tamanho, descricao_, preco, nome, condicao_uso, estado_peca, fk_loja_cnpj, fk_usuario_cpf, fk_adm_id, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        // Prepara os dados para inserção no banco de dados
-        $nome = $conn->real_escape_string($_POST['nome']);
-        $categoria = $conn->real_escape_string($_POST['productCategory']);
-        $tamanho = $conn->real_escape_string($_POST['tamanho']);
-        $descricao = $conn->real_escape_string($_POST['descricao']);
-        $preco = $conn->real_escape_string($_POST['preco']);
-        $condicao_uso = (int) $_POST['condicao_uso'];
-        $estado_peca = $conn->real_escape_string($_POST['estado_peca']);
-        $fk_loja_cnpj = $conn->real_escape_string($_POST['fk_loja_cnpj']);
+    // Prepara a declaração SQL
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        // Abre o arquivo de foto e lê seu conteúdo
+        $fotoContent = file_get_contents($foto);
 
-        // Upload da foto
-        $foto = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+        // Vincula os parâmetros da query preparada
+        $stmt->bind_param("ssdssssibs", $tamanho, $descricao, $preco, $nome, $condicao_uso, $estado_peca, $fk_loja_cnpj, $fk_usuario_cpf, $fk_adm_id, $fotoContent);
 
-        // Query SQL para inserir os dados na tabela de produtos
-        $sql = "INSERT INTO produto (nome, categoria, tamanho, descricao_, preco, condicao_uso, estado_peca, fk_loja_cnpj, foto) VALUES ('$nome', '$categoria', '$tamanho', '$descricao', '$preco', '$condicao_uso', '$estado_peca', '$fk_loja_cnpj', '$foto')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Produto cadastrado com sucesso!";
+        // Executa a query preparada
+        if ($stmt->execute()) {
+            header("Location: ../user/user_login.php");
+            exit();
         } else {
-            echo "Erro ao cadastrar o produto: " . $conn->error;
+            echo "Erro ao cadastrar o produto: " . $stmt->error;
         }
 
-        // Fecha a conexão
-        $conn->close();
+        // Fecha a declaração
+        $stmt->close();
     } else {
-        echo "Por favor, preencha todos os campos obrigatórios.";
+        echo "Erro no preparo da declaração: " . $conn->error;
     }
+
+    // Fecha a conexão com o banco de dados
+    $conn->close();
+} else {
+    echo "Método de requisição inválido.";
 }
 ?>
