@@ -21,89 +21,92 @@
 </head>
 <body>
     <?php @include('../layouts/navbar.php'); ?>
-
-    <div class="d-flex justify-content-center">
-        <form id="registerForm" action="../user/user.php" method="post" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
-            <div class="text-center mb-3">
-                <p>Sign up with:</p>
-                <button type="button" class="btn btn-secondary btn-floating mx-1">
-                    <i class="fab fa-facebook-f"></i>
-                </button>
-                <button type="button" class="btn btn-secondary btn-floating mx-1">
-                    <i class="fab fa-google"></i>
-                </button>
-                <button type="button" class="btn btn-secondary btn-floating mx-1">
-                    <i class="fab fa-twitter"></i>
-                </button>
-            </div>
-
-            <p class="text-center">or:</p>
-
-            <!-- Name input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerName">Name</label>
-                <input type="text" name="registerName" id="registerName" class="form-control border border-dark" style="width: 100%;" required />
-            </div>
-
-            <!-- Email input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerEmail">Email</label>
-                <input type="email" name="registerEmail" id="registerEmail" class="form-control border border-dark" style="width: 100%;" required />
-            </div>
-
-            <!-- CPF input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerCPF">CPF</label>
-                <input type="text" name="registerCPF" id="registerCPF" class="form-control border border-dark" style="width: 100%;" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required />
-            </div>
-
-            <!-- Password input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerPassword">Password</label>
-                <div class="input-group">
-                    <input type="password" name="registerPassword" id="registerPassword" class="form-control border border-dark" style="width: 100%;" required />
-                    <button class="btn border border-dark" type="button" id="togglePasswordVisibility">
-                        <i class="fas fa-eye"></i>
+    <h1>Crie sua Conta</h1>
+    <div class="d-flex justify-content-center" style="color:white">
+        <div class="form-box">
+            <form id="registerForm" action="../user/user.php" method="post" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
+                <div class="text-center mb-3">
+                    <p>Cadastre-se com:</p>
+                    <button type="button" class="btn btn-secondary btn-floating mx-1">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-floating mx-1">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-floating mx-1">
+                        <i class="fab fa-twitter"></i>
                     </button>
                 </div>
-            </div>
 
-            <!-- Repeat Password input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-                <div class="input-group">
-                    <input type="password" name="registerRepeatPassword" id="registerRepeatPassword" class="form-control border border-dark" style="width: 100%;" required />
-                    <button class="btn border border-dark" type="button" id="toggleRepeatPasswordVisibility">
-                        <i class="fas fa-eye"></i>
-                    </button>
+                <p class="text-center">ou:</p>
+
+                <!-- Name input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerName">Nome</label>
+                    <input type="text" name="registerName" id="registerName" class="form-control border border-dark" style="background-color: white;" required />
                 </div>
-            </div>
 
-            <!-- Birthdate input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerBirthdate">Data de Nascimento</label>
-                <input type="date" name="registerBirthdate" id="registerBirthdate" class="form-control border border-dark" style="width: 100%;" required />
-            </div>
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerEmail">Email</label>
+                    <input type="email" name="registerEmail" id="registerEmail" class="form-control border border-dark" style="background-color: white;" required />
+                </div>
 
-            <div class="mb-4">
-                <label for="registerPhoto" class="form-label">Photo</label>
-                <input type="file" class="form-control border border-dark" id="registerPhoto" name="registerPhoto" style="width: 100%;" required>
-            </div>
+                <!-- CPF input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerCPF">CPF</label>
+                    <input type="text" name="registerCPF" id="registerCPF" class="form-control border border-dark" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" style="background-color: white;" required />
+                </div>
 
-            <!-- Checkbox -->
-            <div class="form-check d-flex justify-content-center mb-4">
-                <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked aria-describedby="registerCheckHelpText" required />
-                <label class="form-check-label" for="registerCheck">I have read and agree to the terms</label>
-            </div>
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerPassword">Senha</label>
+                    <div class="input-group">
+                        <input type="password" name="registerPassword" id="registerPassword" class="form-control border border-dark" style="background-color: white;" required />
+                        <button class="btn border border-dark text-white" type="button" id="togglePasswordVisibility" style="background-color: rgb(215,90, 90);">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
 
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-3" style="background-color: rgb(215,90, 90);">Sign in</button>
+                <!-- Repeat Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerRepeatPassword">Repetir senha</label>
+                    <div class="input-group">
+                        <input type="password" name="registerRepeatPassword" id="registerRepeatPassword" class="form-control border border-dark" style="background-color: white;" required />
+                        <button class="btn border border-dark text-white" type="button" id="toggleRepeatPasswordVisibility" style="background-color: rgb(215,90, 90);">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
 
-            <!-- Register buttons -->
-            <div class="text-center">
-                <p>Already have a account? <a href="user_login.php">Login</a></p>
-            </div>
-        </form>
+                <!-- Birthdate input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerBirthdate">Data de Nascimento</label>
+                    <input type="date" name="registerBirthdate" id="registerBirthdate" class="form-control border border-dark" style="background-color: white;" required />
+                </div>
+
+                <!-- Photo input -->
+                <div class="mb-4">
+                    <label for="registerPhoto" class="form-label text-white">Foto</label>
+                    <input type="file" class="form-control border border-dark" id="registerPhoto" name="registerPhoto" required>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked aria-describedby="registerCheckHelpText" required />
+                    <label class="form-check-label text-white" for="registerCheck">Li e concordo com os termos</label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-3" style="background-color: rgb(215,90, 90);">Cadastrar</button>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                    <p>Já possui uma conta? <a href="user_login.php">Faça login</a></p>
+                </div>
+            </form>
+        </div>
     </div>
 
     <footer>
@@ -211,3 +214,26 @@
     </script>
 </body>
 </html>
+
+<style>
+    .form-box {
+        background-color: rgb(90, 29, 0);
+        width: 50%;
+        height: 90%;
+        padding: 10vh 10vh;
+        margin-top: 5vh;
+        margin-bottom: 10vh;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        opacity: 0.9;
+    }
+
+    h1 {
+        color: rgb(215,90, 90);
+        font-size: 50px;
+        text-align: center;
+        font-family: 'Noto Serif Display', serif;
+        margin-top: 10vh;
+        font-weight: bold;
+    }
+
+</style>
