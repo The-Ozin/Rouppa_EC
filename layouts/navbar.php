@@ -76,23 +76,36 @@ session_start();
                         role="button"
                         aria-expanded="false"
                     >
-                    <?php if (isset($_SESSION['foto']) && $_SESSION['foto']): ?>
-                        <img src="<?php echo 'http://localhost/Rouppa/pfp/' . $_SESSION['foto']; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
+                    <?php
+                    if (isset($_SESSION['foto']) && !empty($_SESSION['foto'])):
+                        // Correct the path construction
+                        $avatarPath = 'http://localhost/Rouppa/pfp/' . basename($_SESSION['foto']);
+                    ?>
+                        <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
                     <?php else: ?>
-
-
-                            <i class="fas fa-user" style="color: white;"></i>
-                        <?php endif; ?>
+                        <i class="fas fa-user" style="color: white;"></i>
+                    <?php endif; ?>
                         <span class="ms-2" style="color: white;">
-                            <?php echo isset($_SESSION['user_name']) ? "Olá, " . $_SESSION['user_name'] . "!" : "Bem-vindo, visitante!"; ?>
+                            <?php 
+                            if (!empty($_SESSION)) {
+                                if (isset($_SESSION['user_name'])) {
+                                    echo "Olá, " . $_SESSION['user_name'] . "!";
+                                } elseif (isset($_SESSION['nome_loja'])) {
+                                    echo "Olá, " . $_SESSION['nome_loja'] . "!";
+                                }
+                            } else {
+                                echo "Bem-vindo, visitante!";
+                            }
+                            ?>
                         </span>
                     </a>
                     <ul
                         class="dropdown-menu dropdown-menu-end"
                         aria-labelledby="navbarDropdownMenuAvatar"
                     >
-                        <?php if (isset($_SESSION['user_name'])): ?>
-                            <li><a class="dropdown-item" href="http://localhost/Rouppa/user/user_login.php">Logout</a></li>
+                        <?php if (!empty($_SESSION)): ?>
+                            <li><a class="dropdown-item" href="http://localhost/Rouppa/shop/product_register.php"?logout=true">Cadastrar Produto</a></li>
+                            <li><a class="dropdown-item" href="?logout=true">Logout</a></li>
                         <?php else: ?>
                             <li><a class="dropdown-item" href="http://localhost/Rouppa/user/user_login.php">Login/Cadastro</a></li>
                         <?php endif; ?>
@@ -102,13 +115,11 @@ session_start();
         </div>
     </div>
 </nav>
-<?php
 
-session_destroy();
+<?php
 if (isset($_GET['logout'])) {
     session_destroy();
     header("Location: http://localhost/Rouppa/user/user_login.php");
     exit();
 }
 ?>
-

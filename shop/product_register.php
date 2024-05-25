@@ -80,9 +80,10 @@
             </div>
 
             <div class="mb-4">
-                <label class="form-label" for="productPhoto">Foto:</label>
-                <input type="file" id="productPhoto" name="foto" class="form-control border border-dark" required>
+                <label class="form-label" for="productPhotos">Fotos:</label>
+                <input type="file" id="productPhotos" name="fotos[]" class="form-control border border-dark" multiple required>
             </div>
+
 
             <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-3" style="background-color: rgb(215,90, 90);">Cadastrar Produto</button>
         </form>
@@ -90,5 +91,28 @@
     <footer>
         <?php @include('../layouts/footer.php');?>
     </footer>
+
+    <style>
+    .form-box {
+        background-color: rgb(90, 29, 0);
+        width: 50%;
+        height: 90%;
+        padding: 10vh 10vh;
+        margin-top: 5vh;
+        margin-bottom: 10vh;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        opacity: 0.9;
+    }
+
+    h1 {
+        color: rgb(215,90, 90);
+        font-size: 50px;
+        text-align: center;
+        font-family: 'Noto Serif Display', serif;
+        margin-top: 10vh;
+        font-weight: bold;
+    }
+
+</style>
 </body>
 </html>

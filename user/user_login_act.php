@@ -2,8 +2,14 @@
 include('../connect.php');
 session_start();
 
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+// Captura os dados do formulário
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$senha = isset($_POST['senha']) ? trim($_POST['senha']) : '';
+
+if (empty($email) || empty($senha)) {
+    echo json_encode(["success" => false, "error" => "Email ou senha não preenchidos."]);
+    exit();
+}
 
 try {
     $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email = :email");
@@ -27,6 +33,7 @@ try {
     echo json_encode(["success" => false, "error" => "Erro: " . $e->getMessage()]);
 }
 ?>
+
 
 
 <script>

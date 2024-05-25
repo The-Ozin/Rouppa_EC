@@ -16,20 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if a file was uploaded
     $fotoPath = null;
     if ($foto && $foto['error'] == UPLOAD_ERR_OK) {
-        $targetDirectory = 'http://localhost/Rouppa/pfp/'; // Caminho alterado para refletir a nova localização da pasta de imagens
+        $targetDirectory = 'C:/xampp/htdocs/Rouppa/pfp/'; // Caminho local no sistema de arquivos
         $fileName = basename($foto['name']);
         $targetFilePath = $targetDirectory . $fileName;
 
-        // Move the uploaded file to the target directory
+        // Mova o arquivo enviado para o diretório de destino
         if (move_uploaded_file($foto['tmp_name'], $targetFilePath)) {
-            // Store the relative path to the image in the database
-            $fotoPath = 'http://localhost/Rouppa/pfp/' . $fileName;
+            // Armazene o caminho relativo para a imagem no banco de dados
+            $fotoPath = 'pfp/' . $fileName;
         } else {
             echo "Error uploading the photo.";
             exit();
         }
     }
-
     $hashedPassword = password_hash($senha, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO usuario (nome, email, senha, cpf, data_nascimento, foto) VALUES (?, ?, ?, ?, ?, ?)";
