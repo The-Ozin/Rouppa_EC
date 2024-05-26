@@ -25,28 +25,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fk_loja_cnpj = $isLoja ? "'" . $conn->real_escape_string($_SESSION['cnpj']) . "'" : "NULL";
         $fk_usuario_cpf = $isUsuario ? "'" . $conn->real_escape_string($_SESSION['cpf']) . "'" : "NULL";
 
+        // Obtem a primeira foto (supondo que você quer armazenar uma única foto na tabela produto)
+        $foto = addslashes(file_get_contents($_FILES['fotos']['tmp_name'][0]));
+
         // Query SQL para inserir o produto no banco de dados
-        $sql = "INSERT INTO produto (nome, categoria, tamanho, descricao_, preco, condicao_uso, fk_loja_cnpj, fk_usuario_cpf) 
-                VALUES ('$nome', '$categoria', '$tamanho', '$descricao', '$preco', '$condicao_uso', $fk_loja_cnpj, $fk_usuario_cpf)";
+        $sql = "INSERT INTO produto (nome, categoria, tamanho, descricao_, preco, condicao_uso, foto, fk_loja_cnpj, fk_usuario_cpf) 
+                VALUES ('$nome', '$categoria', '$tamanho', '$descricao', '$preco', '$condicao_uso', '$foto', $fk_loja_cnpj, $fk_usuario_cpf)";
 
         // Executa a consulta SQL
         if ($conn->query($sql) === TRUE) {
-            // Obtém o ID do produto inserido
-            $produto_id = $conn->insert_id;
-
-            // Insere as fotos do produto no banco de dados
-            foreach ($_FILES['fotos']['tmp_name'] as $key => $tmp_name) {
-                $foto = addslashes(file_get_contents($tmp_name));
-                $sql_foto = "INSERT INTO produto_fotos (produto_id, foto) VALUES ('$produto_id', '$foto')";
-
-                // Executa a consulta SQL para inserir a foto
-                if (!$conn->query($sql_foto) === TRUE) {
-                    echo "Erro ao cadastrar a foto: " . $conn->error;
-                }
-            }
-            
             // Redireciona o usuário para a página de boas-vindas
-            header("Location: ../welcome.php");
+            header("Location: http://localhost/Rouppa/welcome.php");
             exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
         } else {
             echo "Erro ao cadastrar o produto: " . $conn->error;

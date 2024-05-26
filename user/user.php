@@ -16,14 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if a file was uploaded
     $fotoPath = null;
     if ($foto && $foto['error'] == UPLOAD_ERR_OK) {
-        $targetDirectory = 'C:/xampp/htdocs/Rouppa/pfp/'; // Caminho local no sistema de arquivos
+        $targetDirectory = '../pfp/'; // Caminho local no sistema de arquivos
         $fileName = basename($foto['name']);
         $targetFilePath = $targetDirectory . $fileName;
 
         // Mova o arquivo enviado para o diretório de destino
         if (move_uploaded_file($foto['tmp_name'], $targetFilePath)) {
             // Armazene o caminho relativo para a imagem no banco de dados
-            $fotoPath = 'pfp/' . $fileName;
+            $fotoPath = '../pfp/' . $fileName;
         } else {
             echo "Error uploading the photo.";
             exit();
