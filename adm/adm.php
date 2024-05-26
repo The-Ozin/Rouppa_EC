@@ -2,16 +2,16 @@
 include('../connect.php');
 
 // Função para deletar usuário
-if (isset($_GET['delete_user_id'])) {
-    $userId = intval($_GET['delete_user_id']);
-    $query = "DELETE FROM usuarios WHERE id = $userId";
+if (isset($_GET['delete_user_cpf'])) {
+    $userCpf = $_GET['delete_user_cpf'];
+    $query = "DELETE FROM usuario WHERE cpf = '$userCpf'";
     mysqli_query($conn, $query);
 }
 
 // Função para deletar loja
-if (isset($_GET['delete_store_id'])) {
-    $storeId = intval($_GET['delete_store_id']);
-    $query = "DELETE FROM lojas WHERE id = $storeId";
+if (isset($_GET['delete_store_cnpj'])) {
+    $storeCnpj = $_GET['delete_store_cnpj'];
+    $query = "DELETE FROM loja WHERE cnpj = '$storeCnpj'";
     mysqli_query($conn, $query);
 }
 ?>
@@ -21,7 +21,7 @@ if (isset($_GET['delete_store_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adm</title>
+    <title>Administração</title>
     <link rel="stylesheet" href="../assets/style.css">
 
     <!-- Font Awesome -->
@@ -88,6 +88,7 @@ if (isset($_GET['delete_store_id'])) {
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Foto</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>CPF</th>
@@ -103,11 +104,13 @@ if (isset($_GET['delete_store_id'])) {
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
+                            echo "<td><img src='" . $row['foto'] . "' alt='Foto do usuário'></td>";
                             echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['cpf']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['data_nascimento']) . "</td>";
-                            echo "<td><button class='btn btn-danger' onclick='deleteUser(" . $row['id'] . ")'>Excluir</button></td>";
+                            echo "<td><button class='btn btn-danger' onclick='deleteUser(\"" . $row['cpf'] . "\")'>Excluir</button>
+                            <button class='btn btn-primary' onclick='editUser(\"" . $row['cpf'] . "\")'>Editar</button></td>";
                             echo "</tr>";
                         }
                     } else {
@@ -140,7 +143,7 @@ if (isset($_GET['delete_store_id'])) {
                             echo "<td>" . htmlspecialchars($row['cnpj']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['endereco']) . "</td>";
-                            echo "<td><button class='btn btn-danger' onclick='deleteStore(" . $row['id'] . ")'>Excluir</button></td>";
+                            echo "<td><button class='btn btn-danger' onclick='deleteStore(\"" . $row['cnpj'] . "\")'>Excluir</button></td>";
                             echo "</tr>";
                         }
                     } else {
@@ -150,10 +153,11 @@ if (isset($_GET['delete_store_id'])) {
                 </tbody>
             </table>
         </div>
+
     </div>
 
     <script>
-        function deleteUser(userId) {
+        function deleteUser(userCpf) {
             Swal.fire({
                 title: 'Tem certeza?',
                 text: "Você não poderá reverter isso!",
@@ -164,12 +168,23 @@ if (isset($_GET['delete_store_id'])) {
                 confirmButtonText: 'Sim, exclua!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "?delete_user_id=" + userId;
+                    window.location.href = "?delete_user_cpf=" + userCpf;
                 }
             });
         }
 
-        function deleteStore(storeId) {
+        function editUser(userId) {
+            window.location.href = "edit_user.php?id"
+        }
+
+
+        function editUser(userId) {
+   
+            window.location.href = "edit_user.php?id=" + userId;
+        }
+
+
+        function deleteStore(storeCnpj) {
             Swal.fire({
                 title: 'Tem certeza?',
                 text: "Você não poderá reverter isso!",
@@ -180,7 +195,7 @@ if (isset($_GET['delete_store_id'])) {
                 confirmButtonText: 'Sim, exclua!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "?delete_store_id=" + storeId;
+                    window.location.href = "?delete_store_cnpj=" + storeCnpj;
                 }
             });
         }

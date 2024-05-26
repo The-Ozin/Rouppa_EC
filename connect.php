@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "PUC@1234";
+$password = "wordpass";
 $database = "rouppa";
 
 // Create connection
@@ -10,7 +10,6 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
 } catch(PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
     exit(); // Terminate script execution if connection fails

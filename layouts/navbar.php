@@ -5,7 +5,7 @@ session_start();
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
     <div class="container-fluid">
         <!-- Navbar title -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
+        <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa_EC/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
             Rouppa
         </a>
 
@@ -79,7 +79,7 @@ session_start();
                     <?php
                     if (isset($_SESSION['foto']) && !empty($_SESSION['foto'])):
                         // Correct the path construction
-                        $avatarPath = 'http://localhost/Rouppa/pfp/' . basename($_SESSION['foto']);
+                        $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto']);
                     ?>
                         <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
                     <?php else: ?>
@@ -104,10 +104,10 @@ session_start();
                         aria-labelledby="navbarDropdownMenuAvatar"
                     >
                         <?php if (!empty($_SESSION)): ?>
-                            <li><a class="dropdown-item" href="http://localhost/Rouppa/shop/product_register.php"?logout=true">Cadastrar Produto</a></li>
+                            <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php"?logout=true">Cadastrar Produto</a></li>
                             <li><a class="dropdown-item" href="?logout=true">Logout</a></li>
                         <?php else: ?>
-                            <li><a class="dropdown-item" href="http://localhost/Rouppa/user/user_login.php">Login/Cadastro</a></li>
+                            <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login/Cadastro</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -119,7 +119,7 @@ session_start();
 <?php
 if (isset($_GET['logout'])) {
     session_destroy();
-    header("Location: http://localhost/Rouppa/user/user_login.php");
+    header("Location: http://localhost/Rouppa_EC/user/user_login.php");
     exit();
 }
 ?>
