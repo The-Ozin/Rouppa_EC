@@ -2,7 +2,7 @@
 include('../connect.php');
 
 // Define the query
-$query = "SELECT * FROM produto";
+$query = "SELECT p.*, pf.foto FROM produto p LEFT JOIN produto_fotos pf ON p.prod_id = pf.produto_id GROUP BY p.prod_id";
 
 $result = mysqli_query($conn, $query);
 if ($result === false) {
@@ -21,7 +21,7 @@ if ($result) {
             echo '<div id="carouselExampleTouch' . $counter . '" class="carousel slide" data-mdb-touch="false" style="max-width: 400px; margin-right: 20px;">';
             echo '<div class="carousel-inner">';
             echo '<div class="carousel-item active">';
-            echo '<img src="../shop_images/' . htmlspecialchars($row['foto']) . '" class="d-block w-100" alt="' . htmlspecialchars($row['nome']) . '" style="height: 400px; object-fit: cover;">';
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($row['foto']) . '" class="d-block w-100" alt="' . htmlspecialchars($row['nome']) . '" style="height: 400px; object-fit: cover;">';
             echo '<div class="carousel-caption d-none d-md-block">';
             echo '<h5>' . htmlspecialchars($row['nome']) . '</h5>';
             echo '<p>' . htmlspecialchars($row['descricao_']) . '</p>';
@@ -45,16 +45,5 @@ if ($result) {
     }
 } else {
     echo '<p>Erro ao executar a consulta: ' . mysqli_error($conn) . '</p>';
-}
-?>
-
-<?php
-session_start(); // Inicia a sessão
-
-// Verifica se a variável de sessão 'user_name' não está definida
-if (!isset($_SESSION['user_name'])) {
-    // Redireciona o usuário de volta para a página de login
-    header("Location: http://localhost/Rouppa/user/user_login.php");
-    exit();
 }
 ?>

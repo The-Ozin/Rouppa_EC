@@ -1,4 +1,10 @@
-<?php @include('../layouts/navbar.php'); ?>
+<?php
+session_start();
+$isLoja = isset($_SESSION['cnpj']);
+$isUsuario = isset($_SESSION['cpf']);
+
+@include('../layouts/navbar.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,15 +75,13 @@
                 </select>
             </div>
 
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="productState">Estado da Peça:</label>
-                <input type="text" id="productState" name="estado_peca" class="form-control border border-dark" required>
-            </div>
-
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="productStore">Loja (CNPJ):</label>
-                <input type="text" id="productStore" name="fk_loja_cnpj" class="form-control border border-dark" required>
-            </div>
+            <?php if ($isLoja): ?>
+                <input type="hidden" name="fk_loja_cnpj" value="<?php echo $_SESSION['cnpj']; ?>">
+            <?php endif; ?>
+        
+            <?php if ($isUsuario): ?>
+                <input type="hidden" name="fk_usuario_cpf" value="<?php echo $_SESSION['cpf']; ?>">
+            <?php endif; ?>
 
             <div class="mb-4">
                 <label class="form-label" for="productPhotos">Fotos:</label>

@@ -2,13 +2,13 @@
 session_start();
 include('../connect.php');
  // Inicia a sessão
-
-// Verifica se a variável de sessão 'user_name' não está definida
-if (!isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['user_name']) AND !isset($_SESSION['nome_loja'])) {
     // Redireciona o usuário de volta para a página de login
     header("Location: http://localhost/Rouppa/user/user_login.php");
     exit();
 }
+
+
 @include('../layouts/navbar.php');
 ?>
 
