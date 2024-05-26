@@ -1,15 +1,10 @@
-<?php 
- @include('../layouts/navbar.php');
-  ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rouppa</title>
+    <title>Edit Profile</title>
     <link rel="stylesheet" href="../assets/style.css">
-
     <!-- Font Awesome -->
     <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -43,81 +38,153 @@
     ></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    </head>
-    <body>
+    <style>
+
+    </style>
+</head>
+<body>
+    <?php @include('../layouts/navbar.php'); ?>
     <div class="d-flex justify-content-center">
-        <form action="update_profile.php" method="POST">
-            <!-- Name input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerName">Name</label>
-                <input type="text" id="registerName" name="name" class="form-control border border-dark" style="width: 100%;" required />
+        <div class="container">
+            <div class="form-header">
+                <h2>Edit Profile</h2>
             </div>
-
-            <!-- Email input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerEmail">Email</label>
-                <input type="email" id="registerEmail" name="email" class="form-control border border-dark" style="width: 100%;" required />
-            </div>
-
-            <!-- CPF input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerCPF">CPF</label>
-                <input type="text" id="registerCPF" name="cpf" class="form-control border border-dark" style="width: 100%;" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required />
-            </div>
-
-            <!-- Password input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerPassword">Password</label>
-                <div class="input-group">
-                    <input type="password" id="registerPassword" name="password" class="form-control border border-dark" style="width: 100%;" required />
-                    <button class="btn border border-dark" type="button" id="togglePasswordVisibility">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Repeat Password input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-                <div class="input-group">
-                    <input type="password" id="registerRepeatPassword" name="repeat_password" class="form-control border border-dark" style="width: 100%;" required />
-                    <button class="btn border border-dark" type="button" id="toggleRepeatPasswordVisibility">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Birthdate input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="registerBirthdate">Data de Nascimento</label>
-                <input type="date" id="registerBirthdate" name="birthdate" class="form-control border border-dark" style="width: 100%;" required />
-            </div>
-
-            <!-- Photo input -->
-            <div class="mb-4">
-                <label for="registerPhoto" class="form-label">Photo</label>
-                <div class="d-flex justify-content-center align-items-center position-relative">
-                    <div class="avatar mx-auto position-relative" style="width: 120px; height: 120px;">
-                        <img src="../assets/avatar.png" alt="Avatar" class="rounded-circle img-fluid">
-                        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.5); opacity: 0;">
-                            <button type="button" class="btn btn-secondary" style="opacity: 0;">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
+            <form id="editProfileForm" action="update_profile.php" method="POST">
+                <div class="profile-photo">
+                    <div class="avatar">
+                        <img src="../assets/avatar.png" alt="Avatar">
+                        <div class="overlay">
+                            <button type="button"><i class="fas fa-pencil-alt"></i></button>
                         </div>
                     </div>
+                    <input type="file" class="form-control mt-2" id="registerPhoto" name="photo">
                 </div>
-                <input type="file" class="form-control border border-dark" id="registerPhoto" name="photo" style="width: 100%;">
-            </div>
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary" style="background-color: rgb(215,90, 90);">Save</button>
-            </div>
-            </div>
-        </form>
+
+                <div class="form-group">
+                    <label class="form-label" for="registerName">Name</label>
+                    <input type="text" id="registerName" name="name" class="form-control" required />
+                    <div class="error" id="nameError">Name is required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" class="form-control" required />
+                    <div class="error" id="emailError">Valid email is required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="registerPassword">New Password</label>
+                    <div class="input-group">
+                        <input type="password" id="registerPassword" name="password" class="form-control" required />
+                        <button class="btn border border-dark text-white" type="button" id="togglePasswordVisibility" style="background-color: rgb(215,90, 90);">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error" id="passwordError">Password is required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="registerRepeatPassword">Old Password</label>
+                    <div class="input-group">
+                        <input type="password" id="registerRepeatPassword" name="old_password" class="form-control" required />
+                        <button class="btn border border-dark text-white" type="button" id="toggleRepeatPasswordVisibility" style="background-color: rgb(215,90, 90);">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error" id="repeatPasswordError">Old password is required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="registerBirthdate">Date of Birth</label>
+                    <input type="date" id="registerBirthdate" name="birthdate" class="form-control" required />
+                    <div class="error" id="birthdateError">Date of birth is required.</div>
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
     <footer>
-        <?php @include('../layouts/footer.php'); ?>
+        <?php include('../layouts/footer.php'); ?>
     </footer>
-</html>
 
-<style>
-</style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePasswordVisibilityButton = document.getElementById('togglePasswordVisibility');
+            const toggleRepeatPasswordVisibilityButton = document.getElementById('toggleRepeatPasswordVisibility');
+            const passwordField = document.getElementById('registerPassword');
+            const repeatPasswordField = document.getElementById('registerRepeatPassword');
+
+            togglePasswordVisibilityButton.addEventListener('click', function() {
+                togglePasswordVisibility(passwordField, this);
+            });
+
+            toggleRepeatPasswordVisibilityButton.addEventListener('click', function() {
+                togglePasswordVisibility(repeatPasswordField, this);
+            });
+
+            function togglePasswordVisibility(field, button) {
+                if (field.type === 'password') {
+                    field.type = 'text';
+                    button.innerHTML = '<i class="fas fa-eye-slash text-white"></i>';
+                } else {
+                    field.type = 'password';
+                    button.innerHTML = '<i class="fas fa-eye text-white"></i>';
+                }
+            }
+
+            document.getElementById('editProfileForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                let valid = true;
+
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const oldPassword = document.getElementById('registerRepeatPassword').value;
+                const birthdate = document.getElementById('registerBirthdate').value;
+
+                if (!name) {
+                    document.getElementById('nameError').style.display = 'block';
+                    valid = false;
+                } else {
+                    document.getElementById('nameError').style.display = 'none';
+                }
+
+                if (!email || !/\S+@\S+\.\S+/.test(email)) {
+                    document.getElementById('emailError').style.display = 'block';
+                    valid = false;
+                } else {
+                    document.getElementById('emailError').style.display = 'none';
+                }
+
+                if (!password) {
+                    document.getElementById('passwordError').style.display = 'block';
+                    valid = false;
+                } else {
+                    document.getElementById('passwordError').style.display = 'none';
+                }
+
+                if (!oldPassword) {
+                    document.getElementById('repeatPasswordError').style.display = 'block';
+                    valid = false;
+                } else {
+                    document.getElementById('repeatPasswordError').style.display = 'none';
+                }
+
+                if (!birthdate) {
+                    document.getElementById('birthdateError').style.display = 'block';
+                    valid = false;
+                } else {
+                    document.getElementById('birthdateError').style.display = 'none';
+                }
+
+                if (valid) {
+                    this.submit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
