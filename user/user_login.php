@@ -92,15 +92,14 @@
     </script>
     <style>
         .form-box {
-            background-color: rgb(90, 10, 0);
+            background-color: rgb(90, 29, 0);
             width: 50%;
-            height: auto;
-            padding: 5vh 5vh;
+            height: 90%;
+            padding: 10vh 10vh;
             margin-top: 5vh;
             margin-bottom: 10vh;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             opacity: 0.9;
-            border-radius: 15px;
         }
     </style>
 </body>
