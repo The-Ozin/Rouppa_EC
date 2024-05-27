@@ -51,6 +51,7 @@ if (isset($_GET['delete_store_cnpj'])) {
             text-align: center;
             margin-top: -10vh;
             font-weight: bold;
+            font-family: 'Noto Serif Display', serif;
         }
         img {
             width: 200px;

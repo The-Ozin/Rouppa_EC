@@ -110,6 +110,7 @@ session_start();
                             <?php else: ?>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php">Cadastrar Produto</a></li>
                                 <li><a class="dropdown-item" href="?logout=true">Logout</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/profile.php?id=<?php echo $_SESSION['user_name']; ?>">Perfil</a></li>
                             <?php endif; ?>
                         <?php else: ?>
                             <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login/Cadastro</a></li>
