@@ -4,7 +4,7 @@ include('../connect.php');
  // Inicia a sessão
 if (!isset($_SESSION['user_name']) AND !isset($_SESSION['nome_loja'])) {
     // Redireciona o usuário de volta para a página de login
-    header("Location: http://localhost/Rouppa/user/user_login.php");
+    header("Location: http://localhost/Rouppa_EC/user/user_login.php");
     exit();
 }
 

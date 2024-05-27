@@ -1,5 +1,12 @@
-<?php 
+<?php
+session_start();
 include('../connect.php');
+
+if (!isset($_SESSION['adm_name'])) {
+    header('Location: http://localhost/Rouppa_EC/welcome.php');
+    exit();
+}
+
 
 // Função para deletar usuário
 if (isset($_GET['delete_user_cpf'])) {
@@ -79,6 +86,7 @@ if (isset($_GET['delete_store_cnpj'])) {
     </style>
 </head>
 <body>
+    <?php @include('../layouts/navbar.php'); ?>
     <a href="../welcome.php"><img src="../assets/images/logo1.jpg" alt="Rouppa"></a>
     <h1>Administração da Rouppa</h1>
 
@@ -226,7 +234,9 @@ if (isset($_GET['delete_store_cnpj'])) {
             </div>
         </div>
     </div>
-
+    <footer>
+        <?php include('../layouts/footer.php'); ?>
+    </footer>
     <script>
         function deleteUser(userCpf) {
             Swal.fire({

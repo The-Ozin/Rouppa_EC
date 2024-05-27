@@ -78,7 +78,6 @@ session_start();
                     >
                     <?php
                     if (isset($_SESSION['foto']) && !empty($_SESSION['foto'])):
-                        // Correct the path construction
                         $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto']);
                     ?>
                         <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
@@ -92,6 +91,8 @@ session_start();
                                     echo "Olá, " . $_SESSION['user_name'] . "!";
                                 } elseif (isset($_SESSION['nome_loja'])) {
                                     echo "Olá, " . $_SESSION['nome_loja'] . "!";
+                                } elseif (isset($_SESSION['adm_name'])) { // Verifica se o administrador está logado
+                                    echo "Olá, " . $_SESSION['adm_name'] . "!";
                                 }
                             } else {
                                 echo "Bem-vindo, visitante!";
@@ -104,8 +105,12 @@ session_start();
                         aria-labelledby="navbarDropdownMenuAvatar"
                     >
                         <?php if (!empty($_SESSION)): ?>
-                            <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php"?logout=true">Cadastrar Produto</a></li>
-                            <li><a class="dropdown-item" href="?logout=true">Logout</a></li>
+                            <?php if (isset($_SESSION['adm_name'])): // Verifica se o administrador está logado ?>
+                                <li><a class="dropdown-item" href="?logout=true">Logout</a></li>
+                            <?php else: ?>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php">Cadastrar Produto</a></li>
+                                <li><a class="dropdown-item" href="?logout=true">Logout</a></li>
+                            <?php endif; ?>
                         <?php else: ?>
                             <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login/Cadastro</a></li>
                         <?php endif; ?>
