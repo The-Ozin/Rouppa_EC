@@ -90,46 +90,65 @@ if (isset($_GET['delete_store_cnpj'])) {
     <a href="../welcome.php"><img src="../assets/images/logo1.jpg" alt="Rouppa"></a>
     <h1>Administração da Rouppa</h1>
 
-    <div class="container">
-        <div class="table-container">
-            <h2>Usuários</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Foto</th>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>CPF</th>
-                        <th>Data de Nascimento</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT * FROM usuario";
-                    $result = mysqli_query($conn, $query);
+    <div class="table-container">
+        <h2>Usuários</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Data de Nascimento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $query = "SELECT * FROM usuario";
+                $result = mysqli_query($conn, $query);
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>";
-                            echo "<td><img src='" . $row['foto'] . "' alt='Foto do usuário' width='50' height='50'></td>";
-                            echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['cpf']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['data_nascimento']) . "</td>";
-                            echo "<td><button class='btn btn-danger' onclick='deleteUser(\"" . $row['cpf'] . "\")'>Excluir</button>
-                            <button class='btn btn-primary' onclick='openEditUserModal(\"" . $row['cpf'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['email']) . "\", \"" . htmlspecialchars($row['data_nascimento']) . "\", \"" . $row['foto'] . "\")'>Editar</button></td>";
-                            echo "</tr>";
-                        }
-                    } 
-                    
-                    else {
-                        echo "<tr><td colspan='6'>Nenhum usuário encontrado</td></tr>";
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td><button class='btn btn-primary' onclick='showUserPhoto(\"" . $row['foto'] . "\")'>Mostrar Foto</button></td>";
+                        echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['cpf']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['data_nascimento']) . "</td>";
+                        echo "<td><button class='btn btn-danger' onclick='deleteUser(\"" . $row['cpf'] . "\")'>Excluir</button>
+                        <button class='btn btn-primary' onclick='openEditUserModal(\"" . $row['cpf'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['email']) . "\", \"" . htmlspecialchars($row['data_nascimento']) . "\", \"" . $row['foto'] . "\")'>Editar</button></td>";
+                        echo "</tr>";
                     }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                } 
+                
+                else {
+                    echo "<tr><td colspan='6'>Nenhum usuário encontrado</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div> 
+
+    <!-- Modal para exibir a foto do usuário -->
+        <div id="userPhotoModal" class="modal fade" tabindex="-1" aria-labelledby="userPhotoModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="userPhotoModalLabel">Foto do Usuário</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img id="userPhoto" src="" alt="Foto do usuário" class="img-fluid">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
 
         <div class="table-container">
             <h2>Lojas</h2>
@@ -287,6 +306,11 @@ if (isset($_GET['delete_store_cnpj'])) {
             document.getElementById('editStoreEndereco').value = endereco;
             var editStoreModal = new bootstrap.Modal(document.getElementById('editStoreModal'));
             editStoreModal.show();
+        }
+        function showUserPhoto(photoUrl) {
+            document.getElementById('userPhoto').src = photoUrl;
+            var userPhotoModal = new bootstrap.Modal(document.getElementById('userPhotoModal'));
+            userPhotoModal.show();
         }
     </script>
 
