@@ -5,7 +5,7 @@ session_start();
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
     <div class="container-fluid">
         <!-- Navbar title -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa_EC/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
+        <a class="navbar-brand mt-2 mt-lg-0" href="../welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
             Rouppa
         </a>
 

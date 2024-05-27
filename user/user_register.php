@@ -45,7 +45,7 @@
     <h1>Crie sua Conta</h1>
     <div class="d-flex justify-content-center" style="color:white">
         <div class="form-box">
-            <form id="registerForm" action="../user/user.php" method="post" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
+            <form id="registerForm" action="user.php" method="post" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
                 <div class="text-center mb-3">
                     <p>Cadastre-se com:</p>
                     <button type="button" class="btn btn-secondary btn-floating mx-1">

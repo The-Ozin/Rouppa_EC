@@ -1,15 +1,13 @@
 <?php
 session_start();
 
-// Verifica se o usuário está logado como loja ou usuário
+
 $isLoja = isset($_SESSION['cnpj']);
 $isUsuario = isset($_SESSION['cpf']);
 
-// Inclui o arquivo de conexão com o banco de dados
 include('../connect.php');
 
-// Inclui a barra de navegação
-@include('../layouts/navbar.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se todos os campos do formulário foram enviados

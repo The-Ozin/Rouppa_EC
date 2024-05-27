@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(6, $fotoPath);
 
         if ($stmt->execute()) {
-            header("Location: ../user/user_login.php");
+            header("Location: user_login.php");
         } else {
             echo "Erro ao cadastrar: " . $stmt->errorInfo()[2];
         }

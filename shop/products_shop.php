@@ -15,7 +15,7 @@ if (mysqli_num_rows($result) > 0) {
 
     while ($row = mysqli_fetch_assoc($result)) {
         if ($counter % 3 == 1 && $counter != 1) {
-            echo '</div><div class="d-flex justify-content-center">';
+           
         }
         echo '<div id="carouselExampleTouch' . $counter . '" class="carousel slide" data-mdb-touch="false" style="max-width: 400px; margin-right: 20px;">';
         echo '<div class="carousel-inner">';
@@ -34,7 +34,15 @@ if (mysqli_num_rows($result) > 0) {
         echo '<button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleTouch' . $counter . '" data-mdb-slide="next">';
         echo '<span class="carousel-control-next-icon" aria-hidden="true" style="color: black;"></span>';
         echo '<span class="visually-hidden">Next</span>';
-        echo '</button></div>';
+        echo '</button>';
+        
+        // Formulário para adicionar ao carrinho
+        echo '<form action="add_to_cart.php" method="post">';
+        echo '<input type="hidden" name="prod_id" value="' . $row['prod_id'] . '">';
+        echo '<button type="submit" class="btn btn-primary mt-3">Adicionar ao Carrinho</button>';
+        echo '</form>';
+        
+        echo '</div>';
 
         $counter++;
     }
@@ -42,5 +50,5 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo '<p>Nenhum produto encontrado</p>';
 }
-    
+
 ?>

@@ -104,17 +104,19 @@ if (isset($_GET['delete_store_cnpj'])) {
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
-                            echo "<td><img src='" . $row['foto'] . "' alt='Foto do usuário'></td>";
+                            echo "<td><img src='" . $row['foto'] . "' alt='Foto do usuário' width='50' height='50'></td>";
                             echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['cpf']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['data_nascimento']) . "</td>";
                             echo "<td><button class='btn btn-danger' onclick='deleteUser(\"" . $row['cpf'] . "\")'>Excluir</button>
-                            <button class='btn btn-primary' onclick='editUser(\"" . $row['cpf'] . "\")'>Editar</button></td>";
+                            <button class='btn btn-primary' onclick='openEditUserModal(\"" . $row['cpf'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['email']) . "\", \"" . htmlspecialchars($row['data_nascimento']) . "\", \"" . $row['foto'] . "\")'>Editar</button></td>";
                             echo "</tr>";
                         }
-                    } else {
-                        echo "<tr><td colspan='5'>Nenhum usuário encontrado</td></tr>";
+                    } 
+                    
+                    else {
+                        echo "<tr><td colspan='6'>Nenhum usuário encontrado</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -143,7 +145,8 @@ if (isset($_GET['delete_store_cnpj'])) {
                             echo "<td>" . htmlspecialchars($row['cnpj']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['endereco']) . "</td>";
-                            echo "<td><button class='btn btn-danger' onclick='deleteStore(\"" . $row['cnpj'] . "\")'>Excluir</button></td>";
+                            echo "<td><button class='btn btn-danger' onclick='deleteStore(\"" . $row['cnpj'] . "\")'>Excluir</button>
+                            <button class='btn btn-primary' onclick='openEditStoreModal(\"" . $row['cnpj'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['endereco']) . "\")'>Editar</button></td>";
                             echo "</tr>";
                         }
                     } else {
@@ -153,7 +156,75 @@ if (isset($_GET['delete_store_cnpj'])) {
                 </tbody>
             </table>
         </div>
+    </div>
 
+    <!-- Modal de Edição de Usuário -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editUserForm" action="update_user.php" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Editar Usuário</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="type" value="1">
+                        <input type="hidden" name="cpf" id="editCpf">
+                        <div class="mb-3">
+                            <label for="editNome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="editNome" name="nome">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editEmail" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editDataNascimento" class="form-label">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="editDataNascimento" name="data_nascimento">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editFoto" class="form-label">Foto</label>
+                            <input type="text" class="form-control" id="editFoto" name="foto">
+                        </div>
+                        <img id="editFotoPreview" src="" alt="Foto do usuário" class="img-fluid">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar mudanças</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edição de Loja -->
+    <div class="modal fade" id="editStoreModal" tabindex="-1" aria-labelledby="editStoreModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editStoreForm" action="update_user.php" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editStoreModalLabel">Editar Loja</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="type" value="2">
+                        <input type="hidden" name="cnpj" id="editStoreCnpj">
+                        <div class="mb-3">
+                            <label for="editStoreNome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="editStoreNome" name="nome">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStoreEndereco" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="editStoreEndereco" name="endereco">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar mudanças</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -173,16 +244,16 @@ if (isset($_GET['delete_store_cnpj'])) {
             });
         }
 
-        function editUser(userId) {
-            window.location.href = "edit_user.php?id"
+        function openEditUserModal(cpf, nome, email, dataNascimento, foto) {
+            document.getElementById('editCpf').value = cpf;
+            document.getElementById('editNome').value = nome;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editDataNascimento').value = dataNascimento;
+            document.getElementById('editFoto').value = foto;
+            document.getElementById('editFotoPreview').src = foto;
+            var editUserModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+            editUserModal.show();
         }
-
-
-        function editUser(userId) {
-   
-            window.location.href = "edit_user.php?id=" + userId;
-        }
-
 
         function deleteStore(storeCnpj) {
             Swal.fire({
@@ -199,7 +270,17 @@ if (isset($_GET['delete_store_cnpj'])) {
                 }
             });
         }
+
+        function openEditStoreModal(cnpj, nome, endereco) {
+            document.getElementById('editStoreCnpj').value = cnpj;
+            document.getElementById('editStoreNome').value = nome;
+            document.getElementById('editStoreEndereco').value = endereco;
+            var editStoreModal = new bootstrap.Modal(document.getElementById('editStoreModal'));
+            editStoreModal.show();
+        }
     </script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

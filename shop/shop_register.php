@@ -23,7 +23,7 @@
     <h1>Crie sua Conta de Loja</h1>
     <div class="d-flex justify-content-center" style="color:white">
         <div class="form-box">
-        <form id="registerForm" action="../shop/shop_register.php" method="post" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
+        <form id="registerForm" action="shop_register_act.php" method="post" enctype="multipart/form-data" onsubmit="return validateRegisterForm()">
                 <div class="text-center mb-3">
                     <p>Cadastre-se com:</p>
                     <button type="button" class="btn btn-secondary btn-floating mx-1">
