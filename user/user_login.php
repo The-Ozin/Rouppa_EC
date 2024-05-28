@@ -62,7 +62,7 @@
                         <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: rgb(215,90, 90);">Entrar</button>
                         <div class="text-center">
                             <p class="text-white">Ainda não é membro? <a href="user_register.php">Registrar</a></p>
-                            <p class="text-white">Gostaria de entrar com perfil de loja? <a href="http://localhost/Rouppa/shop/shop_login.php">Entrar como loja</a></p>
+                            <p class="text-white">Gostaria de entrar com perfil de loja? <a href="http://localhost/Rouppa_EC/shop/shop_login.php">Entrar como loja</a></p>
                         </div>
                     </form>
                 </div>
@@ -92,7 +92,7 @@
     </script>
     <style>
         .form-box {
-            background-color: rgb(90, 29, 0);
+            background-color: burlywood;
             width: 50%;
             height: 90%;
             padding: 10vh 10vh;

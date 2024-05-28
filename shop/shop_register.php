@@ -1,3 +1,7 @@
+<?php 
+ session_start();
+ @include('../layouts/navbar.php');
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,20 +10,42 @@
     <title>Cadastro de Loja</title>
     <link rel="stylesheet" href=".././assets/style.css">
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<!-- Font Awesome -->
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@0,100..900;1,100..900&family=Source+Serif+4:wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+    rel="stylesheet"
+    />
+
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js
+    "></script>
+
+        <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
+        
+        initMDB({ Input, Tab, Ripple });
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <?php @include('../layouts/navbar.php'); ?> 
+
     <h1>Crie sua Conta de Loja</h1>
     <div class="d-flex justify-content-center" style="color:white">
         <div class="form-box">
@@ -84,7 +110,7 @@
 
                 <!-- Register buttons -->
                 <div class="text-center">
-                    <p>Já possui uma conta? <a href="sh_login.php">Faça login</a></p>
+                    <p>Já possui uma conta? <a href="shop_login.php">Faça login</a></p>
                 </div>
             </form>
         </div>
@@ -175,7 +201,7 @@
 
 <style>
     .form-box {
-        background-color: rgb(90, 29, 0);
+        background-color: burlywood;
         width: 50%;
         height: 90%;
         padding: 10vh 10vh;

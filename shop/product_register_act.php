@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Executa a consulta SQL
         if ($conn->query($sql) === TRUE) {
             // Redireciona o usuário para a página de boas-vindas
-            header("Location: http://localhost/Rouppa/welcome.php");
+            header("Location: http://localhost/Rouppa_EC/welcome.php");
             exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
         } else {
             echo "Erro ao cadastrar o produto: " . $conn->error;

@@ -1,5 +1,7 @@
 <?php
 session_start();
+session_start();
+@include('../layouts/navbar.php');
 include('../connect.php');
 
 if (!isset($_SESSION['adm_name'])) {

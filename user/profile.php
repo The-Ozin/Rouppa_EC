@@ -1,3 +1,7 @@
+<?php 
+ session_start();
+ @include('../layouts/navbar.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +47,7 @@
     </style>
 </head>
 <body>
-    <?php @include('../layouts/navbar.php'); ?>
+    
     <div class="d-flex justify-content-center">
         <div class="container">
             <div class="form-header">

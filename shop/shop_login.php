@@ -1,3 +1,7 @@
+<?php 
+ session_start();
+ @include('../layouts/navbar.php');
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +20,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <?php @include('../layouts/navbar.php'); ?>
     <div class="d-flex justify-content-center">
         <div class="form-box">
             <div class="tab-content">
@@ -79,7 +82,7 @@
     </script>
     <style>
         .form-box {
-            background-color: rgb(90, 10, 0);
+            background-color: burlywood;
             width: 50%;
             height: auto;
             padding: 5vh 5vh;

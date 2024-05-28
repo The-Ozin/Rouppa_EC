@@ -78,7 +78,7 @@ if (isset($_GET['error'])) {
     </script>
     <style>
         .form-box {
-            background-color: rgb(90, 29, 0);
+            background-color: burlywood;
             width: 50%;
             height: 90%;
             padding: 10vh 10vh;

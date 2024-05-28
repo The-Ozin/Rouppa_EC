@@ -35,8 +35,9 @@ if (!isset($_SESSION['user_name']) AND !isset($_SESSION['nome_loja'])) {
 </head>
 <body>
     <div class="sale"> ! 20% OFF EM TODA A COMPRA ! </div>
-    <h1>SNKRS</h1>
-    <?php @include('products_shop.php'); ?>
+    <h1>Produtos</h1>
+    <?php @include('../shop/products_shop.php'); ?>
+
     <!-- Adicione a inicialização do componente do carrossel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
     <!-- Adicione a inicialização do componente do carrossel -->

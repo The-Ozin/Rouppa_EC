@@ -6,7 +6,7 @@
     <title>Cadastro</title>
     <link rel="stylesheet" href=".././assets/style.css">
 
-            <!-- Font Awesome -->
+   <!-- Font Awesome -->
             <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     rel="stylesheet"
@@ -238,7 +238,7 @@
 
 <style>
     .form-box {
-        background-color: rgb(90, 29, 0);
+        background-color: burlywood;
         width: 50%;
         height: 90%;
         padding: 10vh 10vh;
