@@ -66,54 +66,91 @@ session_start();
                         </li>
                     </ul>
                 </div>
-                <!-- Avatar -->
                 <div class="dropdown">
-                    <a
-                        data-mdb-dropdown-init
-                        class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                        href="#"
-                        id="navbarDropdownMenuAvatar"
-                        role="button"
-                        aria-expanded="false"
-                    >
-                    <?php
-                    if (isset($_SESSION['foto']) && !empty($_SESSION['foto'])):
-                        $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto']);
-                    ?>
-                        <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
-                    <?php else: ?>
-                        <i class="fas fa-user" style="color: white;"></i>
-                    <?php endif; ?>
-                        <span class="ms-2" style="color: white;">
-                            <?php 
-                            if (!empty($_SESSION)) {
-                                if (isset($_SESSION['user_name'])) {
-                                    echo "Olá, " . $_SESSION['user_name'] . "!";
-                                } elseif (isset($_SESSION['nome_loja'])) {
-                                    echo "Olá, " . $_SESSION['nome_loja'] . "!";
-                                } elseif (isset($_SESSION['adm_name'])) { // Verifica se o administrador está logado
-                                    echo "Olá, " . $_SESSION['adm_name'] . "!";
-                                }
-                            } else {
-                                echo "Bem-vindo, visitante!";
-                            }
-                            ?>
-                        </span>
-                    </a>
-                    <ul
-                        class="dropdown-menu dropdown-menu-end"
-                        aria-labelledby="navbarDropdownMenuAvatar"
-                    >
-                        <?php if (!empty($_SESSION)): ?>
-                            <?php if (isset($_SESSION['adm_name'])): // Verifica se o administrador está logado ?>
-                                <li><a class="dropdown-item" href="?logout=true">Logout</a></li>
+                    <?php if (isset($_SESSION['user_name'])): ?>
+                        <!-- Avatar do usuário -->
+                        <a
+                            data-mdb-dropdown-init
+                            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                            href="#"
+                            id="navbarDropdownMenuAvatar"
+                            role="button"
+                            aria-expanded="false"
+                        >
+                            <?php if (!empty($_SESSION['foto'])): ?>
+                                <?php $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto']); ?>
+                                <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
                             <?php else: ?>
-                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php">Cadastrar Produto</a></li>
-                                <li><a class="dropdown-item" href="logout.php" >Logout</a></li>
-                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/profile.php?id=<?php echo $_SESSION['user_name']; ?>">Perfil</a></li>
+                                <i class="fas fa-user" style="color: white;"></i>
+                            <?php endif; ?>
+                            <span class="ms-2" style="color: white;">Olá, <?php echo $_SESSION['user_name']; ?>!</span>
+                        </a>
+                    <?php elseif (isset($_SESSION['nome_loja'])): ?>
+                        <!-- Avatar da loja -->
+                        <a
+                            data-mdb-dropdown-init
+                            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                            href="#"
+                            id="navbarDropdownMenuAvatar"
+                            role="button"
+                            aria-expanded="false"
+                        >
+                            <?php if (!empty($_SESSION['foto_loja'])): ?>
+                                <?php $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto_loja']); ?>
+                                <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
+                            <?php else: ?>
+                                <i class="fas fa-store" style="color: white;"></i>
+                            <?php endif; ?>
+                            <span class="ms-2" style="color: white;">Olá, <?php echo $_SESSION['nome_loja']; ?>!</span>
+                            
+                        </a>
+                    <?php elseif (isset($_SESSION['adm_name'])): ?>
+                        <a
+                                data-mdb-dropdown-init
+                                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                                href="#"
+                                id="navbarDropdownMenuAvatar"
+                                role="button"
+                                aria-expanded="false"
+                        >
+                                <i class="fas fa-user" style="color: white;"></i>
+                                <span class="ms-2" style="color: white;">Olá, <?php echo $_SESSION['adm_name']; ?>!</span>
+                        </a>
+                    <?php else: ?>
+                        <!-- Visitante não logado -->
+                        <a
+                            data-mdb-dropdown-init
+                            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                            href="#"
+                            id="navbarDropdownMenuAvatar"
+                            role="button"
+                            aria-expanded="false"
+                        >
+                            <i class="fas fa-user" style="color: white;"></i>
+                            <span class="ms-2" style="color: white;">Bem-vindo, visitante!</span>
+                        </a>
+                    <?php endif; ?>
+            
+                    <!-- Opções do dropdown -->
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                        <?php if (!empty($_SESSION)): ?>
+                            <?php if (isset($_SESSION['adm_name'])): ?>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
+                            <?php elseif (isset($_SESSION['user_name'])): ?>
+                                <!-- Opções específicas do usuário -->
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php">Cadastar Produto</a></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                            <?php elseif (isset($_SESSION['nome_loja'])): ?>
+                                <!-- Opções específicas da loja -->
+                                <li><a class="dropdown-item" href="#">Gerenciar Produtos</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php">Cadastar Produto</a></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             <?php endif; ?>
                         <?php else: ?>
-                            <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login/Cadastro</a></li>
+                            <!-- Opções para visitantes não logados -->
+                            <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login</a></li>
+                            <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_register.php">Cadastro</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -121,5 +158,3 @@ session_start();
         </div>
     </div>
 </nav>
-
-

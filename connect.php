@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "PUC@1234";
+$password = "wordpass";
 $database = "rouppa";
 
 // Create connection
@@ -26,6 +26,4 @@ if ($result === false) {
     die("Error executing query: " . mysqli_error($conn));
 }
 
-// Close connection (optional)
-// mysqli_close($conn);
 ?>

@@ -51,8 +51,8 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: rgb(215,90, 90);">Entrar</button>
                         <div class="text-center">
-                            <p class="text-white">Ainda não é membro? <a href="shop_register.php">Registrar</a></p>
-                            <p class="text-white">Gostaria de entrar como usuário? <a href="http://localhost/Rouppa/user/user_login.php">Entrar como usuário</a></p>
+                            <p class="text-white">Ainda não cadastrou sua loja? <a href="shop_register.php">Registrar</a></p>
+                            <p class="text-white">Gostaria de entrar como usuário? <a href="http://localhost/Rouppa_EC/user/user_login.php">Entrar como usuário</a></p>
                         </div>
                     </form>
                 </div>

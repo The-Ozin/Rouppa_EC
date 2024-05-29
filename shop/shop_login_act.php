@@ -22,7 +22,12 @@ try {
         $_SESSION['email_loja'] = $loja['email'];
         $_SESSION['cnpj'] = $loja['cnpj'];
         $_SESSION['endereco'] = $loja['endereco'];
-    
+        
+        // Atribui a foto da loja apenas se existir
+        if (!empty($loja['foto'])) {
+            $_SESSION['foto_loja'] = $loja['foto'];
+        }
+
         // Redireciona para a página de boas-vindas da loja
         header("Location: ../welcome.php");
         exit();

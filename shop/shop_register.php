@@ -105,6 +105,11 @@
                     </div>
                 </div>
 
+                <div class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerStorePhoto">Imagem de Perfil</label>
+                    <input type="file" name="registerStorePhoto" id="registerStorePhoto" class="form-control border border-dark" style="background-color: white;" accept="image/*" />
+                </div>
+
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block mb-3" style="background-color: rgb(215,90, 90);">Cadastrar</button>
 

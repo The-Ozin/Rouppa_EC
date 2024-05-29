@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_start();
 @include('../layouts/navbar.php');
 include('../connect.php');
 
@@ -8,7 +7,6 @@ if (!isset($_SESSION['adm_name'])) {
     header('Location: http://localhost/Rouppa_EC/welcome.php');
     exit();
 }
-
 
 // Função para deletar usuário
 if (isset($_GET['delete_user_cpf'])) {
@@ -89,7 +87,6 @@ if (isset($_GET['delete_store_cnpj'])) {
     </style>
 </head>
 <body>
-    <?php @include('../layouts/navbar.php'); ?>
     <a href="../welcome.php"><img src="../assets/images/logo1.jpg" alt="Rouppa"></a>
     <h1>Administração da Rouppa</h1>
 
@@ -114,7 +111,7 @@ if (isset($_GET['delete_store_cnpj'])) {
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
-                        echo "<td><button class='btn btn-primary' onclick='showUserPhoto(\"" . $row['foto'] . "\")'>Mostrar Foto</button></td>";
+                        echo "<td><button class='btn btn-primary' onclick='showPhoto(\"" . $row['foto'] . "\")'>Mostrar Foto</button></td>";
                         echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['cpf']) . "</td>";
@@ -134,15 +131,15 @@ if (isset($_GET['delete_store_cnpj'])) {
     </div> 
 
     <!-- Modal para exibir a foto do usuário -->
-        <div id="userPhotoModal" class="modal fade" tabindex="-1" aria-labelledby="userPhotoModalLabel" aria-hidden="true">
+        <div id="photoModal" class="modal fade" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="userPhotoModalLabel">Foto do Usuário</h5>
+                            <h5 class="modal-title" id="photoModalLabel">Foto</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <img id="userPhoto" src="" alt="Foto do usuário" class="img-fluid">
+                            <img id="photo" src="" alt="Foto" class="img-fluid">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -158,6 +155,7 @@ if (isset($_GET['delete_store_cnpj'])) {
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Foto</th>
                         <th>CNPJ</th>
                         <th>Nome</th>
                         <th>Endereço</th>
@@ -172,15 +170,16 @@ if (isset($_GET['delete_store_cnpj'])) {
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
+                            echo "<td><button class='btn btn-primary' onclick='showPhoto(\"" . $row['foto'] . "\")'>Mostrar Foto</button></td>";
                             echo "<td>" . htmlspecialchars($row['cnpj']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['endereco']) . "</td>";
                             echo "<td><button class='btn btn-danger' onclick='deleteStore(\"" . $row['cnpj'] . "\")'>Excluir</button>
-                            <button class='btn btn-primary' onclick='openEditStoreModal(\"" . $row['cnpj'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['endereco']) . "\")'>Editar</button></td>";
+                            <button class='btn btn-primary' onclick='openEditStoreModal(\"" . $row['cnpj'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['endereco']) . "\", \"" . $row['foto'] . "\")'>Editar</button></td>";
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='4'>Nenhuma loja encontrada</td></tr>";
+                        echo "<tr><td colspan='5'>Nenhuma loja encontrada</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -247,6 +246,11 @@ if (isset($_GET['delete_store_cnpj'])) {
                             <label for="editStoreEndereco" class="form-label">Endereço</label>
                             <input type="text" class="form-control" id="editStoreEndereco" name="endereco">
                         </div>
+                        <div class="mb-3">
+                            <label for="editStoreFoto" class="form-label">Foto</label>
+                            <input type="text" class="form-control" id="editStoreFoto" name="foto">
+                        </div>
+                        <img id="editStoreFotoPreview" src="" alt="Foto da loja" class="img-fluid">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -303,17 +307,20 @@ if (isset($_GET['delete_store_cnpj'])) {
             });
         }
 
-        function openEditStoreModal(cnpj, nome, endereco) {
+        function openEditStoreModal(cnpj, nome, endereco, foto) {
             document.getElementById('editStoreCnpj').value = cnpj;
             document.getElementById('editStoreNome').value = nome;
             document.getElementById('editStoreEndereco').value = endereco;
+            document.getElementById('editStoreFoto').value = foto;
+            document.getElementById('editStoreFotoPreview').src = foto;
             var editStoreModal = new bootstrap.Modal(document.getElementById('editStoreModal'));
             editStoreModal.show();
         }
-        function showUserPhoto(photoUrl) {
-            document.getElementById('userPhoto').src = photoUrl;
-            var userPhotoModal = new bootstrap.Modal(document.getElementById('userPhotoModal'));
-            userPhotoModal.show();
+
+        function showPhoto(photoUrl) {
+            document.getElementById('photo').src = photoUrl;
+            var photoModal = new bootstrap.Modal(document.getElementById('photoModal'));
+            photoModal.show();
         }
     </script>
 
