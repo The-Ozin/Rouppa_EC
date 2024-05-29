@@ -21,6 +21,7 @@ try {
         $_SESSION['user_name'] = $usuario['nome'];
         $_SESSION['email'] = $usuario['email'];
         $_SESSION['id'] = $usuario['id'];
+        $_SESSION['cpf'] = $usuario['cpf'];
         $_SESSION['foto'] = $usuario['foto']; // Armazena o caminho relativo da foto do usuário
     
         // Redireciona para a página de boas-vindas

@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-
-$isLoja = isset($_SESSION['cnpj']);
 $isUsuario = isset($_SESSION['cpf']);
+$isLoja = isset($_SESSION['cnpj']);
+
 
 include('../connect.php');
 
