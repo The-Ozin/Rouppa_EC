@@ -14,7 +14,8 @@ $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : '';
 $tamanho = isset($_GET['tamanho']) ? $_GET['tamanho'] : '';
 
 $query = "SELECT * FROM produto WHERE 1";
-$query = "SELECT * FROM produto WHERE tipo_usuario = 'loja'";
+$query = "SELECT * FROM produto WHERE tipo_usuario = 'usuario'";
+
 if ($categoria) {
     $query .= " AND categoria = '" . mysqli_real_escape_string($conn, $categoria) . "'";
 }
@@ -155,14 +156,7 @@ if ($result === false) {
                 tamanhoSelect.innerHTML = ''; // Clear existing options
             }
         }
-        document.addEventListener('DOMContentLoaded', function () {
-            const carousels = document.querySelectorAll('.carousel');
-            carousels.forEach(function (carousel) {
-                new mdb.Carousel(carousel, {
-                    touch: false // Desabilita o toque do carrossel para evitar conflitos com a biblioteca MDB UI Kit
-                });
-            });
-        });
+
         document.addEventListener('DOMContentLoaded', toggleTamanhoInputs);
     </script>
     <footer>

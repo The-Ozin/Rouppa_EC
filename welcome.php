@@ -59,7 +59,7 @@
                 </a>
             </div>
             <div class="opcao">
-                <a href="#">
+                <a href="./user/brecho.php">
                     <img src="./assets/images/brecho_img.jpg" alt="Brechó">
                     <h2>Brechó</h2>
                     <p>Encontre peças únicas com história dos usuários</p>

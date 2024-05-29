@@ -139,13 +139,13 @@ session_start();
                             <?php elseif (isset($_SESSION['user_name'])): ?>
                                 <!-- Opções específicas do usuário -->
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php">Cadastar Produto</a></li>
-                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/product/product_register.php">Cadastar Produto</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php elseif (isset($_SESSION['nome_loja'])): ?>
                                 <!-- Opções específicas da loja -->
                                 <li><a class="dropdown-item" href="#">Gerenciar Produtos</a></li>
-                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/product_register.php">Cadastar Produto</a></li>
-                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/product/product_register.php">Cadastar Produto</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php endif; ?>
                         <?php else: ?>
                             <!-- Opções para visitantes não logados -->
