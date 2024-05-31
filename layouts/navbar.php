@@ -30,7 +30,7 @@ session_start();
                     <a class="nav-link" href="http://localhost/Rouppa_EC/shop/shop.php" style="color: white;">loja</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: white;">Brechó</a>
+                    <a class="nav-link" href="http://localhost/Rouppa_EC/user/brecho.php" style="color: white;">Brechó</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: white;">Contato</a>
@@ -79,7 +79,7 @@ session_start();
                         >
                             <?php if (!empty($_SESSION['foto'])): ?>
                                 <?php $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto']); ?>
-                                <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
+                                <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="30" width="30" alt="Avatar" loading="lazy" />
                             <?php else: ?>
                                 <i class="fas fa-user" style="color: white;"></i>
                             <?php endif; ?>
@@ -97,7 +97,7 @@ session_start();
                         >
                             <?php if (!empty($_SESSION['foto_loja'])): ?>
                                 <?php $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto_loja']); ?>
-                                <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="25" alt="Avatar" loading="lazy" />
+                                <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="3" width="35 alt="Avatar" loading="lazy" />
                             <?php else: ?>
                                 <i class="fas fa-store" style="color: white;"></i>
                             <?php endif; ?>

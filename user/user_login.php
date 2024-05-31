@@ -22,28 +22,28 @@
         <div class="form-box">
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                    <form action="user_login_act.php" method="post" id="loginForm">
+                    <form id="loginForm">
                         <div class="text-center mb-3" style="color: white;">
                             <p>Entrar com:</p>
-                            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
+                            <button type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
                                 <i class="fab fa-facebook-f"></i>
                             </button>
-                            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
+                            <button type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
                                 <i class="fab fa-google"></i>
                             </button>
-                            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
+                            <button type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
                                 <i class="fab fa-twitter"></i>
                             </button>
                         </div>
                         <p class="text-center" style="color: white;">ou:</p>
-                        <div data-mdb-input-init class="form-outline mb-4">
+                        <div class="form-outline mb-4">
                             <label class="form-label text-white" for="email">Email</label>
-                            <input type="email" name="email" class="form-control border border-dark bg-white" style="width: 100%;" required/>
+                            <input type="email" name="email" class="form-control border border-dark bg-white" required/>
                         </div>
-                        <div data-mdb-input-init class="form-outline mb-4">
+                        <div class="form-outline mb-4">
                             <label class="form-label text-white" for="senha">Senha</label>
                             <div class="input-group">
-                                <input type="password" name="senha" id="senha" class="form-control border border-dark" style="background-color: white;" required />
+                                <input type="password" name="senha" id="senha" class="form-control border border-dark bg-white" required />
                                 <button class="btn border border-dark text-white" type="button" id="togglePasswordVisibility" style="background-color: rgb(215,90, 90);">
                                     <i class="fas fa-eye"></i>
                                 </button>
@@ -91,7 +91,6 @@
             }
         });
 
-        // Função para exibir alerta em SweetAlert
         function showAlert(title, text, icon) {
             Swal.fire({
                 title: title,
@@ -100,31 +99,24 @@
             });
         }
 
-        // Obter o formulário de login
         var loginForm = document.getElementById("loginForm");
 
-        // Adicionar um ouvinte de evento para o envio do formulário
         loginForm.addEventListener("submit", function(event) {
-            event.preventDefault(); // Impedir o envio padrão do formulário
+            event.preventDefault();
 
-            // Obter os dados do formulário
             var formData = new FormData(loginForm);
 
-            // Enviar a solicitação assíncrona para o servidor
             fetch("user_login_act.php", {
                 method: "POST",
                 body: formData
             })
             .then(function(response) {
-                return response.json(); // Converter a resposta em JSON
+                return response.json();
             })
             .then(function(data) {
-                // Lidar com a resposta do servidor
                 if (data.success) {
-                    // Redirecionar para a página de boas-vindas se o login for bem-sucedido
                     window.location.href = data.redirect;
                 } else {
-                    // Exibir alerta se o login falhou
                     showAlert('Erro', data.error, 'error');
                 }
             })
