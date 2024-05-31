@@ -10,184 +10,174 @@
     <title>Edit Profile</title>
     <link rel="stylesheet" href="../assets/style.css">
     <!-- Font Awesome -->
-    <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
-    <link
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-    rel="stylesheet"
-    />
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
-
     <!-- MDB -->
-    <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
-    rel="stylesheet"
-    />
-
-    <script src="
-    https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js
-    "></script>
-
-        <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
-        
-        initMDB({ Input, Tab, Ripple });
-    ></script>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js" initMDB({ Input, Tab, Ripple });></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        .form-box {
+            background-color: burlywood !important;
+            width: 70%;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            margin-bottom: 10vh;  
+        }
+
+        .profile-photo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo .avatar {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-photo .avatar img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #d75858;
+        }
+
+        .profile-photo .avatar .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 0 0 50% 50%;
+            display: none;
+        }
+
+        .profile-photo .avatar:hover .overlay {
+            display: block;
+        }
+
+        .profile-photo input[type="file"] {
+            display: none;
+        }
+
+        .profile-photo label {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #d75858;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .form-header h2 {
+            color: #d75858;
+            margin-bottom: 30px;
+            font-size: 50px;
+            font-family: 'Noto Serif Display', serif;
+            font-weight: bold;
+            margin-top: 5vh;
+        }                               
 
     </style>
 </head>
 <body>
-    
-    <div class="d-flex justify-content-center">
-        <div class="container">
-            <div class="form-header">
-                <h2>Edit Profile</h2>
+    <div class="form-header text-center">
+        <h2>Editar Perfil</h2>
+    </div>
+    <div class="form-box">
+        <div class="profile-photo">
+            <div class="avatar">
+                <img src="../assets/avatar.png">
+                <div class="overlay">
+                    <button type="button"><i class="fas fa-pencil-alt"></i></button>
+                </div>
             </div>
-            <form id="editProfileForm" action="update_profile.php" method="POST">
-                <div class="profile-photo">
-                    <div class="avatar">
-                        <img src="../assets/avatar.png" alt="Avatar">
-                        <div class="overlay">
-                            <button type="button"><i class="fas fa-pencil-alt"></i></button>
-                        </div>
-                    </div>
-                    <input type="file" class="form-control mt-2" id="registerPhoto" name="photo">
+            <label for="registerPhoto">Change Photo</label>
+            <input type="file" class="form-control mt-2" id="registerPhoto" name="photo">
+        </div>
+                <!-- Name input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerName">Nome</label>
+                    <input type="text" name="registerName" id="registerName" class="form-control border border-dark" style="background-color: white;" required />
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="registerName">Name</label>
-                    <input type="text" id="registerName" name="name" class="form-control" required />
-                    <div class="error" id="nameError">Name is required.</div>
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerEmail">Email</label>
+                    <input type="email" name="registerEmail" id="registerEmail" class="form-control border border-dark" style="background-color: white;" required />
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" name="email" class="form-control" required />
-                    <div class="error" id="emailError">Valid email is required.</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="registerPassword">New Password</label>
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerPassword">Nova Senha</label>
                     <div class="input-group">
-                        <input type="password" id="registerPassword" name="password" class="form-control" required />
+                        <input type="password" name="registerPassword" id="registerPassword" class="form-control border border-dark" style="background-color: white;" required />
                         <button class="btn border border-dark text-white" type="button" id="togglePasswordVisibility" style="background-color: rgb(215,90, 90);">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
-                    <div class="error" id="passwordError">Password is required.</div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="registerRepeatPassword">Old Password</label>
+                <!-- Old Password -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerRepeatPassword">Senha antiga</label>
                     <div class="input-group">
-                        <input type="password" id="registerRepeatPassword" name="old_password" class="form-control" required />
+                        <input type="password" name="registerRepeatPassword" id="registerRepeatPassword" class="form-control border border-dark" style="background-color: white;" required />
                         <button class="btn border border-dark text-white" type="button" id="toggleRepeatPasswordVisibility" style="background-color: rgb(215,90, 90);">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
-                    <div class="error" id="repeatPasswordError">Old password is required.</div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="registerBirthdate">Date of Birth</label>
-                    <input type="date" id="registerBirthdate" name="birthdate" class="form-control" required />
-                    <div class="error" id="birthdateError">Date of birth is required.</div>
+                <!-- Birthdate input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerBirthdate">Data de Nascimento</label>
+                    <input type="date" name="registerBirthdate" id="registerBirthdate" class="form-control border border-dark" style="background-color: white;" required />
                 </div>
-
-                <div class="form-footer">
-                    <button type="submit" class="btn btn-primary btn-block mb-4">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #d75858;">Save</button>
+            </div>
+        </form>
     <footer>
         <?php include('../layouts/footer.php'); ?>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const togglePasswordVisibilityButton = document.getElementById('togglePasswordVisibility');
-            const toggleRepeatPasswordVisibilityButton = document.getElementById('toggleRepeatPasswordVisibility');
-            const passwordField = document.getElementById('registerPassword');
-            const repeatPasswordField = document.getElementById('registerRepeatPassword');
+        function togglePasswordVisibility(buttonId, inputId) {
+            const passwordField = document.getElementById(inputId);
+            const passwordFieldType = passwordField.getAttribute('type');
+            const newPasswordFieldType = passwordFieldType === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', newPasswordFieldType);
 
-            togglePasswordVisibilityButton.addEventListener('click', function() {
-                togglePasswordVisibility(passwordField, this);
-            });
+            const button = document.getElementById(buttonId);
+            const icon = button.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        }
 
-            toggleRepeatPasswordVisibilityButton.addEventListener('click', function() {
-                togglePasswordVisibility(repeatPasswordField, this);
-            });
+        document.getElementById('togglePasswordVisibility').addEventListener('click', function() {
+            togglePasswordVisibility('togglePasswordVisibility', 'registerPassword');
+        });
 
-            function togglePasswordVisibility(field, button) {
-                if (field.type === 'password') {
-                    field.type = 'text';
-                    button.innerHTML = '<i class="fas fa-eye-slash text-white"></i>';
-                } else {
-                    field.type = 'password';
-                    button.innerHTML = '<i class="fas fa-eye text-white"></i>';
-                }
-            }
-
-            document.getElementById('editProfileForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                let valid = true;
-
-                const name = document.getElementById('registerName').value;
-                const email = document.getElementById('registerEmail').value;
-                const password = document.getElementById('registerPassword').value;
-                const oldPassword = document.getElementById('registerRepeatPassword').value;
-                const birthdate = document.getElementById('registerBirthdate').value;
-
-                if (!name) {
-                    document.getElementById('nameError').style.display = 'block';
-                    valid = false;
-                } else {
-                    document.getElementById('nameError').style.display = 'none';
-                }
-
-                if (!email || !/\S+@\S+\.\S+/.test(email)) {
-                    document.getElementById('emailError').style.display = 'block';
-                    valid = false;
-                } else {
-                    document.getElementById('emailError').style.display = 'none';
-                }
-
-                if (!password) {
-                    document.getElementById('passwordError').style.display = 'block';
-                    valid = false;
-                } else {
-                    document.getElementById('passwordError').style.display = 'none';
-                }
-
-                if (!oldPassword) {
-                    document.getElementById('repeatPasswordError').style.display = 'block';
-                    valid = false;
-                } else {
-                    document.getElementById('repeatPasswordError').style.display = 'none';
-                }
-
-                if (!birthdate) {
-                    document.getElementById('birthdateError').style.display = 'block';
-                    valid = false;
-                } else {
-                    document.getElementById('birthdateError').style.display = 'none';
-                }
-
-                if (valid) {
-                    this.submit();
-                }
-            });
+        document.getElementById('toggleRepeatPasswordVisibility').addEventListener('click', function() {
+            togglePasswordVisibility('toggleRepeatPasswordVisibility', 'registerRepeatPassword');
         });
     </script>
 </body>
