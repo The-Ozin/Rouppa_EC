@@ -6,6 +6,8 @@ session_start();
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 $senha = isset($_POST['senha']) ? trim($_POST['senha']) : '';
 
+header('Content-Type: application/json');
+
 if (empty($email) || empty($senha)) {
     echo json_encode(["success" => false, "error" => "Email ou senha não preenchidos."]);
     exit();
@@ -24,8 +26,8 @@ try {
         $_SESSION['cpf'] = $usuario['cpf'];
         $_SESSION['foto'] = $usuario['foto']; // Armazena o caminho relativo da foto do usuário
     
-        // Redireciona para a página de boas-vindas
-        header("Location: ../welcome.php");
+        // Retorna uma resposta de sucesso
+        echo json_encode(["success" => true, "redirect" => "../welcome.php"]);
         exit();
     } else {
         echo json_encode(["success" => false, "error" => "Credenciais inválidas. Tente novamente."]);
@@ -35,41 +37,3 @@ try {
 }
 ?>
 
-
-
-<script>
-    // Função para exibir alerta em JavaScript
-    function showAlert(message) {
-        alert(message);
-    }
-
-    // Obter o formulário de login
-    var loginForm = document.getElementById("loginForm");
-
-    // Adicionar um ouvinte de evento para o envio do formulário
-    loginForm.addEventListener("submit", function(event) {
-        event.preventDefault(); // Impedir o envio padrão do formulário
-
-        // Obter os dados do formulário
-        var formData = new FormData(loginForm);
-
-        // Enviar a solicitação assíncrona para o servidor
-        fetch("user_login_act.php", {
-            method: "POST",
-            body: formData
-        })
-        .then(function(response) {
-            return response.json(); // Converter a resposta em JSON
-        })
-        .then(function(data) {
-            // Lidar com a resposta do servidor
-            if (!data.success) {
-                // Exibir alerta se o login falhou
-                showAlert(data.error);
-            }
-        })
-        .catch(function(error) {
-            console.error("Erro ao processar a solicitação:", error);
-        });
-    });
-</script>

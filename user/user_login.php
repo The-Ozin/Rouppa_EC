@@ -1,3 +1,5 @@
+<?php @include('../layouts/navbar.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +18,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <?php @include('../layouts/navbar.php'); ?>
     <div class="d-flex justify-content-center">
         <div class="form-box">
             <div class="tab-content">
@@ -88,6 +89,49 @@
                     button.innerHTML = '<i class="fas fa-eye text-white"></i>';
                 }
             }
+        });
+
+        // Função para exibir alerta em SweetAlert
+        function showAlert(title, text, icon) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon
+            });
+        }
+
+        // Obter o formulário de login
+        var loginForm = document.getElementById("loginForm");
+
+        // Adicionar um ouvinte de evento para o envio do formulário
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Impedir o envio padrão do formulário
+
+            // Obter os dados do formulário
+            var formData = new FormData(loginForm);
+
+            // Enviar a solicitação assíncrona para o servidor
+            fetch("user_login_act.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(function(response) {
+                return response.json(); // Converter a resposta em JSON
+            })
+            .then(function(data) {
+                // Lidar com a resposta do servidor
+                if (data.success) {
+                    // Redirecionar para a página de boas-vindas se o login for bem-sucedido
+                    window.location.href = data.redirect;
+                } else {
+                    // Exibir alerta se o login falhou
+                    showAlert('Erro', data.error, 'error');
+                }
+            })
+            .catch(function(error) {
+                console.error("Erro ao processar a solicitação:", error);
+                showAlert('Erro', 'Ocorreu um erro ao processar a solicitação.', 'error');
+            });
         });
     </script>
     <style>

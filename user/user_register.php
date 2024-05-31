@@ -1,3 +1,5 @@
+<?php @include('../layouts/navbar.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +43,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <?php @include('../layouts/navbar.php'); ?>
     <h1>Crie sua Conta</h1>
     <div class="d-flex justify-content-center" style="color:white">
         <div class="form-box">
