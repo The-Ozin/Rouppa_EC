@@ -157,14 +157,10 @@ if ($result === false) {
     }
     ?>
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
-=======
->>>>>>> 773f9747899c09a27e2672823a48228ba729fe4e
->>>>>>> Stashed changes
+
+
     <script>
         function toggleTamanhoInputs() {
             const categoria = document.getElementById('categoria').value;
