@@ -117,7 +117,7 @@ if ($result === false) {
             // Consulta para obter as fotos do produto
             $foto_query = "SELECT foto FROM produto_fotos WHERE prod_id = " . $row['prod_id'];
             $foto_result = mysqli_query($conn, $foto_query);
-        
+
             // Verifica se há fotos disponíveis
             if (mysqli_num_rows($foto_result) > 0) {
                 // Exibe a primeira foto encontrada
@@ -127,7 +127,7 @@ if ($result === false) {
                 // Caso não haja fotos, use uma imagem padrão
                 $foto = ''; // Caminho para a imagem padrão
             }
-        
+
             // Exibe os detalhes do produto, incluindo a foto
             echo '<div class="product-card">';
             echo '<div class="carousel slide" data-mdb-touch="false" style="max-width: 400px; margin-right: 20px;">';
@@ -142,7 +142,7 @@ if ($result === false) {
             echo '<span>Tamanho: ' . htmlspecialchars($row['tamanho']) . '</span>';
             echo '<span style="float: right;">Preço: R$ ' . htmlspecialchars($row['preco']) . '</span>';
             echo '</p>';
-            echo '<form action="add_to_cart.php" method="post">';
+            echo '<form action="http://localhost/Rouppa_EC/product/add_to_cart.php" method="post">';
             echo '<input type="hidden" name="prod_id" value="' . $row['prod_id'] . '">';
             echo '<button type="submit" class="btn btn-primary mt-3">Adicionar ao Carrinho</button>';
             echo '</form>';
@@ -150,13 +150,21 @@ if ($result === false) {
             echo '</div>';
             echo '</div>';
         }
-        
+
         echo '</div>';
     } else {
         echo '<p>Nenhum produto encontrado</p>';
     }
     ?>
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+=======
+>>>>>>> 773f9747899c09a27e2672823a48228ba729fe4e
+>>>>>>> Stashed changes
     <script>
         function toggleTamanhoInputs() {
             const categoria = document.getElementById('categoria').value;

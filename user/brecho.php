@@ -118,9 +118,11 @@ if ($result === false) {
             echo '<span>Tamanho: ' . htmlspecialchars($row['tamanho']) . '</span>';
             echo '<span style="float: right;">Preço: R$ ' . htmlspecialchars($row['preco']) . '</span>';
             echo '</p>';
-            echo '<form action="add_to_cart.php" method="post">';
-            echo '<input type="hidden" name="prod_id" value="' . $row['prod_id'] . '">';
+            echo '<form action="http://localhost/Rouppa_EC/product/add_to_cart.php" method="post">';
+            echo '<input type="hidden" name="tipo_usuario" value="usuario">'; // Campo oculto para enviar o tipo de usuário
+            echo '<input type="hidden" name="prod_id" value="' . $row['prod_id'] . '">'; // Campo oculto para enviar o ID do produto
             echo '<button type="submit" class="btn btn-primary mt-3">Adicionar ao Carrinho</button>';
+            echo '</form>';
             echo '</form>';
             echo '</div>';
             echo '</div>';

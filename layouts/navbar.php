@@ -5,7 +5,7 @@ session_start();
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
     <div class="container-fluid">
         <!-- Navbar title -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="../welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
+        <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa_EC/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
             Rouppa
         </a>
 
@@ -27,7 +27,7 @@ session_start();
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/Rouppa_EC/shop/shop.php" style="color: white;">loja</a>
+                    <a class="nav-link" href="http://localhost/Rouppa_EC/shop/shop.php" style="color: white;">Loja</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost/Rouppa_EC/user/brecho.php" style="color: white;">Brechó</a>
@@ -40,7 +40,7 @@ session_start();
             <!-- Right elements -->
             <div class="d-flex align-items-center">
                 <!-- Icon -->
-                <a class="text-reset me-3" href="#">
+                <a class="text-reset me-3" href="http://localhost/Rouppa_EC/product/cart.php">
                     <i class="fas fa-shopping-cart" style="color: white;"></i>
                 </a>
 
