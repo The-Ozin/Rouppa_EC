@@ -1,5 +1,3 @@
-<?php @include('../layouts/navbar.php'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,32 +16,33 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <?php @include('../layouts/navbar.php'); ?>
     <div class="d-flex justify-content-center">
         <div class="form-box">
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                    <form id="loginForm">
+                    <form action="user_login_act.php" method="post" id="loginForm">
                         <div class="text-center mb-3" style="color: white;">
                             <p>Entrar com:</p>
-                            <button type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
+                            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
                                 <i class="fab fa-facebook-f"></i>
                             </button>
-                            <button type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
+                            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
                                 <i class="fab fa-google"></i>
                             </button>
-                            <button type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
+                            <button data-mdb-ripple-init type="button" class="btn btn-secondary btn-floating mx-1" style="background-color: white;">
                                 <i class="fab fa-twitter"></i>
                             </button>
                         </div>
                         <p class="text-center" style="color: white;">ou:</p>
-                        <div class="form-outline mb-4">
+                        <div data-mdb-input-init class="form-outline mb-4">
                             <label class="form-label text-white" for="email">Email</label>
-                            <input type="email" name="email" class="form-control border border-dark bg-white" required/>
+                            <input type="email" name="email" class="form-control border border-dark bg-white" style="width: 100%;" required/>
                         </div>
-                        <div class="form-outline mb-4">
+                        <div data-mdb-input-init class="form-outline mb-4">
                             <label class="form-label text-white" for="senha">Senha</label>
                             <div class="input-group">
-                                <input type="password" name="senha" id="senha" class="form-control border border-dark bg-white" required />
+                                <input type="password" name="senha" id="senha" class="form-control border border-dark" style="background-color: white;" required />
                                 <button class="btn border border-dark text-white" type="button" id="togglePasswordVisibility" style="background-color: rgb(215,90, 90);">
                                     <i class="fas fa-eye"></i>
                                 </button>
@@ -89,41 +88,6 @@
                     button.innerHTML = '<i class="fas fa-eye text-white"></i>';
                 }
             }
-        });
-
-        function showAlert(title, text, icon) {
-            Swal.fire({
-                title: title,
-                text: text,
-                icon: icon
-            });
-        }
-
-        var loginForm = document.getElementById("loginForm");
-
-        loginForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            var formData = new FormData(loginForm);
-
-            fetch("user_login_act.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-                if (data.success) {
-                    window.location.href = data.redirect;
-                } else {
-                    showAlert('Erro', data.error, 'error');
-                }
-            })
-            .catch(function(error) {
-                console.error("Erro ao processar a solicitação:", error);
-                showAlert('Erro', 'Ocorreu um erro ao processar a solicitação.', 'error');
-            });
         });
     </script>
     <style>
