@@ -50,5 +50,5 @@ try {
     echo json_encode(["success" => false, "error" => "Erro ao acessar o banco de dados: " . $e->getMessage()]);
     exit();
 }
-?>
+
 

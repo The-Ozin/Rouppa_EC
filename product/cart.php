@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo '<button type="submit" class="remove-button">Remover do Carrinho</button>';
                     echo '</form>';
                     echo '</div>';
+                    
                 }
             }
         ?>
@@ -115,6 +116,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo 'Valor Total: R$ ' . number_format($total, 2, ',', '.');
     ?>
 </div>
+<div class="checkout-button">
+    <a href="finalizar_compra.php" class="checkout-link">Finalizar Compra</a>
+</div>
 
     <footer>
         <?php @include('../layouts/footer.php'); ?>
@@ -123,6 +127,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </html>
 
 <style>
+    .checkout-button {
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.checkout-link {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    
+}
+
+.checkout-link:hover {
+    background-color: #218838;
+}
+
 h1.centralize {
     font-size: 32px; /* Tamanho da fonte */
     color: #333; /* Cor do texto */
