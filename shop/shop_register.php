@@ -126,6 +126,31 @@
     </footer>
 
     <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cnpjField = document.querySelector('#registerCNPJ');
+
+            cnpjField.addEventListener('input', function() {
+                let value = cnpjField.value.replace(/\D/g, '');
+
+                if (value.length > 14) {
+                    value = value.slice(0, 14);
+                }
+
+                if (value.length > 2 && value.length <= 5) {
+                    value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+                } else if (value.length > 5 && value.length <= 8) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d)/, '$1.$2.$3');
+                } else if (value.length > 8 && value.length <= 12) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d)/, '$1.$2.$3/$4');
+                } else if (value.length > 12) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})/, '$1.$2.$3/$4-$5');
+                }
+
+                cnpjField.value = value;
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             const passwordField = document.querySelector('#registerPassword');
             const repeatPasswordField = document.querySelector('#registerRepeatPassword');

@@ -72,13 +72,16 @@
     <footer>
         <?php include('../layouts/footer.php'); ?>
     </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const loginPasswordField = document.querySelector('input[name="senha"]');
             const toggleLoginPasswordVisibilityButton = document.querySelector('#togglePasswordVisibility');
+            
             toggleLoginPasswordVisibilityButton.addEventListener('click', function() {
                 togglePasswordVisibility(loginPasswordField, this);
             });
+
             function togglePasswordVisibility(field, button) {
                 if (field.type === 'password') {
                     field.type = 'text';
@@ -88,8 +91,19 @@
                     button.innerHTML = '<i class="fas fa-eye text-white"></i>';
                 }
             }
+
+            <?php if (isset($_SESSION['login_error'])): ?>
+                Swal.fire({
+                    title: 'Erro!',
+                    text: '<?php echo $_SESSION['login_error']; ?>',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                <?php unset($_SESSION['login_error']); ?>
+            <?php endif; ?>
         });
     </script>
+
     <style>
         .form-box {
             background-color: burlywood;

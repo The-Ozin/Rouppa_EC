@@ -2,12 +2,12 @@
 include('../connect.php');
 session_start();
 
-// Captura os dados do formulário
 $cnpj = isset($_POST['cnpj']) ? trim($_POST['cnpj']) : '';
 $senha = isset($_POST['senha']) ? trim($_POST['senha']) : '';
 
 if (empty($cnpj) || empty($senha)) {
-    echo json_encode(["success" => false, "error" => "CNPJ ou senha não preenchidos."]);
+    $_SESSION['login_error'] = "CNPJ ou senha não preenchidos.";
+    header("Location: shop_login.php");
     exit();
 }
 
@@ -17,24 +17,25 @@ try {
     $loja = $stmt->fetch();
 
     if ($loja && password_verify($senha, $loja['senha'])) {
-        // Define as variáveis de sessão após o login bem-sucedido
         $_SESSION['nome_loja'] = $loja['nome'];
         $_SESSION['email_loja'] = $loja['email'];
         $_SESSION['cnpj'] = $loja['cnpj'];
         $_SESSION['endereco'] = $loja['endereco'];
-        
-        // Atribui a foto da loja apenas se existir
+
         if (!empty($loja['foto'])) {
             $_SESSION['foto_loja'] = $loja['foto'];
         }
 
-        // Redireciona para a página de boas-vindas da loja
         header("Location: ../welcome.php");
         exit();
     } else {
-        echo json_encode(["success" => false, "error" => "Credenciais inválidas. Tente novamente."]);
+        $_SESSION['login_error'] = "Credenciais inválidas. Tente novamente.";
+        header("Location: shop_login.php");
+        exit();
     }
 } catch (PDOException $e) {
-    echo json_encode(["success" => false, "error" => "Erro: " . $e->getMessage()]);
+    $_SESSION['login_error'] = "Erro: " . $e->getMessage();
+    header("Location: shop_login.php");
+    exit();
 }
 ?>

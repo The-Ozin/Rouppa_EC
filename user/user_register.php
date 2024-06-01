@@ -137,6 +137,28 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const cpfField = document.querySelector('#registerCPF');
+
+            cpfField.addEventListener('input', function() {
+                let value = cpfField.value.replace(/\D/g, '');
+
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+
+                if (value.length > 3 && value.length <= 6) {
+                    value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+                } else if (value.length > 6 && value.length <= 9) {
+                    value = value.replace(/^(\d{3})(\d{3})(\d)/, '$1.$2.$3');
+                } else if (value.length > 9) {
+                    value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+                }
+
+                cpfField.value = value;
+            });
+        });
+
+
             const passwordField = document.querySelector('#registerPassword');
             const repeatPasswordField = document.querySelector('#registerRepeatPassword');
 
@@ -160,7 +182,7 @@
                     button.innerHTML = '<i class="fas fa-eye"></i>';
                 }
             }
-        });
+        
 
         function validateRegisterForm() {
             const nameField = document.querySelector('#registerName');
@@ -234,9 +256,6 @@
             });
         }
     </script>
-</body>
-</html>
-
 <style>
     .form-box {
         background-color: burlywood;

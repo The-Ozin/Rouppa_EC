@@ -59,23 +59,60 @@ if (isset($_GET['error'])) {
         <?php include('../layouts/footer.php'); ?>
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const adminPasswordField = document.querySelector('input[name="senha"]');
-            const toggleAdminPasswordVisibilityButton = document.querySelector('#toggleAdminPasswordVisibility');
-            toggleAdminPasswordVisibilityButton.addEventListener('click', function() {
-                togglePasswordVisibility(adminPasswordField, this);
-            });
-            function togglePasswordVisibility(field, button) {
-                if (field.type === 'password') {
-                    field.type = 'text';
-                    button.innerHTML = '<i class="fas fa-eye-slash text-white"></i>';
-                } else {
-                    field.type = 'password';
-                    button.innerHTML = '<i class="fas fa-eye text-white"></i>';
-                }
+    document.addEventListener('DOMContentLoaded', function() {
+        const cpfField = document.querySelector('input[name="cpf"]');
+
+        cpfField.addEventListener('input', function() {
+            let value = cpfField.value.replace(/\D/g, '');
+
+            if (value.length > 11) {
+                value = value.slice(0, 11);
             }
+
+            if (value.length > 3 && value.length <= 6) {
+                value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+            } else if (value.length > 6 && value.length <= 9) {
+                value = value.replace(/^(\d{3})(\d{3})(\d)/, '$1.$2.$3');
+            } else if (value.length > 9) {
+                value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+            }
+
+            cpfField.value = value;
         });
-    </script>
+
+        const adminPasswordField = document.querySelector('input[name="senha"]');
+        const toggleAdminPasswordVisibilityButton = document.querySelector('#toggleAdminPasswordVisibility');
+
+        toggleAdminPasswordVisibilityButton.addEventListener('click', function() {
+            togglePasswordVisibility(adminPasswordField, this);
+        });
+
+        function togglePasswordVisibility(field, button) {
+            if (field.type === 'password') {
+                field.type = 'text';
+                button.innerHTML = '<i class="fas fa-eye-slash text-white"></i>';
+            } else {
+                field.type = 'password';
+                button.innerHTML = '<i class="fas fa-eye text-white"></i>';
+            }
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar se há uma mensagem de erro na sessão
+        <?php if(isset($_SESSION['login_error'])): ?>
+            // Exibir a mensagem de erro como um Sweet Alert
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro de login',
+                text: '<?php echo $_SESSION['login_error']; ?>',
+            });
+            // Limpar a mensagem de erro da sessão
+            <?php unset($_SESSION['login_error']); ?>
+        <?php endif; ?>
+    });
+
+</script>
+
     <style>
         .form-box {
             background-color: burlywood;

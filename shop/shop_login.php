@@ -1,7 +1,3 @@
-<?php 
- session_start();
- @include('../layouts/navbar.php');
-  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <?php @include('../layouts/navbar.php'); ?>
     <div class="d-flex justify-content-center">
         <div class="form-box">
             <div class="tab-content">
@@ -62,13 +59,38 @@
     <footer>
         <?php include('../layouts/footer.php'); ?>
     </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const cnpjField = document.querySelector('input[name="cnpj"]');
+
+            cnpjField.addEventListener('input', function() {
+                let value = cnpjField.value.replace(/\D/g, '');
+
+                if (value.length > 14) {
+                    value = value.slice(0, 14);
+                }
+
+                if (value.length > 2 && value.length <= 5) {
+                    value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+                } else if (value.length > 5 && value.length <= 8) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d)/, '$1.$2.$3');
+                } else if (value.length > 8 && value.length <= 12) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d)/, '$1.$2.$3/$4');
+                } else if (value.length > 12) {
+                    value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})/, '$1.$2.$3/$4-$5');
+                }
+
+                cnpjField.value = value;
+            });
+
             const loginPasswordField = document.querySelector('input[name="senha"]');
             const toggleLoginPasswordVisibilityButton = document.querySelector('#togglePasswordVisibility');
+
             toggleLoginPasswordVisibilityButton.addEventListener('click', function() {
                 togglePasswordVisibility(loginPasswordField, this);
             });
+
             function togglePasswordVisibility(field, button) {
                 if (field.type === 'password') {
                     field.type = 'text';
@@ -78,8 +100,19 @@
                     button.innerHTML = '<i class="fas fa-eye text-white"></i>';
                 }
             }
+
+            <?php if (isset($_SESSION['login_error'])): ?>
+                Swal.fire({
+                    title: 'Erro!',
+                    text: '<?php echo $_SESSION['login_error']; ?>',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                <?php unset($_SESSION['login_error']); ?>
+            <?php endif; ?>
         });
     </script>
+
     <style>
         .form-box {
             background-color: burlywood;

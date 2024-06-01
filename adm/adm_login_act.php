@@ -26,12 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             // Senha incorreta
-            header("Location: adm_login.php?error=" . urlencode("Senha incorreta"));
+            $_SESSION['login_error'] = "Senha incorreta";
+            header("Location: adm_login.php");
             exit();
         }
     } else {
         // CPF de administrador não encontrado
-        header("Location: adm_login.php?error=" . urlencode("ID de administrador não encontrado"));
+        $_SESSION['login_error'] = "ID de administrador não encontrado";
+        header("Location: adm_login.php");
         exit();
     }
 }
