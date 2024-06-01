@@ -81,30 +81,30 @@ if ($result === false) {
     <h1 class="centralize">Produtos</h1>
 
     <!-- Formulário de Filtros -->
-    <form method="GET" action="" class="product-filter">
-        <label for="categoria">Categoria:</label>
-        <select name="categoria" id="categoria" onchange="toggleTamanhoInputs()">
-            <option value="">Todas</option>
-            <option value="calcado" <?php if ($categoria == 'calcado') echo 'selected'; ?>>Calçado</option>
-            <option value="roupa" <?php if ($categoria == 'roupa') echo 'selected'; ?>>Roupa</option>
-            <option value="acessorio" <?php if ($categoria == 'acessorio') echo 'selected'; ?>>Acessório</option>
-        </select>
-
-        <div id="tamanhoInputs" style="display: none;">
-            <label for="tamanho">Tamanho:</label>
-            <select name="tamanho" id="tamanho" onchange="showSizes()">
-                <option value="">Selecione</option>
-                <option value="roupa">Roupa</option>
-                <option value="calcado">Calçado</option>
+        <form method="GET" action="" class="product-filter" style="width: 1500px; height: 200px;">
+            <label for="categoria">Categoria:</label>
+            <select name="categoria" id="categoria" onchange="toggleTamanhoInputs()">
+                <option value="">Todas</option>
+                <option value="calcado" <?php if ($categoria == 'calcado') echo 'selected'; ?>>Calçado</option>
+                <option value="roupa" <?php if ($categoria == 'roupa') echo 'selected'; ?>>Roupa</option>
+                <option value="acessorio" <?php if ($categoria == 'acessorio') echo 'selected'; ?>>Acessório</option>
             </select>
-        </div>
 
-        <label for="ordem">Ordenar por:</label>
-        <select name="ordem" id="ordem">
-            <option value="">Selecione</option>
-            <option value="preco_asc" <?php if ($ordem == 'preco_asc') echo 'selected'; ?>>Menor preço</option>
-            <option value="preco_desc" <?php if ($ordem == 'preco_desc') echo 'selected'; ?>>Maior preço</option>
-        </select>
+            <div id="tamanhoInputs" style="display: none;">
+                <label for="tamanho">Tamanho:</label>
+                <select name="tamanho" id="tamanho" onchange="showSizes()">
+                    <option value="">Selecione</option>
+                    <option value="roupa">Roupa</option>
+                    <option value="calcado">Calçado</option>
+                </select>
+            </div>
+
+            <label for="ordem">Ordenar por:</label>
+            <select name="ordem" id="ordem">
+                <option value="">Selecione</option>
+                <option value="preco_asc" <?php if ($ordem == 'preco_asc') echo 'selected'; ?>>Menor preço</option>
+                <option value="preco_desc" <?php if ($ordem == 'preco_desc') echo 'selected'; ?>>Maior preço</option>
+            </select>
         <button type="submit">Filtrar</button>
     </form>
 
@@ -157,6 +157,10 @@ if ($result === false) {
     }
     ?>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+
+
     <script>
         function toggleTamanhoInputs() {
             const categoria = document.getElementById('categoria').value;
@@ -176,22 +180,16 @@ if ($result === false) {
                 });
             } else if (categoria === 'calcado') {
                 tamanhoSelect.innerHTML = ''; // Clear existing options
-                for (let i = 34; i <= 44; i++) {
+                for (let i = 28; i <= 45; i++) {
                     tamanhoSelect.innerHTML += `<option value="${i}">${i}</option>`;
                 }
             } else {
                 tamanhoSelect.innerHTML = ''; // Clear existing options
             }
         }
-        document.addEventListener('DOMContentLoaded', function () {
-            const carousels = document.querySelectorAll('.carousel');
-            carousels.forEach(function (carousel) {
-                new mdb.Carousel(carousel, {
-                    touch: false // Desabilita o toque do carrossel para evitar conflitos com a biblioteca MDB UI Kit
-                });
-            });
-        });
+
         document.addEventListener('DOMContentLoaded', toggleTamanhoInputs);
+
     </script>
     <footer>
         <?php @include('../layouts/footer.php'); ?>
