@@ -114,7 +114,9 @@
             margin-bottom: 10vh;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             opacity: 0.9;
+            font-size: 18px;
         }
+
     </style>
 </body>
 </html>

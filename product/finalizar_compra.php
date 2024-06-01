@@ -61,12 +61,40 @@ function consultarCEP($cep) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Compra</title>
     <link rel="stylesheet" href="../assets/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display&family=Source+Serif+4&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+
+   <!-- Font Awesome -->
+   <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+    rel="stylesheet"
+    />
+
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js
+    "></script>
+
+        <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
+        
+        initMDB({ Input, Tab, Ripple });
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function buscarEndereco() {
             var cep = document.getElementById('cep').value;
@@ -94,7 +122,7 @@ function consultarCEP($cep) {
     </script>
 </head>
 <body>
-    <div class="container">
+    <div class="board d-flex justify-content-center">
         <div class="user-info">
             <h2>Informações do Usuário</h2>
             <!-- Formulário para as informações do usuário e endereço -->
@@ -122,7 +150,7 @@ function consultarCEP($cep) {
                 <label for="estado">Estado:</label>
                 <input type="text" id="estado" name="estado" required>
                 
-                <button type="submit">Finalizar Pedido</button>
+                <button type="submit" style background-color=" color: rgb(215,90, 90);">Finalizar Pedido</button>
             </form>
         </div>
         <div class="order-summary">
@@ -154,7 +182,6 @@ function consultarCEP($cep) {
 </ul>
 <!-- Exibir o total do pedido -->
 <p>Total: <?php echo 'R$ ' . number_format($total, 2, ',', '.'); ?></p>
-
         </div>
     </div>
     <footer>
@@ -164,27 +191,23 @@ function consultarCEP($cep) {
 </html>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
+.board {
     display: flex;
-    justify-content: center; /* Centraliza as divs horizontalmente */
-    margin: 20px;
+    justify-content: space-between;
+    margin: 20vh;
 }
 
 .user-info,
 .order-summary {
     flex-basis: 45%;
+    background-color: burlywood;
 }
 
 .user-info {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: burlywood;
 }
 
 .order-summary {
@@ -216,7 +239,7 @@ input[type="text"], input[type="email"] {
 
 button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: rgb(215,90, 90);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -224,7 +247,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: rgb(90, 29, 0)
 }
 
 /* Estilos específicos para o resumo do pedido */
@@ -244,6 +267,7 @@ button:hover {
 .order-summary p {
     font-weight: bold;
 }
+
 
 /* Responsividade */
 @media screen and (max-width: 768px) {

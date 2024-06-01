@@ -33,64 +33,66 @@ $isUsuario = isset($_SESSION['cpf']);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+<h1 class="text-center">Cadastro de Produto</h1>
     <div class="d-flex justify-content-center">
-        <form id="productForm" action="product_register_act.php" method="post" enctype="multipart/form-data">
-            <h1 class="text-center">Cadastro de Produto</h1>
+        <div class="form-box">
+            <form id="productForm" action="product_register_act.php" method="post" enctype="multipart/form-data">
 
             <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="productName">Nome:</label>
-                <input type="text" id="productName" name="nome" class="form-control border border-dark" required>
-            </div>
-
-            <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="productCategory">Categoria:</label>
-                <select id="productCategory" name="productCategory" class="form-select border border-dark" required>
-                    <option value="" disabled selected>Selecione a categoria</option>
-                    <option value="roupa">Roupa</option>
-                    <option value="calcado">Calçado</option>
-                    <option value="acessorios">Acessórios</option>
-                </select>
+            <label class="form-label" for="productName" style="color: white;">Nome:</label>
+            <input type="text" id="productName" name="nome" class="form-control border border-dark" style="background-color: white;" required>
             </div>
 
             <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="productSize">Tamanho:</label>
-                <input type="text" id="productSize" name="tamanho" class="form-control border border-dark" required>
+            <label class="form-label" for="productCategory" style="color: white;">Categoria:</label>
+            <select id="productCategory" name="productCategory" class="form-select border border-dark" style="background-color: white;" required>
+            <option value="" disabled selected>Selecione a categoria</option>
+            <option value="roupa">Roupa</option>
+            <option value="calcado">Calçado</option>
+            <option value="acessorios">Acessórios</option>
+            </select>
             </div>
 
             <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="productDescription">Descrição:</label>
-                <textarea id="productDescription" name="descricao" class="form-control border border-dark" required></textarea>
+            <label class="form-label" for="productSize" style="color: white;">Tamanho:</label>
+            <input type="text" id="productSize" name="tamanho" class="form-control border border-dark" style="background-color: white;" required>
             </div>
 
             <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="productPrice">Preço:</label>
-                <input type="text" id="productPrice" name="preco" class="form-control border border-dark" required>
+            <label class="form-label" for="productDescription" style="color: white;">Descrição:</label>
+            <textarea id="productDescription" name="descricao" class="form-control border border-dark" style="background-color: white;" required></textarea>
             </div>
 
             <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="productCondition">Condição de Uso:</label>
-                <select id="productCondition" name="condicao_uso" class="form-select border border-dark" required>
-                    <option value="1">Novo</option>
-                    <option value="0">Usado</option>
-                </select>
+            <label class="form-label" for="productPrice" style="color: white;">Preço:</label>
+            <input type="text" id="productPrice" name="preco" class="form-control border border-dark" style="background-color: white;" required>
             </div>
 
-            <?php if ($isLoja): ?>
-                <input type="hidden" name="fk_loja_cnpj" value="<?php echo $_SESSION['cnpj']; ?>">
-            <?php endif; ?>
-        
-            <?php if ($isUsuario): ?>
-                <input type="hidden" name="fk_usuario_cpf" value="<?php echo $_SESSION['cpf']; ?>">
-            <?php endif; ?>
-
-            <div class="mb-4">
-                <label class="form-label" for="productPhotos">Fotos:</label>
-                <input type="file" id="productPhotos" name="fotos[]" class="form-control border border-dark" multiple required>
+            <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="productCondition" style="color: white;">Condição de Uso:</label>
+            <select id="productCondition" name="condicao_uso" class="form-select border border-dark" style="background-color: white;" required>
+            <option value="1">Novo</option>
+            <option value="0">Usado</option>
+            </select>
             </div>
 
+                <?php if ($isLoja): ?>
+                    <input type="hidden" name="fk_loja_cnpj" value="<?php echo $_SESSION['cnpj']; ?>">
+                <?php endif; ?>
+            
+                <?php if ($isUsuario): ?>
+                    <input type="hidden" name="fk_usuario_cpf" value="<?php echo $_SESSION['cpf']; ?>">
+                <?php endif; ?>
 
-            <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-3" style="background-color: rgb(215,90, 90);">Cadastrar Produto</button>
-        </form>
+                <div class="mb-4">
+                    <label class="form-label" for="productPhotos" style="color: white;">Fotos:</label>
+                    <input type="file" id="productPhotos" name="fotos[]" class="form-control border border-dark" multiple required>
+                </div>
+
+
+                <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-3" style="background-color: rgb(215,90, 90);">Cadastrar Produto</button>
+            </form>
+        </div>       
     </div>
     <footer>
         <?php @include('../layouts/footer.php');?>
@@ -98,14 +100,15 @@ $isUsuario = isset($_SESSION['cpf']);
 
     <style>
     .form-box {
-        background-color: rgb(90, 29, 0);
-        width: 50%;
-        height: 90%;
-        padding: 10vh 10vh;
-        margin-top: 5vh;
-        margin-bottom: 10vh;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        opacity: 0.9;
+        background-color: burlywood;
+            width: 50%;
+            height: 90%;
+            padding: 10vh 10vh;
+            margin-top: 5vh;
+            margin-bottom: 10vh;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            opacity: 0.9;
+            font-size: 18px;
     }
 
     h1 {
@@ -115,6 +118,11 @@ $isUsuario = isset($_SESSION['cpf']);
         font-family: 'Noto Serif Display', serif;
         margin-top: 10vh;
         font-weight: bold;
+    }
+
+
+    .form-label {
+        color: #000;
     }
 
 </style>
