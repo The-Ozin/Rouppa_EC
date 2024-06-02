@@ -111,30 +111,39 @@ if ($result === false) {
     <?php
     if (mysqli_num_rows($result) > 0) {
         echo '<div class="d-flex justify-content-center flex-wrap">';
-        $counter = 1;
 
         while ($row = mysqli_fetch_assoc($result)) {
             // Consulta para obter as fotos do produto
             $foto_query = "SELECT foto FROM produto_fotos WHERE prod_id = " . $row['prod_id'];
             $foto_result = mysqli_query($conn, $foto_query);
 
-            // Verifica se há fotos disponíveis
-            if (mysqli_num_rows($foto_result) > 0) {
-                // Exibe a primeira foto encontrada
-                $foto_row = mysqli_fetch_assoc($foto_result);
-                $foto = base64_encode($foto_row['foto']);
-            } else {
-                // Caso não haja fotos, use uma imagem padrão
-                $foto = ''; // Caminho para a imagem padrão
+            // Iniciar o carrossel
+            echo '<div class="product-card">';
+            echo '<div id="carouselExampleControls' . $row['prod_id'] . '" class="carousel slide" data-bs-ride="carousel">';
+            echo '<div class="carousel-inner">';
+            $active = true;
+
+            // Iterar sobre cada foto e adicionar ao carrossel
+            while ($foto_row = mysqli_fetch_assoc($foto_result)) {
+                echo '<div class="carousel-item' . ($active ? ' active' : '') . '">';
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($foto_row['foto']) . '" class="d-block w-100" alt="Produto ' . $row['nome'] . '">';
+                echo '</div>';
+                $active = false;
             }
 
-            // Exibe os detalhes do produto, incluindo a foto
-            echo '<div class="product-card">';
-            echo '<div class="carousel slide" data-mdb-touch="false" style="max-width: 400px; margin-right: 20px;">';
-            echo '<div class="carousel-inner">';
-            echo '<div class="carousel-item active">';
-            echo '<img src="data:image/jpeg;base64,' . $foto . '" class="d-block w-100" alt="' . htmlspecialchars($row['nome']) . '" style="height: 400px; object-fit: cover;">';
-            echo '</div></div>';
+            // Finalizar o carrossel
+            echo '</div>';
+            echo '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls' . $row['prod_id'] . '" data-bs-slide="prev">';
+            echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+            echo '<span class="visually-hidden">Previous</span>';
+            echo '</button>';
+            echo '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls' . $row['prod_id'] . '" data-bs-slide="next">';
+            echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+            echo '<span class="visually-hidden">Next</span>';
+            echo '</button>';
+            echo '</div>';
+
+            // Exibir os detalhes do produto abaixo do carrossel
             echo '<div class="product-details">';
             echo '<h5>' . htmlspecialchars($row['nome']) . '</h5>';
             echo '<p>' . htmlspecialchars($row['descricao_']) . '</p>';
@@ -148,18 +157,16 @@ if ($result === false) {
             echo '</form>';
             echo '</div>';
             echo '</div>';
-            echo '</div>';
         }
 
+        echo '</div>';
         echo '</div>';
     } else {
         echo '<p>Nenhum produto encontrado</p>';
     }
     ?>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
-
+<!-- Bootstrap JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <script>
         function toggleTamanhoInputs() {
@@ -265,5 +272,7 @@ h1 {
     background-color: #0056b3;
 }
 
-
+.product-card {
+        padding-right: 25px; /* Adiciona uma margem inferior de 20px para separar os produtos */
+    }
 </style>

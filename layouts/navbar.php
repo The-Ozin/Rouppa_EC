@@ -97,7 +97,7 @@ session_start();
                         >
                             <?php if (!empty($_SESSION['foto_loja'])): ?>
                                 <?php $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto_loja']); ?>
-                                <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="3" width="35 alt="Avatar" loading="lazy" />
+                                <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="35" width="35" alt="Avatar" loading="lazy" />
                             <?php else: ?>
                                 <i class="fas fa-store" style="color: white;"></i>
                             <?php endif; ?>
@@ -139,11 +139,12 @@ session_start();
                             <?php elseif (isset($_SESSION['user_name'])): ?>
                                 <!-- Opções específicas do usuário -->
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/profile.php">Perfil</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_product_managment.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/product/product_register.php">Cadastar Produto</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php elseif (isset($_SESSION['nome_loja'])): ?>
                                 <!-- Opções específicas da loja -->
-                                <li><a class="dropdown-item" href="#">Gerenciar Produtos</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/shop_product_managment.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/product/product_register.php">Cadastar Produto</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php endif; ?>
