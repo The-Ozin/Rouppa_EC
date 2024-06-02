@@ -222,21 +222,6 @@ footer {
         padding: 20px;
     }
 
-@media (max-width: 768px) {
-    .sale {
-        font-size: 50px;
-        height: 150px;
-        top: 12vh;
-    }
-}
-
-@media (max-width: 576px) {
-    .sale {
-        font-size: 30px;
-        height: 100px;
-        top: 12vh;
-    }
-}
 
 .carousel {
     margin-top: 27vh;
@@ -279,5 +264,6 @@ h1 {
 .product-filter button:hover {
     background-color: #0056b3;
 }
+
 
 </style>

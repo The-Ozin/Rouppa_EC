@@ -77,7 +77,6 @@ if ($result === false) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="sale"> ! 20% OFF EM TODA A COMPRA ! </div>
     <h1 class="centralize">Produtos</h1>
 
     <!-- Formulário de Filtros -->
@@ -204,23 +203,12 @@ footer {
     margin-top: 40vh;
 }
 
-    .sale {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: orangered;
-        font-family: 'Anton', sans-serif;
-        color: black;
-        font-weight: 400;
-        font-size: 80px;
-        height: 200px;
-        width: 100%;
-        margin: 0;
-        position: absolute;
-        top: 12vh;
-        border: 1px solid black;
-        padding: 20px;
-    }
+h1 {
+    margin-top: 20vh;
+    font-family: 'Anton', sans-serif;
+    color: rgb(90, 29, 0);
+    text-align: center;
+}
 
 @media (max-width: 768px) {
     .sale {
@@ -251,7 +239,7 @@ footer {
 }
 
 h1 {
-    margin-top: 40vh;
+    margin-top: 20vh;
     font-family: 'Anton', sans-serif;
     color: rgb(90, 29, 0);
     text-align: center;

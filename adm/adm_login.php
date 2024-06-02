@@ -125,6 +125,13 @@ if (isset($_GET['error'])) {
             opacity: 0.9;
             font-size: 18px;
         }
+
+        
+    @media screen and (max-width: 768px) {
+            .form-box {
+                width: 90%; 
+            }
+        }
     </style>
 </body>
 </html>

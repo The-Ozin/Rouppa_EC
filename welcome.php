@@ -77,79 +77,111 @@
 
 
 <style>
+
+.titulo {
+    font-family: 'Noto Serif Display', serif;
+    text-align: center;
+    font-size: 200px;
+    color: rgb(215, 90, 90);
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.frase {
+    font-family: 'Noto Serif Display', serif;
+    text-align: center;
+    font-size: 30px;
+    color: rgb(215, 90, 90);
+}
+
+
+.opcoes-container {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap; 
+    margin-top: 20vh;
+}
+
+
+.opcao {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(90, 29, 0)!important;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    max-width: 450px; 
+}
+
+.opcao:hover {
+    transform: scale(1.05);
+}
+
+.opcao img {
+    width: 100%; 
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.opcao h2 {
+    font-family: 'Noto Serif Display', serif;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.opcao a {
+    text-decoration: none;
+}
+
+.opcao p {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Noto Serif Display', serif;
+}
+
+footer {
+    margin-top: 20vh;
+}
+
+@media (max-width: 768px) {
     .titulo {
-        font-family: 'Noto Serif Display', serif;
-        text-align: center;
-        font-size: 200px;
-        color: rgb(215,90, 90);
-        margin-top: 20px;
-        font-style: italic;
+        font-size: 100px;
     }
 
     .frase {
-        font-family: 'Noto Serif Display', serif;
-        text-align: center;
-        font-size: 30px;
-        color: rgb(215,90, 90);
+        font-size: 20px;
     }
 
     .opcoes-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: 60vh;
-        transform: translate(-50%, -50%);
-        display: flex;
-        justify-content: center;
-        gap: 80px;
-    }
-
-
-    .opcao {
-        position: relative;
-        flex: 1;
-        display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 20px;
-        background-color: rgb(90, 29, 0)!important;
-        transition: transform 0.3s ease;
-        cursor: pointer;
+        margin-top: 20vh;
+        gap: 20px; 
     }
 
-    .opcao:hover {
-        transform: scale(1.05);
+    .opcao {
+        width: 100%;
+        margin-bottom: 20px;
+        max-width: none; 
     }
 
     .opcao img {
-        width: 450px;
-        height: 600px;
-        margin-bottom: 20px;
-    }
-
-    .opcao h2 {
-        font-family: 'Noto Serif Display', serif;
-        color: white;
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .opcao a {
-        text-decoration: none;
-    }
-
-    .opcao p {
-        color: white;
-        font-size: 18px;
-        text-align: center;
-        font-family: 'Noto Serif Display', serif;
+        width: 100%; 
+        height: auto;
     }
 
     footer {
-        margin-top: 120vh;
+        margin-top: 20vh;
     }
+}
+
 
 </style>
 

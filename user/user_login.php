@@ -14,10 +14,30 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .form-box {
+            background-color: burlywood;
+            width: 50%;
+            height: 90%;
+            padding: 10vh 10vh;
+            margin-top: 5vh;
+            margin-bottom: 10vh;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            opacity: 0.9;
+            font-size: 18px;
+        }
+
+        
+    @media screen and (max-width: 768px) {
+            .form-box {
+                width: 90%; 
+            }
+        }
+    </style>
 </head>
 <body>
     <?php @include('../layouts/navbar.php'); ?>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="form-box">
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
@@ -49,13 +69,13 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-md-6 d-flex justify-content-center">
-                                <div class="form-check mb-3 mb-md-0">
+                            <div class="col-12 col-md-6 d-flex justify-content-center mb-2 mb-md-0">
+                                <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked>
                                     <label class="form-check-label text-white" for="loginCheck"> Lembrar-me </label>
                                 </div>
                             </div>
-                            <div class="col-md-6 d-flex justify-content-center">
+                            <div class="col-12 col-md-6 d-flex justify-content-center">
                                 <a href="#!" class="text-white">Esqueceu a senha?</a>
                             </div>
                         </div>
@@ -103,20 +123,6 @@
             <?php endif; ?>
         });
     </script>
-
-    <style>
-        .form-box {
-            background-color: burlywood;
-            width: 50%;
-            height: 90%;
-            padding: 10vh 10vh;
-            margin-top: 5vh;
-            margin-bottom: 10vh;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            opacity: 0.9;
-            font-size: 18px;
-        }
-
-    </style>
 </body>
 </html>
+
