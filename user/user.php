@@ -1,5 +1,5 @@
 <?php
-@include('../connect.php'); // Include the database connection script
+@include('../connect.php'); 
 
 session_start();
 
@@ -11,21 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data_nascimento = trim($_POST['registerBirthdate']);
     $foto = isset($_FILES['registerPhoto']) ? $_FILES['registerPhoto'] : null;
 
-    // Perform validations...
-
-    // Check if a file was uploaded
     $fotoPath = null;
     if ($foto && $foto['error'] == UPLOAD_ERR_OK) {
         $targetDirectory = '../pfp/'; // Caminho local no sistema de arquivos
         $fileName = basename($foto['name']);
         $targetFilePath = $targetDirectory . $fileName;
 
-        // Mova o arquivo enviado para o diretório de destino
         if (move_uploaded_file($foto['tmp_name'], $targetFilePath)) {
-            // Armazene o caminho relativo para a imagem no banco de dados
             $fotoPath = '../pfp/' . $fileName;
         } else {
-            echo "Error uploading the photo.";
+            echo json_encode(['status' => 'error', 'message' => 'Erro ao fazer upload da foto.']);
             exit();
         }
     }
@@ -42,17 +37,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(5, $data_nascimento);
         $stmt->bindParam(6, $fotoPath);
 
-        if ($stmt->execute()) {
-            header("Location: user_login.php");
-        } else {
-            echo "Erro ao cadastrar: " . $stmt->errorInfo()[2];
+        try {
+            if ($stmt->execute()) {
+                echo json_encode(['status' => 'success', 'message' => 'Cadastro realizado com sucesso!']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Erro ao cadastrar.']);
+            }
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                echo json_encode(['status' => 'error', 'message' => 'CPF já cadastrado.']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Erro ao cadastrar: ' . $e->getMessage()]);
+            }
         }
 
         $stmt->closeCursor();
     } else {
-        echo "Erro no preparo da declaração: " . $pdo->errorInfo()[2];
+        echo json_encode(['status' => 'error', 'message' => 'Erro no preparo da declaração: ' . $pdo->errorInfo()[2]]);
     }
 } else {
-    echo "Método de requisição inválido.";
+    echo json_encode(['status' => 'error', 'message' => 'Método de requisição inválido.']);
 }
 ?>
