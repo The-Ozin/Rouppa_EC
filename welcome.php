@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rouppa</title>
     <link rel="stylesheet" href="./assets/style.css">
+    <link rel="icon" href="/favicon_io/favicon-16x16.png" type="image/png">
 
     <!-- Font Awesome -->
     <link
