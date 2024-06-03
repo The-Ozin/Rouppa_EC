@@ -1,6 +1,31 @@
-<?php 
- session_start();
- @include('../layouts/navbar.php');
+<?php
+session_start();
+
+// Verificar se o usuário está logado
+if (!isset($_SESSION['user_name'])) {
+    // Redirecionar para a página de login se o usuário não estiver logado
+    header("Location: user_login.php");
+    exit();
+}
+
+// Incluir o arquivo de conexão com o banco de dados
+include('../connect.php');
+@include('../layouts/navbar.php');
+
+
+try {
+    $stmt = $pdo->prepare("SELECT nome, email, data_nascimento FROM usuario WHERE cpf = ?");
+    $stmt->execute([$_SESSION['user_name']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $name = $user['nome'];
+    $email = $user['email'];
+    $birthdate = $user['data_nascimento'];
+} catch (PDOException $e) {
+    $_SESSION['update_profile_error'] = "Erro ao recuperar dados do usuário: " . $e->getMessage();
+    header("Location: profile.php");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +46,98 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js" initMDB({ Input, Tab, Ripple });></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
+
+</head>
+<body>
+    <div class="form-header text-center">
+        <h2>Editar Perfil</h2>
+    </div>
+    <div class="form-box">
+        <form action="update_profile.php" method="post">
+            <div class="profile-photo">
+                <div class="avatar">
+                    <img src="../assets/avatar.png">
+                    <div class="overlay">
+                        <button type="button"><i class="fas fa-pencil-alt"></i></button>
+                    </div>
+                </div>
+                <label for="registerPhoto">Change Photo</label>
+                <input type="file" class="form-control mt-2" id="registerPhoto" name="photo">
+            </div>
+
+            <!-- Name input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label text-white" for="registerName">Nome</label>
+                <input type="text" name="registerName" id="registerName" class="form-control border border-dark" style="background-color: white;" value="<?php echo $name; ?>" />
+            </div>
+
+            <!-- Email input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label text-white" for="registerEmail">Email</label>
+                <input type="email" name="registerEmail" id="registerEmail" class="form-control border border-dark" style="background-color: white;" value="<?php echo $email; ?>" />
+            </div>
+
+            <!-- Password input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label text-white" for="registerPassword">Nova Senha</label>
+                <div class="input-group">
+                    <input type="password" name="registerPassword" id="registerPassword" class="form-control border border-dark" style="background-color: white;" />
+                    <button class="btn border border-dark text-white" type="button" id="togglePasswordVisibility" style="background-color:rgb(215,90, 90);">
+                    <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+                <!-- Old Password -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerRepeatPassword">Senha antiga</label>
+                    <div class="input-group">
+                        <input type="password" name="registerRepeatPassword" id="registerRepeatPassword" class="form-control border border-dark" style="background-color: white;" />
+                        <button class="btn border border-dark text-white" type="button" id="toggleRepeatPasswordVisibility" style="background-color: rgb(215,90, 90);">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Birthdate input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label text-white" for="registerBirthdate">Data de Nascimento</label>
+                    <input type="date" name="registerBirthdate" id="registerBirthdate" class="form-control border border-dark" style="background-color: white;" value="<?php echo $birthdate; ?>" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #d75858;">Save</button>
+            </form>
+        </div>
+
+<footer>
+    <?php include('../layouts/footer.php'); ?>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function togglePasswordVisibility(buttonId, inputId) {
+        const passwordField = document.getElementById(inputId);
+        const passwordFieldType = passwordField.getAttribute('type');
+        const newPasswordFieldType = passwordFieldType === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', newPasswordFieldType);
+
+        const button = document.getElementById(buttonId);
+        const icon = button.querySelector('i');
+        icon.classList.toggle('fa-eye');
+        icon.classList.toggle('fa-eye-slash');
+    }
+
+    document.getElementById('togglePasswordVisibility').addEventListener('click', function() {
+        togglePasswordVisibility('togglePasswordVisibility', 'registerPassword');
+    });
+
+    document.getElementById('toggleRepeatPasswordVisibility').addEventListener('click', function() {
+        togglePasswordVisibility('toggleRepeatPasswordVisibility', 'registerRepeatPassword');
+    });
+</script>
+</body>
+</html>
+<style>
         .form-box {
             background-color: burlywood !important;
             width: 70%;
@@ -94,91 +210,3 @@
         }                               
 
     </style>
-</head>
-<body>
-    <div class="form-header text-center">
-        <h2>Editar Perfil</h2>
-    </div>
-    <div class="form-box">
-        <div class="profile-photo">
-            <div class="avatar">
-                <img src="../assets/avatar.png">
-                <div class="overlay">
-                    <button type="button"><i class="fas fa-pencil-alt"></i></button>
-                </div>
-            </div>
-            <label for="registerPhoto">Change Photo</label>
-            <input type="file" class="form-control mt-2" id="registerPhoto" name="photo">
-        </div>
-                <!-- Name input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label text-white" for="registerName">Nome</label>
-                    <input type="text" name="registerName" id="registerName" class="form-control border border-dark" style="background-color: white;" required />
-                </div>
-
-                <!-- Email input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label text-white" for="registerEmail">Email</label>
-                    <input type="email" name="registerEmail" id="registerEmail" class="form-control border border-dark" style="background-color: white;" required />
-                </div>
-
-                <!-- Password input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label text-white" for="registerPassword">Nova Senha</label>
-                    <div class="input-group">
-                        <input type="password" name="registerPassword" id="registerPassword" class="form-control border border-dark" style="background-color: white;" required />
-                        <button class="btn border border-dark text-white" type="button" id="togglePasswordVisibility" style="background-color: rgb(215,90, 90);">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Old Password -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label text-white" for="registerRepeatPassword">Senha antiga</label>
-                    <div class="input-group">
-                        <input type="password" name="registerRepeatPassword" id="registerRepeatPassword" class="form-control border border-dark" style="background-color: white;" required />
-                        <button class="btn border border-dark text-white" type="button" id="toggleRepeatPasswordVisibility" style="background-color: rgb(215,90, 90);">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Birthdate input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label text-white" for="registerBirthdate">Data de Nascimento</label>
-                    <input type="date" name="registerBirthdate" id="registerBirthdate" class="form-control border border-dark" style="background-color: white;" required />
-                </div>
-                <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #d75858;">Save</button>
-            </div>
-        </form>
-    <footer>
-        <?php include('../layouts/footer.php'); ?>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function togglePasswordVisibility(buttonId, inputId) {
-            const passwordField = document.getElementById(inputId);
-            const passwordFieldType = passwordField.getAttribute('type');
-            const newPasswordFieldType = passwordFieldType === 'password' ? 'text' : 'password';
-            passwordField.setAttribute('type', newPasswordFieldType);
-
-            const button = document.getElementById(buttonId);
-            const icon = button.querySelector('i');
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        }
-
-        document.getElementById('togglePasswordVisibility').addEventListener('click', function() {
-            togglePasswordVisibility('togglePasswordVisibility', 'registerPassword');
-        });
-
-        document.getElementById('toggleRepeatPasswordVisibility').addEventListener('click', function() {
-            togglePasswordVisibility('toggleRepeatPasswordVisibility', 'registerRepeatPassword');
-        });
-    </script>
-</body>
-</html>

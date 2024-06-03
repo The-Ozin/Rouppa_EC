@@ -135,6 +135,8 @@ session_start();
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                         <?php if (!empty($_SESSION)): ?>
                             <?php if (isset($_SESSION['adm_name'])): ?>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/adm/adm.php">Gerenciar Usuários e Lojas</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/adm/produtos_adm.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php elseif (isset($_SESSION['user_name'])): ?>
                                 <!-- Opções específicas do usuário -->

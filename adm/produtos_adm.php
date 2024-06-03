@@ -8,7 +8,6 @@ if (!isset($_SESSION['adm_name'])) {
     exit();
 }
 
-// Função para deletar produto
 if (isset($_GET['delete_product_id'])) {
     $productId = $_GET['delete_product_id'];
     $query = "DELETE FROM produto WHERE prod_id = '$productId'";
@@ -23,22 +22,25 @@ if (isset($_GET['delete_product_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração</title>
     <link rel="stylesheet" href="../assets/style.css">
-
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
-
-    <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <style>
+        .subtitulo{
+            text-align: center;
+            padding: 10px;
+            padding-top: 20px;
+            font-size: x-large;
+        }
         h1 {
             color: rgb(215, 90, 90);
             text-align: center;
@@ -84,7 +86,7 @@ if (isset($_GET['delete_product_id'])) {
     <h1>Administração da Rouppa</h1>
 
     <div class="table-container">
-        <h2>Produtos</h2>
+        <h2 class="subtitulo">Produtos Anunciados por Usuários</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -94,17 +96,24 @@ if (isset($_GET['delete_product_id'])) {
                     <th>Preço</th>
                     <th>Categoria</th>
                     <th>Condição</th>
-                    <th>Estado</th>
+                    <th>Anunciador</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $query = "SELECT * FROM produto";
+                $query = "
+                SELECT p.*, u.nome AS usuario_nome, GROUP_CONCAT(pf.foto) AS fotos
+                FROM produto p
+                LEFT JOIN usuario u ON p.fk_usuario_cpf = u.cpf
+                LEFT JOIN produto_fotos pf ON p.prod_id = pf.prod_id
+                WHERE p.fk_loja_cnpj IS NULL
+                GROUP BY p.prod_id";
                 $result = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
+                        $cadastrador_nome = $row['usuario_nome'];
                         echo "<tr>";
                         echo "<td><button class='btn btn-primary' onclick='showPhoto(" . $row['prod_id'] . ")'>Mostrar Foto</button></td>";
                         echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
@@ -112,7 +121,7 @@ if (isset($_GET['delete_product_id'])) {
                         echo "<td>" . htmlspecialchars($row['preco']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['categoria']) . "</td>";
                         echo "<td>" . ($row['condicao_uso'] ? 'Usado' : 'Novo') . "</td>";
-                        echo "<td>" . htmlspecialchars($row['estado_peca']) . "</td>";
+                        echo "<td>" . htmlspecialchars($cadastrador_nome) . "</td>";
                         echo "<td><button class='btn btn-danger' onclick='deleteProduct(" . $row['prod_id'] . ")'>Excluir</button>
                         <button class='btn btn-primary' onclick='openEditProductModal(" . $row['prod_id'] . ", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['descricao_']) . "\", \"" . htmlspecialchars($row['preco']) . "\", \"" . htmlspecialchars($row['categoria']) . "\", " . $row['condicao_uso'] . ", \"" . htmlspecialchars($row['estado_peca']) . "\")'>Editar</button></td>";
                         echo "</tr>";
@@ -125,7 +134,55 @@ if (isset($_GET['delete_product_id'])) {
         </table>
     </div>
 
-    <!-- Modal para exibir a foto do produto -->
+    <div class="table-container">
+        <h2 class="subtitulo">Produtos Anunciados por Lojas</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Categoria</th>
+                    <th>Condição</th>
+                    <th>Anunciador</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $query = "
+                SELECT p.*, l.nome AS loja_nome, GROUP_CONCAT(pf.foto) AS fotos
+                FROM produto p
+                LEFT JOIN loja l ON p.fk_loja_cnpj = l.cnpj
+                LEFT JOIN produto_fotos pf ON p.prod_id = pf.prod_id
+                WHERE p.fk_usuario_cpf IS NULL
+                GROUP BY p.prod_id";
+                $result = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $cadastrador_nome = $row['loja_nome'];
+                        echo "<tr>";
+                        echo "<td><button class='btn btn-primary' onclick='showPhoto(" . $row['prod_id'] . ")'>Mostrar Foto</button></td>";
+                        echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['descricao_']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['preco']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['categoria']) . "</td>";
+                        echo "<td>" . ($row['condicao_uso'] ? 'Usado' : 'Novo') . "</td>";
+                        echo "<td>" . htmlspecialchars($cadastrador_nome) . "</td>";
+                        echo "<td><button class='btn btn-danger' onclick='deleteProduct(" . $row['prod_id'] . ")'>Excluir</button>
+                        <button class='btn btn-primary' onclick='openEditProductModal(" . $row['prod_id'] . ", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['descricao_']) . "\", \"" . htmlspecialchars($row['preco']) . "\", \"" . htmlspecialchars($row['categoria']) . "\", " . $row['condicao_uso'] . ", \"" . htmlspecialchars($row['estado_peca']) . "\")'>Editar</button></td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='8'>Nenhum produto encontrado</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
     <div id="photoModal" class="modal fade" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -143,7 +200,8 @@ if (isset($_GET['delete_product_id'])) {
         </div>
     </div>
 
-    <!-- Modal de Edição de Produto -->
+
+
     <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -190,8 +248,19 @@ if (isset($_GET['delete_product_id'])) {
             </div>
         </div>
     </div>
-
+    
     <script>
+        function showPhoto(prodId) {
+            fetch(`get_product_photo.php?prod_id=${prodId}`)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    document.getElementById('photo').src = url;
+                    $('#photoModal').modal('show');
+                })
+                .catch(error => console.error('Error fetching photo:', error));
+        }
+
         function deleteProduct(prodId) {
             Swal.fire({
                 title: 'Tem certeza?',
@@ -209,13 +278,6 @@ if (isset($_GET['delete_product_id'])) {
             })
         }
 
-        function showPhoto(prodId) {
-            // Função para mostrar a foto do produto
-            // Exemplo: Você pode carregar a URL da foto aqui com base no prodId
-            // document.getElementById('photo').src = 'caminho/para/foto/' + prodId + '.jpg';
-            $('#photoModal').modal('show');
-        }
-
         function openEditProductModal(prodId, nome, descricao, preco, categoria, condicaoUso, estadoPeca) {
             document.getElementById('editProdId').value = prodId;
             document.getElementById('editNome').value = nome;
@@ -227,5 +289,7 @@ if (isset($_GET['delete_product_id'])) {
             $('#editProductModal').modal('show');
         }
     </script>
+
+
 </body>
 </html>

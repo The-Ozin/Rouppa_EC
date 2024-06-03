@@ -26,4 +26,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo 'Método de requisição inválido.';
     exit();
 }
-?>
+

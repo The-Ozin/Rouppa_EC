@@ -46,6 +46,12 @@ if (isset($_GET['delete_store_cnpj'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
+        .subtitulo{
+            text-align: center;
+            padding: 10px;
+            padding-top: 20px;
+            font-size: x-large;
+        }
         h1 {
             color: rgb(215,90, 90);
             text-align: center;
@@ -91,7 +97,7 @@ if (isset($_GET['delete_store_cnpj'])) {
     <h1>Administração da Rouppa</h1>
 
     <div class="table-container">
-        <h2>Usuários</h2>
+        <h2 class="subtitulo">Usuários</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -151,7 +157,7 @@ if (isset($_GET['delete_store_cnpj'])) {
 
 
         <div class="table-container">
-            <h2>Lojas</h2>
+            <h2 class="subtitulo">Lojas</h2>
             <table class="table">
                 <thead>
                     <tr>
