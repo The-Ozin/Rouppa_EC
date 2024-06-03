@@ -3,7 +3,7 @@ session_start();
 
 include('../connect.php');
 if (!isset($_SESSION['nome_loja'])) {
-    header('Location: http://localhost/Rouppa_EC/shop/shop_login.php');
+    header('Location: http://localhost/Rouppa_EC/user/user_login.php');
     exit();
 }
 @include('../layouts/navbar.php');
@@ -89,54 +89,31 @@ if (isset($_GET['delete_product_id'])) {
                     <th>Preço</th>
                     <th>Descrição</th>
                     <th>Condição de Uso</th>
-                    <th>Foto Principal</th>
-                    <th>Fotos Adicionais</th> <!-- Nova coluna para mostrar fotos adicionais -->
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 $query = "SELECT * FROM produto WHERE fk_loja_cnpj = '$cnpj'";
                 $result = mysqli_query($conn, $query);
 
-                if ($result) {
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['categoria']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['tamanho']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['preco']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['descricao_']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['condicao_uso']) . "</td>";
-                            echo "<td><img src=\"" . htmlspecialchars($row['foto']) . "\" alt=\"Foto Principal\" style=\"max-width: 100px;\"></td>";
-                            echo "<td>";
-
-                            // Consulta para obter fotos adicionais
-                            $foto_query = "SELECT foto FROM produto_fotos WHERE prod_id = " . $row['prod_id'];
-                            $foto_result = mysqli_query($conn, $foto_query);
-
-                            if ($foto_result) {
-                                while ($foto_row = mysqli_fetch_assoc($foto_result)) {
-                                    echo "<img src=\"" . htmlspecialchars($foto_row['foto']) . "\" alt=\"Foto Adicional\" style=\"max-width: 100px; margin-right: 5px;\">";
-                                }
-                            } else {
-                                echo "Erro ao buscar fotos adicionais";
-                            }
-
-                            echo "</td>";
-                            echo "<td><button class='btn btn-danger' onclick='deleteProduct(\"" . $row['prod_id'] . "\")'>Excluir</button>
-                                <button class='btn btn-primary' onclick='openEditProductModal(\"" . $row['prod_id'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['categoria']) . "\", \"" . htmlspecialchars($row['tamanho']) . "\", \"" . htmlspecialchars($row['preco']) . "\", \"" . htmlspecialchars($row['descricao_']) . "\", \"" . htmlspecialchars($row['condicao_uso']) . "\")'>Editar</button></td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='9'>Nenhum produto encontrado</td></tr>";
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['categoria']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['tamanho']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['preco']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['descricao_']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['condicao_uso']) . "</td>";
+                        echo "<td><button class='btn btn-danger' onclick='deleteProduct(\"" . $row['prod_id'] . "\")'>Excluir</button>
+                        <button class='btn btn-primary' onclick='openEditProductModal(\"" . $row['prod_id'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['categoria']) . "\", \"" . htmlspecialchars($row['tamanho']) . "\", \"" . htmlspecialchars($row['preco']) . "\", \"" . htmlspecialchars($row['descricao_']) . "\", \"" . htmlspecialchars($row['condicao_uso']) . "\")'>Editar</button></td>";
+                        echo "</tr>";
                     }
                 } else {
-                    echo "Erro na consulta: " . mysqli_error($conn);
+                    echo "<tr><td colspan='7'>Nenhum produto encontrado</td></tr>";
                 }
-            ?>
-
+                ?>
             </tbody>
         </table>
     </div>
@@ -146,16 +123,15 @@ if (isset($_GET['delete_product_id'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="editProductForm" action="edit_product.php" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProductModalLabel">Editar Produto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div class="modal-body">
                         <input type="hidden" name="prod_id" id="editProductId">
                         <div class="mb-3">
                             <label for="editProductNome" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="editProductNome" name="nome">
-                        </div>
-                        <!-- Adicione o campo de entrada de arquivo para a foto -->
-                        <div class="mb-3">
-                            <label for="editProductFoto" class="form-label">Foto</label>
-                            <input type="file" class="form-control" id="editProductFoto" name="foto">
                         </div>
                         <div class="mb-3">
                             <label for="editProductCategoria" class="form-label">Categoria</label>
@@ -176,6 +152,11 @@ if (isset($_GET['delete_product_id'])) {
                         <div class="mb-3">
                             <label for="editProductCondicao" class="form-label">Condição de Uso</label>
                             <input type="text" class="form-control" id="editProductCondicao" name="condicao">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar mudanças</button>
                     </div>
                 </form>
             </div>
@@ -199,10 +180,9 @@ if (isset($_GET['delete_product_id'])) {
             });
         }
 
-        function openEditProductModal(id, nome, foto, categoria, tamanho, preco, descricao, condicao) {
+        function openEditProductModal(id, nome, categoria, tamanho, preco, descricao, condicao) {
             document.getElementById('editProductId').value = id;
             document.getElementById('editProductNome').value = nome;
-            document.getElementById('editProductFoto').value = foto; // Se a foto já estiver carregada no sistema
             document.getElementById('editProductCategoria').value = categoria;
             document.getElementById('editProductTamanho').value = tamanho;
             document.getElementById('editProductPreco').value = preco;

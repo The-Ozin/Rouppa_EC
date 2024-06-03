@@ -135,41 +135,40 @@ $total = $pedido['total'];
         </div>
     </div>
 
-    <footer>
-            <?php 
-            @include('../layouts/footer.php');
-            ?>
-    </footer>
-
 </body>
+
+<footer>
+    <?php 
+        @include('../layouts/footer.php');
+    ?>
+    </footer>
 </html>
 <style>
+    .main-content {
+        min-height: calc(100vh - 100px); /* Assuming your footer height is 100px */
+    }
 
     .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
     .order-summary {
         padding: 20px;
+        border-radius: 15px;
         border: 1px solid #ccc;
         border-radius: 5px;
         text-align: center;
         background-color: whitesmoke;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
     }
 
     h2 {
         margin-top: 0;
     }
 
-    .footer {
-        position: fixed !important;
-        width: 5vh !important;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-    }
+
+
 </style>
