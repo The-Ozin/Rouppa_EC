@@ -136,7 +136,7 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const cpfField = document.querySelector('#registerCPF');
 
     cpfField.addEventListener('input', function() {
@@ -200,8 +200,8 @@
                 } else {
                     showAlert(data.message, 'success');
                     setTimeout(() => {
-                        window.location.href = 'user_login.php';
-                    }, 2000);
+                        window.location.href = 'http://localhost/Rouppa_EC/welcome.php';
+                    }, 10000); 
                 }
             })
             .catch(error => {
@@ -277,7 +277,9 @@
             title: icon === 'error' ? 'Erro!' : 'Sucesso!',
             text: message,
             icon: icon,
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK',
+            timer: icon === 'success' ? 10000 : null, 
+            timerProgressBar: icon === 'success'
         });
     }
 });
