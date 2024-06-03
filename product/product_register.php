@@ -126,5 +126,41 @@ $isUsuario = isset($_SESSION['cpf']);
     }
 
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const productPriceInput = document.getElementById('productPrice');
+        const productSizeInput = document.getElementById('productSize');
+
+        // Adiciona um ouvinte de evento de input ao campo de preço
+        productPriceInput.addEventListener('input', function (event) {
+            // Remove qualquer caractere que não seja um número
+            event.target.value = event.target.value.replace(/[^\d.,]/g, '');
+        });
+
+        // Adiciona um ouvinte de evento de input ao campo de tamanho
+        let typingTimer;
+        const doneTypingInterval = 2000; // Intervalo de 1 segundo (1000 milissegundos)
+        
+        productSizeInput.addEventListener('input', function (event) {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                // Verifica se o tamanho está dentro dos limites desejados
+                const validSizes = ['PP', 'P', 'M', 'G', 'GG', 'XGG'];
+                const size = event.target.value.toUpperCase();
+                if (!validSizes.includes(size) && (isNaN(size) || size < 25 || size > 45)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: 'Por favor, informe um tamanho válido.',
+                        confirmButtonColor: '#d75a5a'
+                    });
+                    event.target.value = '';
+                }
+            }, doneTypingInterval);
+        });
+    });
+</script>
+
 </body>
 </html>
