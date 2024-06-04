@@ -63,7 +63,7 @@
                 <a href="./user/brecho.php">
                     <img src="./assets/images/brecho_img.jpg" alt="Brechó">
                     <h2>Brechó</h2>
-                    <p>Encontre peças únicas com história dos usuários</p>
+                    <p>Encontre peças únicas dos usuários</p>
                 </a>
             </div>
         </div>

@@ -8,24 +8,28 @@ if (!isset($_SESSION['user_name'])) {
     exit();
 }
 
-// Incluir o arquivo de conexão com o banco de dados
 include('../connect.php');
 @include('../layouts/navbar.php');
-
 
 try {
     $stmt = $pdo->prepare("SELECT nome, email, data_nascimento FROM usuario WHERE cpf = ?");
     $stmt->execute([$_SESSION['user_name']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    $name = $user['nome'];
-    $email = $user['email'];
-    $birthdate = $user['data_nascimento'];
+
+    if ($user) {
+        $name = $user['nome'];
+        $email = $user['email'];
+        $birthdate = $user['data_nascimento'];
+    } else {
+        $_SESSION['update_profile_error'] = "Usuário não encontrado.";
+        header("Location: http://localhost/Rouppa_EC/user/user_login.php");
+        exit();
+    }
 } catch (PDOException $e) {
     $_SESSION['update_profile_error'] = "Erro ao recuperar dados do usuário: " . $e->getMessage();
     header("Location: profile.php");
     exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -53,7 +53,7 @@ if ($result === false) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <h1 class="centralize">Produtos do Brechó</h1>
+    <h1 class="centralize">Produtos</h1>
 
     <form method="GET" action="" class="product-filter" style="width: 1500px; height: 200px;">
         <label for="categoria">Categoria:</label>
@@ -81,58 +81,57 @@ if ($result === false) {
         </select>
         <button type="submit">Filtrar</button>
     </form>
+        <?php
+        if (mysqli_num_rows($result) > 0) {
+            echo '<div class="d-flex justify-content-center flex-wrap">';
 
-    <?php
-    if (mysqli_num_rows($result) > 0) {
-        echo '<div class="d-flex justify-content-center flex-wrap">';
+            while ($row = mysqli_fetch_assoc($result)) {
+                $foto_query = "SELECT foto FROM produto_fotos WHERE prod_id = " . $row['prod_id'];
+                $foto_result = mysqli_query($conn, $foto_query);
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            $foto_query = "SELECT foto FROM produto_fotos WHERE prod_id = " . $row['prod_id'];
-            $foto_result = mysqli_query($conn, $foto_query);
+                echo '<div class="product-card">';
+                echo '<div id="carouselExampleControls' . $row['prod_id'] . '" class="carousel slide" data-bs-ride="carousel">';
+                echo '<div class="carousel-inner">';
+                $active = true;
 
-            echo '<div class="product-card">';
-            echo '<div id="carouselExampleControls' . $row['prod_id'] . '" class="carousel slide" data-bs-ride="carousel">';
-            echo '<div class="carousel-inner">';
-            $active = true;
+                while ($foto_row = mysqli_fetch_assoc($foto_result)) {
+                    echo '<div class="carousel-item' . ($active ? ' active' : '') . '">';
+                    echo '<img src="data:image/jpeg;base64,' . base64_encode($foto_row['foto']) . '" class="d-block w-100" alt="Produto ' . $row['nome'] . '">';
+                    echo '</div>';
+                    $active = false;
+                }
 
-            while ($foto_row = mysqli_fetch_assoc($foto_result)) {
-                echo '<div class="carousel-item' . ($active ? ' active' : '') . '">';
-                echo '<img src="data:image/jpeg;base64,' . base64_encode($foto_row['foto']) . '" class="d-block w-100" alt="Produto ' . $row['nome'] . '">';
                 echo '</div>';
-                $active = false;
+                echo '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls' . $row['prod_id'] . '" data-bs-slide="prev">';
+                echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+                echo '<span class="visually-hidden">Previous</span>';
+                echo '</button>';
+                echo '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls' . $row['prod_id'] . '" data-bs-slide="next">';
+                echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+                echo '<span class="visually-hidden">Next</span>';
+                echo '</button>';
+                echo '</div>';
+
+                echo '<div class="product-details">';
+                echo '<h5>' . htmlspecialchars($row['nome']) . '</h5>';
+                echo '<p>' . htmlspecialchars($row['descricao_']) . '</p>';
+                echo '<p>';
+                echo '<span>Tamanho: ' . htmlspecialchars($row['tamanho']) . '</span>';
+                echo '<span style="float: right;">Preço: R$ ' . htmlspecialchars($row['preco']) . '</span>';
+                echo '</p>';
+                if (isset($_SESSION['user_name'])){
+                    echo '<button class="add-to-cart btn btn-primary mt-3" data-id="' . $row['prod_id'] . '" data-tipo="loja">Adicionar ao Carrinho</button>';
+                }
+                echo '</div>';
+                echo '</div>';
             }
 
             echo '</div>';
-            echo '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls' . $row['prod_id'] . '" data-bs-slide="prev">';
-            echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
-            echo '<span class="visually-hidden">Previous</span>';
-            echo '</button>';
-            echo '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls' . $row['prod_id'] . '" data-bs-slide="next">';
-            echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
-            echo '<span class="visually-hidden">Next</span>';
-            echo '</button>';
             echo '</div>';
-
-            echo '<div class="product-details">';
-            echo '<h5>' . htmlspecialchars($row['nome']) . '</h5>';
-            echo '<p>' . htmlspecialchars($row['descricao_']) . '</p>';
-            echo '<p>';
-            echo '<span>Tamanho: ' . htmlspecialchars($row['tamanho']) . '</span>';
-            echo '<span style="float: right;">Preço: R$ ' . htmlspecialchars($row['preco']) . '</span>';
-            echo '</p>';
-            if (isset($_SESSION['user_name'])){
-                echo '<button class="add-to-cart btn btn-primary mt-3" data-id="' . $row['prod_id'] . '" data-tipo="loja">Adicionar ao Carrinho</button>';
-            }
-            echo '</div>';
-            echo '</div>';
+        } else {
+            echo '<p>Nenhum produto encontrado</p>';
         }
-
-        echo '</div>';
-        echo '</div>';
-    } else {
-        echo '<p>Nenhum produto encontrado</p>';
-    }
-    ?>
+        ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         function toggleTamanhoInputs() {
@@ -207,32 +206,8 @@ if ($result === false) {
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 footer {
-    margin-top: 30px;
+    margin-top: 40vh;
 }
-.centralize{
-    align-items: center;
-    text-align: center;
-    margin-top: 25px;
-    font-weight: bold;
-}
-    .sale {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: orangered;
-        font-family: 'Anton', sans-serif;
-        color: black;
-        font-weight: 400;
-        font-size: 80px;
-        height: 200px;
-        width: 100%;
-        margin: 0;
-        position: absolute;
-        top: 12vh;
-        border: 1px solid black;
-        padding: 20px;
-    }
-
 
 .carousel {
     margin-top: 27vh;
@@ -246,12 +221,16 @@ footer {
     object-fit: cover;
 }
 
-
+h1 {
+    margin-top: 10vh;
+    font-family: 'Anton', sans-serif;
+    color: rgb(90, 29, 0);
+    text-align: center;
+}
 .product-filter {
     display: flex;
     align-items: center;
-    margin-bottom: -100px;
-    text-align: center;
+    margin-bottom: -60px;
 }
 
 .product-filter label,
@@ -273,6 +252,6 @@ footer {
 }
 
 .product-card {
-        padding-right: 25px; /* Adiciona uma margem inferior de 20px para separar os produtos */
+        padding-right: 25px; 
     }
 </style>

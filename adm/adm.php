@@ -11,16 +11,92 @@ if (!isset($_SESSION['adm_name'])) {
 // Função para deletar usuário
 if (isset($_GET['delete_user_cpf'])) {
     $userCpf = $_GET['delete_user_cpf'];
-    $query = "DELETE FROM usuario WHERE cpf = '$userCpf'";
-    mysqli_query($conn, $query);
+
+    // Deleta os produtos relacionados ao usuário
+    $deleteProdutoQuery = "DELETE FROM produto WHERE fk_usuario_cpf = '$userCpf'";
+    mysqli_query($conn, $deleteProdutoQuery);
+
+    // Deleta os pedidos relacionados ao usuário
+    $deletePedidoQuery = "DELETE FROM pedido WHERE fk_usuario_cpf = '$userCpf'";
+    mysqli_query($conn, $deletePedidoQuery);
+
+    // Deleta o usuário
+    $deleteUsuarioQuery = "DELETE FROM usuario WHERE cpf = '$userCpf'";
+    mysqli_query($conn, $deleteUsuarioQuery);
+
+    // Verifica se a exclusão foi bem-sucedida e redireciona ou exibe uma mensagem de sucesso
+    if (mysqli_affected_rows($conn) > 0) {
+        echo "<script>
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: 'Usuário deletado com sucesso.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'sua_pagina.php'; // Redireciona para uma página específica
+                    }
+                });
+              </script>";
+    } else {
+        echo "<script>
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Erro ao deletar usuário.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'sua_pagina.php'; // Redireciona para uma página específica
+                    }
+                });
+              </script>";
+    }
 }
+
 
 // Função para deletar loja
 if (isset($_GET['delete_store_cnpj'])) {
     $storeCnpj = $_GET['delete_store_cnpj'];
-    $query = "DELETE FROM loja WHERE cnpj = '$storeCnpj'";
-    mysqli_query($conn, $query);
+
+    // Deleta os produtos relacionados à loja
+    $deleteProdutoQuery = "DELETE FROM produto WHERE fk_loja_cnpj = '$storeCnpj'";
+    mysqli_query($conn, $deleteProdutoQuery);
+
+    // Deleta a loja
+    $deleteLojaQuery = "DELETE FROM loja WHERE cnpj = '$storeCnpj'";
+    mysqli_query($conn, $deleteLojaQuery);
+
+    // Verifica se a exclusão foi bem-sucedida e exibe uma mensagem de sucesso
+    if (mysqli_affected_rows($conn) > 0) {
+        echo "<script>
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: 'Loja deletada com sucesso.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'sua_pagina.php'; // Redireciona para uma página específica
+                    }
+                });
+              </script>";
+    } else {
+        echo "<script>
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Erro ao deletar loja.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'sua_pagina.php'; // Redireciona para uma página específica
+                    }
+                });
+              </script>";
+    }
 }
+
 ?>
 
 <!DOCTYPE html>

@@ -53,7 +53,6 @@ if ($result === false) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="sale">! 20% OFF EM TODA A COMPRA !</div>
     <h1 class="centralize">Produtos</h1>
 
     <form method="GET" action="" class="product-filter" style="width: 1500px; height: 200px;">
@@ -244,7 +243,7 @@ footer {
 }
 
 h1 {
-    margin-top: 40vh;
+    margin-top: 20vh;
     font-family: 'Anton', sans-serif;
     color: rgb(90, 29, 0);
     text-align: center;

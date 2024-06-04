@@ -72,6 +72,10 @@ if (isset($_GET['delete_product_id'])) {
         .btn {
             margin: 5px;
         }
+
+        footer {
+            margin-top: 10vh;
+        }
     </style>
 </head>
 <body>
@@ -113,6 +117,7 @@ if (isset($_GET['delete_product_id'])) {
                 } else {
                     echo "<tr><td colspan='7'>Nenhum produto encontrado</td></tr>";
                 }
+
                 ?>
             </tbody>
         </table>
