@@ -208,7 +208,7 @@ if ($result === false) {
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 footer {
-    margin-top: 40vh;
+    margin-top: 25px;
 }
 
     .sale {
@@ -243,7 +243,7 @@ footer {
 }
 
 h1 {
-    margin-top: 20vh;
+    margin-top: 10vh;
     font-family: 'Anton', sans-serif;
     color: rgb(90, 29, 0);
     text-align: center;
@@ -273,6 +273,8 @@ h1 {
 }
 
 .product-card {
-        padding-right: 25px; /* Adiciona uma margem inferior de 20px para separar os produtos */
+        padding-right: 25px; 
+        height: 70%;
+        margin: 10;
     }
 </style>

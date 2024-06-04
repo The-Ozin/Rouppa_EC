@@ -140,7 +140,7 @@ session_start();
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php elseif (isset($_SESSION['user_name'])): ?>
                                 <!-- Opções específicas do usuário -->
-                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/profile.php">Perfil</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_managment.php">Gerenciar Perfil</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_product_managment.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/product/product_register.php">Cadastar Produto</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>

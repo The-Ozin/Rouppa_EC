@@ -13,8 +13,8 @@ $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : '';
 $tamanho = isset($_GET['tamanho']) ? $_GET['tamanho'] : '';
 
-$query = "SELECT * FROM produto WHERE 1";
 $query = "SELECT * FROM produto WHERE tipo_usuario = 'usuario'";
+
 if ($categoria) {
     $query .= " AND categoria = '" . mysqli_real_escape_string($conn, $categoria) . "'";
 }
@@ -187,26 +187,37 @@ if ($result === false) {
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Erro',
-                                text: 'Erro ao adicionar o produto ao carrinho.'
+                                title: 'Erro!',
+                                text: 'Não foi possível adicionar o produto ao carrinho.',
+                                timer: 1500,
+                                showConfirmButton: false
                             });
                         }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro!',
+                            text: 'Ocorreu um erro. Tente novamente.',
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
                     }
                 });
             });
         });
     </script>
-    <footer>
-        <?php @include('../layouts/footer.php'); ?>
-    </footer>
 </body>
+<footer>
+        <?php @include('../layouts/footer.php'); ?>
+</footer>
 </html>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 footer {
-    margin-top: 40vh;
+    margin-top: 25px;
 }
 
 .carousel {
@@ -221,16 +232,17 @@ footer {
     object-fit: cover;
 }
 
-h1 {
+.centralize{
     margin-top: 10vh;
     font-family: 'Anton', sans-serif;
     color: rgb(90, 29, 0);
     text-align: center;
 }
+
 .product-filter {
     display: flex;
     align-items: center;
-    margin-bottom: -60px;
+    margin-bottom: -170px;
 }
 
 .product-filter label,
@@ -253,5 +265,8 @@ h1 {
 
 .product-card {
         padding-right: 25px; 
+        height: 70%;
+        margin: 5;
+        
     }
 </style>

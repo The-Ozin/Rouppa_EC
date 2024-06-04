@@ -190,8 +190,16 @@
             const password = passwordField.value.trim();
             const repeatPassword = repeatPasswordField.value.trim();
 
+            // Regex para validar o formato do CNPJ (XX.XXX.XXX/XXXX-XX)
+            const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/;
+
             if (!cnpj) {
                 showAlert('Por favor, insira o CNPJ da loja.', 'error');
+                return false;
+            }
+
+            if (!cnpjRegex.test(cnpj)) {
+                showAlert('Por favor, insira um CNPJ válido no formato XX.XXX.XXX/XXXX-XX.', 'error');
                 return false;
             }
 
@@ -218,6 +226,7 @@
             showAlert('Cadastro de loja realizado com sucesso!', 'success');
             return true;
         }
+
 
         function showAlert(message, icon = 'error') {
             Swal.fire({

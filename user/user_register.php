@@ -136,153 +136,117 @@
     </footer>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cpfField = document.querySelector('#registerCPF');
+        document.addEventListener('DOMContentLoaded', function() {
+            const cpfField = document.querySelector('#registerCPF');
 
-    cpfField.addEventListener('input', function() {
-        let value = cpfField.value.replace(/\D/g, '');
+            cpfField.addEventListener('input', function() {
+                let value = cpfField.value.replace(/\D/g, '');
 
-        if (value.length > 11) {
-            value = value.slice(0, 11);
-        }
-
-        if (value.length > 3 && value.length <= 6) {
-            value = value.replace(/^(\d{3})(\d)/, '$1.$2');
-        } else if (value.length > 6 && value.length <= 9) {
-            value = value.replace(/^(\d{3})(\d{3})(\d)/, '$1.$2.$3');
-        } else if (value.length > 9) {
-            value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
-        }
-
-        cpfField.value = value;
-    });
-
-    const passwordField = document.querySelector('#registerPassword');
-    const repeatPasswordField = document.querySelector('#registerRepeatPassword');
-
-    const togglePasswordVisibilityButton = document.querySelector('#togglePasswordVisibility');
-    const toggleRepeatVisibilityButton = document.querySelector('#toggleRepeatPasswordVisibility');
-
-    togglePasswordVisibilityButton.addEventListener('click', function() {
-        togglePasswordVisibility(passwordField, this);
-    });
-
-    toggleRepeatVisibilityButton.addEventListener('click', function() {
-        togglePasswordVisibility(repeatPasswordField, this);
-    });
-
-    function togglePasswordVisibility(field, button) {
-        if (field.type === 'password') {
-            field.type = 'text';
-            button.innerHTML = '<i class="fas fa-eye-slash"></i>';
-        } else {
-            field.type = 'password';
-            button.innerHTML = '<i class="fas fa-eye"></i>';
-        }
-    }
-
-    const registerForm = document.querySelector('#registerForm');
-
-    registerForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        if (validateRegisterForm()) {
-            const formData = new FormData(registerForm);
-
-            fetch('user.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'error') {
-                    showAlert(data.message, 'error');
-                } else {
-                    showAlert(data.message, 'success');
-                    setTimeout(() => {
-                        window.location.href = 'http://localhost/Rouppa_EC/welcome.php';
-                    }, 10000); 
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
                 }
-            })
-            .catch(error => {
-                showAlert('Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.', 'error');
+
+                if (value.length > 3 && value.length <= 6) {
+                    value = value.replace(/^(\d{3})(\d)/, '$1.$2');
+                } else if (value.length > 6 && value.length <= 9) {
+                    value = value.replace(/^(\d{3})(\d{3})(\d)/, '$1.$2.$3');
+                } else if (value.length > 9) {
+                    value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+                }
+
+                cpfField.value = value;
+            });
+        });
+
+            const passwordField = document.querySelector('#registerPassword');
+            const repeatPasswordField = document.querySelector('#registerRepeatPassword');
+
+            const togglePasswordVisibilityButton = document.querySelector('#togglePasswordVisibility');
+            const toggleRepeatVisibilityButton = document.querySelector('#toggleRepeatPasswordVisibility');
+
+
+            togglePasswordVisibilityButton.addEventListener('click', function() {
+                togglePasswordVisibility(passwordField, this);
+            });
+
+            toggleRepeatVisibilityButton.addEventListener('click', function() {
+                togglePasswordVisibility(repeatPasswordField, this);
+            });
+
+            function togglePasswordVisibility(field, button) {
+                if (field.type === 'password') {
+                    field.type = 'text';
+                    button.innerHTML = '<i class="fas fa-eye-slash"></i>';
+
+                } else {
+                    field.type = 'password';
+                    button.innerHTML = '<i class="fas fa-eye"></i>';
+
+                }
+            }
+        function validateRegisterForm() {
+            const nameField = document.querySelector('#registerName');
+            const emailField = document.querySelector('#registerEmail');
+            const passwordField = document.querySelector('#registerPassword');
+            const repeatPasswordField = document.querySelector('#registerRepeatPassword');
+            const birthdateField = document.querySelector('#registerBirthdate');
+            const cpfField = document.querySelector('#registerCPF');
+            
+            const name = nameField.value.trim();
+            const email = emailField.value.trim();
+            const password = passwordField.value.trim();
+            const repeatPassword = repeatPasswordField.value.trim();
+            const birthdate = new Date(birthdateField.value);
+            const eighteenYearsAgo = new Date();
+            eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+            const cpf = cpfField.value.trim();
+            if (birthdate >= new Date() || birthdate > eighteenYearsAgo) {
+                showAlert('Você deve ser maior de 18 anos para se registrar.', 'error');
+                return false;
+            }
+            if (!name || name.length < 3) {
+                showAlert('O nome deve ter pelo menos 3 letras.', 'error');
+                return false;
+            }
+            if (!email || !isValidEmail(email)) {
+                showAlert('Por favor, insira um endereço de e-mail válido.', 'error');
+                return false;
+            }
+            if (!password || password.length < 6) {
+                showAlert('A senha deve ter pelo menos 6 caracteres.', 'error');
+                return false;
+            }
+            if (password !== repeatPassword) {
+                showAlert('As senhas não coincidem.', 'error');
+                return false;
+            }
+            const specialCharacterRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+            if (!specialCharacterRegex.test(password)) {
+                showAlert('A senha deve conter pelo menos um caractere especial.', 'error');
+                return false;
+            }
+            const cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+            if (!cpfRegex.test(cpf)) {
+                showAlert('Por favor, insira um CPF válido.', 'error');
+                return false;
+            }
+            showAlert('Cadastro realizado com sucesso!', 'success');
+            return true;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        function showAlert(message, icon = 'error') {
+            Swal.fire({
+                title: icon === 'error' ? 'Erro!' : 'Sucesso!',
+                text: message,
+                icon: icon,
+                confirmButtonText: 'OK'
             });
         }
-    });
-
-    function validateRegisterForm() {
-        const nameField = document.querySelector('#registerName');
-        const emailField = document.querySelector('#registerEmail');
-        const passwordField = document.querySelector('#registerPassword');
-        const repeatPasswordField = document.querySelector('#registerRepeatPassword');
-        const birthdateField = document.querySelector('#registerBirthdate');
-        const cpfField = document.querySelector('#registerCPF');
-        
-        const name = nameField.value.trim();
-        const email = emailField.value.trim();
-        const password = passwordField.value.trim();
-        const repeatPassword = repeatPasswordField.value.trim();
-        const birthdate = new Date(birthdateField.value);
-        const eighteenYearsAgo = new Date();
-        eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
-        const cpf = cpfField.value.trim();
-
-        if (birthdate >= new Date() || birthdate > eighteenYearsAgo) {
-            showAlert('Você deve ser maior de 18 anos para se registrar.', 'error');
-            return false;
-        }
-
-        if (!name || name.length < 3) {
-            showAlert('O nome deve ter pelo menos 3 letras.', 'error');
-            return false;
-        }
-
-        if (!email || !isValidEmail(email)) {
-            showAlert('Por favor, insira um endereço de e-mail válido.', 'error');
-            return false;
-        }
-
-        if (!password || password.length < 6) {
-            showAlert('A senha deve ter pelo menos 6 caracteres.', 'error');
-            return false;
-        }
-
-        if (password !== repeatPassword) {
-            showAlert('As senhas não coincidem.', 'error');
-            return false;
-        }
-
-        const specialCharacterRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-        if (!specialCharacterRegex.test(password)) {
-            showAlert('A senha deve conter pelo menos um caractere especial.', 'error');
-            return false;
-        }
-
-        const cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-        if (!cpfRegex.test(cpf)) {
-            showAlert('Por favor, insira um CPF válido.', 'error');
-            return false;
-        }
-
-        return true;
-    }
-
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    function showAlert(message, icon = 'error') {
-        Swal.fire({
-            title: icon === 'error' ? 'Erro!' : 'Sucesso!',
-            text: message,
-            icon: icon,
-            confirmButtonText: 'OK',
-            timer: icon === 'success' ? 10000 : null, 
-            timerProgressBar: icon === 'success'
-        });
-    }
-});
 
     </script>
 <style>

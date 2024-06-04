@@ -95,10 +95,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Exibir os detalhes do produto
                     echo '<div class="product-card">';
                     echo '<h3>' . htmlspecialchars($row['nome']) . '</h3>';
-                    echo '<p>Preço: R$ ' . htmlspecialchars($row['preco']) . '</p>';
+                    echo '<p>Preço Unitário: R$ ' . htmlspecialchars($row['preco']) . '</p>';
                     echo '<form method="post">';
                     echo '<input type="hidden" name="prod_id" value="' . $prod_id . '">';
-                    echo '<label for="quantity">Quantidade:</label>';
+                    echo '<label for="quantity">Quantidade: </label>';
                     echo '<select name="quantity" id="quantity" onchange="this.form.submit()">';
                     for ($i = 1; $i <= 10; $i++) {
                         echo '<option value="' . $i . '"';
