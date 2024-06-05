@@ -155,8 +155,11 @@ if (isset($_GET['delete_product_id'])) {
                             <input type="text" class="form-control" id="editProductDescricao" name="descricao">
                         </div>
                         <div class="mb-3">
-                            <label for="editProductCondicao" class="form-label">Condição de Uso</label>
-                            <input type="text" class="form-control" id="editProductCondicao" name="condicao">
+                            <label for="editProductCondicao" class="form-label">Condição</label>
+                            <select class="form-control" id="editProductCondicao" name="condicao">
+                                <option value="1">Novo</option>
+                                <option value="0">Usado</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
