@@ -4,12 +4,12 @@ session_start();
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(90, 29, 0); position: sticky; top: 0; z-index: 1000;">
     <div class="container-fluid">
-        <!-- Navbar title -->
+
         <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost/Rouppa_EC/welcome.php" style="font-family: 'Noto Serif Display', serif; font-weight: bold; font-style: italic; color: white;">
             Rouppa
         </a>
 
-        <!-- Toggle button -->
+
         <button
             data-mdb-collapse-init
             class="navbar-toggler"
@@ -22,9 +22,9 @@ session_start();
             <i class="fas fa-bars"></i>
         </button>
 
-        <!-- Collapsible wrapper -->
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left links -->
+
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost/Rouppa_EC/shop/shop.php" style="color: white;">Loja</a>
@@ -37,14 +37,13 @@ session_start();
                 </li>
             </ul>
 
-            <!-- Right elements -->
+
             <div class="d-flex align-items-center">
-                <!-- Icon -->
+
                 <a class="text-reset me-3" href="http://localhost/Rouppa_EC/product/cart.php">
                     <i class="fas fa-shopping-cart" style="color: white;"></i>
                 </a>
 
-                <!-- Notifications -->
                 <div class="dropdown">
                     <a
                         data-mdb-dropdown-init
@@ -68,7 +67,7 @@ session_start();
                 </div>
                 <div class="dropdown">
                     <?php if (isset($_SESSION['user_name'])): ?>
-                        <!-- Avatar do usuário -->
+
                         <a
                             data-mdb-dropdown-init
                             class="dropdown-toggle d-flex align-items-center hidden-arrow"
@@ -86,7 +85,7 @@ session_start();
                             <span class="ms-2" style="color: white;">Olá, <?php echo $_SESSION['user_name']; ?>!</span>
                         </a>
                     <?php elseif (isset($_SESSION['nome_loja'])): ?>
-                        <!-- Avatar da loja -->
+
                         <a
                             data-mdb-dropdown-init
                             class="dropdown-toggle d-flex align-items-center hidden-arrow"
@@ -117,7 +116,7 @@ session_start();
                                 <span class="ms-2" style="color: white;">Olá, <?php echo $_SESSION['adm_name']; ?>!</span>
                         </a>
                     <?php else: ?>
-                        <!-- Visitante não logado -->
+
                         <a
                             data-mdb-dropdown-init
                             class="dropdown-toggle d-flex align-items-center hidden-arrow"
@@ -131,7 +130,7 @@ session_start();
                         </a>
                     <?php endif; ?>
             
-                    <!-- Opções do dropdown -->
+
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                         <?php if (!empty($_SESSION)): ?>
                             <?php if (isset($_SESSION['adm_name'])): ?>
@@ -139,19 +138,19 @@ session_start();
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/adm/produtos_adm.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php elseif (isset($_SESSION['user_name'])): ?>
-                                <!-- Opções específicas do usuário -->
+
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_managment.php">Gerenciar Perfil</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_product_managment.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/product/product_register.php">Cadastar Produto</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php elseif (isset($_SESSION['nome_loja'])): ?>
-                                <!-- Opções específicas da loja -->
+
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/shop/shop_product_managment.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/product/product_register.php">Cadastar Produto</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php endif; ?>
                         <?php else: ?>
-                            <!-- Opções para visitantes não logados -->
+
                             <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login</a></li>
                             <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_register.php">Cadastro</a></li>
                         <?php endif; ?>

@@ -8,23 +8,22 @@ if (!isset($_SESSION['adm_name'])) {
     exit();
 }
 
-// Função para deletar usuário
+
 if (isset($_GET['delete_user_cpf'])) {
     $userCpf = $_GET['delete_user_cpf'];
 
-    // Deleta os produtos relacionados ao usuário
+
     $deleteProdutoQuery = "DELETE FROM produto WHERE fk_usuario_cpf = '$userCpf'";
     mysqli_query($conn, $deleteProdutoQuery);
 
-    // Deleta os pedidos relacionados ao usuário
+  
     $deletePedidoQuery = "DELETE FROM pedido WHERE fk_usuario_cpf = '$userCpf'";
     mysqli_query($conn, $deletePedidoQuery);
 
-    // Deleta o usuário
     $deleteUsuarioQuery = "DELETE FROM usuario WHERE cpf = '$userCpf'";
     mysqli_query($conn, $deleteUsuarioQuery);
 
-    // Verifica se a exclusão foi bem-sucedida e redireciona ou exibe uma mensagem de sucesso
+
     if (mysqli_affected_rows($conn) > 0) {
         echo "<script>
                 Swal.fire({
@@ -55,19 +54,18 @@ if (isset($_GET['delete_user_cpf'])) {
 }
 
 
-// Função para deletar loja
+
 if (isset($_GET['delete_store_cnpj'])) {
     $storeCnpj = $_GET['delete_store_cnpj'];
 
-    // Deleta os produtos relacionados à loja
+
     $deleteProdutoQuery = "DELETE FROM produto WHERE fk_loja_cnpj = '$storeCnpj'";
     mysqli_query($conn, $deleteProdutoQuery);
 
-    // Deleta a loja
+
     $deleteLojaQuery = "DELETE FROM loja WHERE cnpj = '$storeCnpj'";
     mysqli_query($conn, $deleteLojaQuery);
 
-    // Verifica se a exclusão foi bem-sucedida e exibe uma mensagem de sucesso
     if (mysqli_affected_rows($conn) > 0) {
         echo "<script>
                 Swal.fire({
@@ -212,7 +210,7 @@ if (isset($_GET['delete_store_cnpj'])) {
         </table>
     </div> 
 
-    <!-- Modal para exibir a foto do usuário -->
+
         <div id="photoModal" class="modal fade" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
@@ -269,7 +267,6 @@ if (isset($_GET['delete_store_cnpj'])) {
         </div>
     </div>
 
-    <!-- Modal de Edição de Usuário -->
     <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -308,7 +305,7 @@ if (isset($_GET['delete_store_cnpj'])) {
         </div>
     </div>
 
-    <!-- Modal de Edição de Loja -->
+
     <div class="modal fade" id="editStoreModal" tabindex="-1" aria-labelledby="editStoreModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -406,7 +403,7 @@ if (isset($_GET['delete_store_cnpj'])) {
         }
     </script>
 
-    <!-- Bootstrap Bundle with Popper -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

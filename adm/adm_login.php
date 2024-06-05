@@ -1,9 +1,9 @@
 <?php
-// Verifica se há um erro na URL
+
 if (isset($_GET['error'])) {
-    // Obtém o erro da URL e decodifica (remove os caracteres especiais)
+
     $error = urldecode($_GET['error']);
-    // Exibe a mensagem de erro na página
+
     echo "<p style='color: red;'>$error</p>";
 }
 ?>
@@ -98,15 +98,15 @@ if (isset($_GET['error'])) {
         }
     });
     document.addEventListener('DOMContentLoaded', function() {
-        // Verificar se há uma mensagem de erro na sessão
+
         <?php if(isset($_SESSION['login_error'])): ?>
-            // Exibir a mensagem de erro como um Sweet Alert
+
             Swal.fire({
                 icon: 'error',
                 title: 'Erro de login',
                 text: '<?php echo $_SESSION['login_error']; ?>',
             });
-            // Limpar a mensagem de erro da sessão
+
             <?php unset($_SESSION['login_error']); ?>
         <?php endif; ?>
     });
