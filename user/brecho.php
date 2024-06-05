@@ -66,7 +66,7 @@ if ($result === false) {
             <option value="">Todas</option>
             <option value="calcado" <?php if ($categoria == 'calcado') echo 'selected'; ?>>Calçado</option>
             <option value="roupa" <?php if ($categoria == 'roupa') echo 'selected'; ?>>Roupa</option>
-            <option value="acessorio" <?php if ($categoria == 'acessorio') echo 'selected'; ?>>Acessório</option>
+            <option value="acessorio" <?php if ($categoria == 'acessorios') echo 'selected'; ?>>Acessório</option>
         </select>
 
         <div id="tamanhoInputs" style="display: none;">

@@ -120,7 +120,7 @@ if (isset($_GET['delete_product_id'])) {
                         echo "<td>" . htmlspecialchars($row['descricao_']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['preco']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['categoria']) . "</td>";
-                        echo "<td>" . ($row['condicao_uso'] ? 'Usado' : 'Novo') . "</td>";
+                        echo "<td>" . ($row['condicao_uso'] ? 'Novo' : 'Usado') . "</td>";
                         echo "<td>" . htmlspecialchars($cadastrador_nome) . "</td>";
                         echo "<td><button class='btn btn-danger' onclick='deleteProduct(" . $row['prod_id'] . ")'>Excluir</button>
                         <button class='btn btn-primary' onclick='openEditProductModal(" . $row['prod_id'] . ", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['descricao_']) . "\", \"" . htmlspecialchars($row['preco']) . "\", \"" . htmlspecialchars($row['categoria']) . "\", " . $row['condicao_uso'] . ", \"" . htmlspecialchars($row['estado_peca']) . "\")'>Editar</button></td>";
@@ -231,8 +231,8 @@ if (isset($_GET['delete_product_id'])) {
                         <div class="mb-3">
                             <label for="editCondicaoUso" class="form-label">Condição</label>
                             <select class="form-control" id="editCondicaoUso" name="condicao_uso">
-                                <option value="0">Novo</option>
-                                <option value="1">Usado</option>
+                                <option value="1">Novo</option>
+                                <option value="0">Usado</option>
                             </select>
                         </div>
                         <div class="mb-3">

@@ -105,7 +105,7 @@ if (isset($_GET['delete_product_id'])) {
                         echo "<td>" . htmlspecialchars($row['tamanho']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['preco']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['descricao_']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['condicao_uso']) . "</td>";
+                        echo "<td>" . ($row['condicao_uso'] ? 'Novo' : 'Usado') . "</td>";
                         echo "<td><button class='btn btn-danger' onclick='deleteProduct(\"" . $row['prod_id'] . "\")'>Excluir</button>
                         <button class='btn btn-primary' onclick='openEditProductModal(\"" . $row['prod_id'] . "\", \"" . htmlspecialchars($row['nome']) . "\", \"" . htmlspecialchars($row['categoria']) . "\", \"" . htmlspecialchars($row['tamanho']) . "\", \"" . htmlspecialchars($row['preco']) . "\", \"" . htmlspecialchars($row['descricao_']) . "\", \"" . htmlspecialchars($row['condicao_uso']) . "\")'>Editar</button></td>";
                         echo "</tr>";
