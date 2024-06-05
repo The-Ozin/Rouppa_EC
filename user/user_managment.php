@@ -11,6 +11,8 @@ $cpf = $_SESSION['cpf'];
 $query = "SELECT nome, email, foto FROM usuario WHERE cpf = '$cpf'";
 $result = mysqli_query($conn, $query);
 $user = mysqli_fetch_assoc($result);
+
+$_SESSION['foto'] = $user['foto'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +39,12 @@ $user = mysqli_fetch_assoc($result);
             <div class="form-box">
                 <form action="edit_user.php" method="post" id="editProfileForm" enctype="multipart/form-data">
                     <input type="hidden" name="update_user" value="1">
+                    <div class="mb-3 text-center">
+                        <?php if (!empty($_SESSION['foto'])): ?>
+                            <?php $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto']); ?>
+                            <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="180" width="180" alt="Foto de Perfil" loading="lazy">
+                        <?php endif; ?>
+                    </div>
                     <div class="mb-3">
                         <label for="editNome" class="form-label" style="color: white;">Nome</label>
                         <input type="text" class="form-control" id="editNome" name="nome" value="<?php echo htmlspecialchars($user['nome']); ?>">
@@ -125,33 +133,33 @@ $user = mysqli_fetch_assoc($result);
 </footer>
 </html>
 <style>
-        h1 {
-            color: rgb(215, 90, 90);
-            text-align: center;
-            margin-top: -10vh;
-            font-weight: bold;
-            font-family: 'Noto Serif Display', serif;
-        }
-        .logo {
-            width: 200px;
-            height: 200px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 10vh;
-            transform: translateY(-50%);
-        }
-
-            .form-box {
-                background-color: burlywood;
-                width: 80%;
-                height: 90%;
-                padding: 10vh 10vh;
-                margin: 0 auto; 
-                margin-top: 5vh;
-                margin-bottom: 10vh;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-                opacity: 0.9;
-                font-size: 18px;
-            }
+    h1 {
+        color: rgb(215, 90, 90);
+        text-align: center;
+        margin-top: -10vh;
+        font-weight: bold;
+        font-family: 'Noto Serif Display', serif;
+    }
+    .logo {
+        width: 200px;
+        height: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10vh;
+        transform: translateY(-50%);
+    }
+    .form-box {
+        background-color: burlywood;
+        width: 80%;
+        height: 90%;
+        padding: 10vh 10vh;
+        margin: 0 auto; 
+        margin-top: 5vh;
+        margin-bottom: 10vh;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        opacity: 0.9;
+        font-size: 18px;
+    }
 </style>
+
