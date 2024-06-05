@@ -8,8 +8,6 @@ $session_timeout = 30 * 60; // 30 minutos
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $session_timeout)) {
     session_unset();
     session_destroy();
-    session_start();
-    $_SESSION['login_error'] = "Sessão expirada. Faça login novamente.";
     header("Location: user_login.php");
     exit();
 }

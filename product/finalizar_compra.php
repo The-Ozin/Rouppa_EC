@@ -109,14 +109,28 @@ function consultarCEP($cep) {
                             document.getElementById('cidade').value = data.localidade;
                             document.getElementById('estado').value = data.uf;
                         } else {
-                            alert('CEP não encontrado');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'CEP não encontrado',
+                                text: 'Por favor, insira um CEP válido.',
+                                confirmButtonColor: 'rgb(215,90,90)'
+                            });
                         }
                     })
                     .catch(error => {
-                        alert('Erro ao consultar o CEP: ' + error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro ao consultar o CEP',
+                            text: 'Verifique se o CEP informado é válido.',
+                            confirmButtonColor: 'rgb(215,90,90)'
+                        });
                     });
             } else {
-                alert('Por favor, insira um CEP.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Por favor, insira um CEP',
+                    confirmButtonColor: 'rgb(215,90,90)'
+                });
             }
         }
     </script>
