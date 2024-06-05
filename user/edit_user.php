@@ -35,45 +35,39 @@ if (isset($_POST['update_user'])) {
         }
     }
 
-    // Constrói a consulta SQL para atualizar os dados do usuário
+
     $query = "UPDATE usuario SET nome='$nome', email='$email'";
-// Se uma nova foto de perfil foi enviada, adiciona-a à consulta
+
     if (isset($fotoPath)) {
         $query .= ", foto='$fotoPath'";
     } else {
-        // Se nenhuma nova foto foi enviada, mantenha a foto atual no banco de dados
+        
         $query .= ", foto='" . $_SESSION['foto'] . "'";
     }
     $_SESSION['user_name'] = $nome;
     $_SESSION['foto'] = $fotoPath;
-    // Se uma nova senha foi fornecida, adiciona-a à consulta
+
     if (!empty($senha)) {
         $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
         $query .= ", senha='$senhaCriptografada'";
     }
-
-    // Se uma nova foto de perfil foi enviada, adiciona-a à consulta
     if (isset($fotoPath)) {
         $query .= ", foto='$fotoPath'";
     }
 
     $query .= " WHERE cpf='$cpf'";
 
-    // Executa a consulta SQL
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        // Se a atualização for bem-sucedida, redireciona o usuário para a página de gerenciamento com uma mensagem de sucesso
         header('Location: http://localhost/Rouppa_EC/user/user_managment.php');
         exit();
     } else {
-        // Se houver algum erro, redireciona o usuário para a página de gerenciamento com uma mensagem de erro
         header('Location: http://localhost/Rouppa_EC/user/user_managment.php?error=erro_atualizar_perfil');
         exit();
     }
 }
 
-// Se o usuário tentar acessar este script diretamente, redireciona-o de volta à página de gerenciamento
 header('Location: http://localhost/Rouppa_EC/user/user_managment.php');
 exit();
 ?>

@@ -118,7 +118,6 @@ if (isset($_GET['delete_product_id'])) {
         </table>
     </div>
 
-    <!-- Modal de Edição de Produto -->
     <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

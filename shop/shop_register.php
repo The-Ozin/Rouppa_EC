@@ -190,7 +190,6 @@
             const password = passwordField.value.trim();
             const repeatPassword = repeatPasswordField.value.trim();
 
-            // Regex para validar o formato do CNPJ (XX.XXX.XXX/XXXX-XX)
             const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/;
 
             if (!cnpj) {

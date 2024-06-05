@@ -11,12 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data_nascimento = trim($_POST['registerBirthdate']);
     $foto = isset($_FILES['registerPhoto']) ? $_FILES['registerPhoto'] : null;
 
-    // Verifica se o CPF já está cadastrado
     $stmt_check_cpf = $pdo->prepare("SELECT COUNT(*) FROM usuario WHERE cpf = ?");
     $stmt_check_cpf->execute([$cpf]);
     $cpf_count = $stmt_check_cpf->fetchColumn();
 
-    if ($cpf_count > 0) {// Redireciona após 3 segundos
+    if ($cpf_count > 0) {
         ?>
         <script>
             Swal.fire({
@@ -44,10 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        // Hash da senha
         $hashedPassword = password_hash($senha, PASSWORD_DEFAULT);
 
-        // Prepara e executa a declaração de inserção
         $sql = "INSERT INTO usuario (nome, email, senha, cpf, data_nascimento, foto) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
 
@@ -62,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             try {
                 if ($stmt->execute()) {
                     echo json_encode(['status' => 'success', 'message' => 'Cadastro realizado com sucesso!']);
-                    header('Location: user_login.php'); // Redireciona para a página de login
+                    header('Location: user_login.php'); 
                     exit();
                 } else {
                     echo json_encode(['status' => 'error', 'message' => 'Erro ao cadastrar.']);
@@ -71,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode(['status' => 'error', 'message' => 'Erro ao cadastrar: ' . $e->getMessage()]);
             }
 
-            // Fecha a declaração
             $stmt->closeCursor();
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Erro no preparo da declaração: ' . $pdo->errorInfo()[2]]);

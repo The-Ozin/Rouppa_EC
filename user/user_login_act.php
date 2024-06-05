@@ -2,7 +2,6 @@
 include('../connect.php');
 session_start();
 
-// Definir o tempo limite de sessão em segundos (por exemplo, 30 minutos)
 $session_timeout = 30 * 60; // 30 minutos
 
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $session_timeout)) {
@@ -11,7 +10,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     header("Location: user_login.php");
     exit();
 }
-// Atualiza o timestamp da última atividade para o tempo atual
+
 $_SESSION['LAST_ACTIVITY'] = time();
 
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
@@ -29,7 +28,6 @@ try {
     $usuario = $stmt->fetch();
 
     if ($usuario && password_verify($senha, $usuario['senha'])) {
-        // Destrói a sessão atual antes de iniciar uma nova
         session_unset();
         session_destroy();
         session_start();
@@ -40,7 +38,7 @@ try {
         $_SESSION['cpf'] = $usuario['cpf'];
         $_SESSION['senha'] = $usuario['senha'];
         $_SESSION['foto'] = $usuario['foto'];
-        $_SESSION['LAST_ACTIVITY'] = time(); // Inicializa a última atividade
+        $_SESSION['LAST_ACTIVITY'] = time(); 
         header("Location: http://localhost/Rouppa_EC/welcome.php");
         exit();
     } else {

@@ -73,26 +73,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <?php
             foreach ($_SESSION['cart'] as $prod_id => $quantidade) {
-                // Consulta SQL para obter os detalhes do produto e suas fotos
+
                 $query = "SELECT produto.*, produto_fotos.foto
                         FROM produto
                         LEFT JOIN produto_fotos ON produto.prod_id = produto_fotos.prod_id
-                        WHERE produto.prod_id = $prod_id"; // Filtrar pelo ID do produto no carrinho
+                        WHERE produto.prod_id = $prod_id"; 
 
                 $result = mysqli_query($conn, $query);
 
                 if ($result && mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_assoc($result);
-
-                    // Exibir a imagem do produto
                     if (!empty($row['foto'])) {
                         echo '<img src="data:image/jpeg;base64,' . base64_encode($row['foto']) . '" alt="' . htmlspecialchars($row['nome']) . '" style="max-width: 100px;">';
                     } else {
-                        // Se não houver imagem disponível, exiba uma imagem padrão
+
                         echo '<img src="caminho/para/imagem/padrao.jpg" alt="Imagem padrão" style="max-width: 100px;">';
                     }
-
-                    // Exibir os detalhes do produto
                     echo '<div class="product-card">';
                     echo '<h3>' . htmlspecialchars($row['nome']) . '</h3>';
                     echo '<p>Preço Unitário: R$ ' . htmlspecialchars($row['preco']) . '</p>';
@@ -121,25 +117,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <div class="total">
     <?php
-    // Variável para armazenar o valor total
     $total = 0;
-
-    // Loop pelos produtos no carrinho
     foreach ($_SESSION['cart'] as $prod_id => $quantidade) {
-        // Consulta SQL para obter o preço do produto
+
         $query = "SELECT preco FROM produto WHERE prod_id = $prod_id";
         $result = mysqli_query($conn, $query);
 
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
-            // Calcula o subtotal do produto (preço * quantidade)
             $subtotal = $row['preco'] * $quantidade;
-            // Adiciona o subtotal ao total
             $total += $subtotal;
         }
     }
 
-    // Exibe o valor total formatado
     echo 'Valor Total: R$ ' . number_format($total, 2, ',', '.');
     ?>
 </div>
@@ -179,12 +169,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 h1.centralize {
-    font-size: 32px; /* Tamanho da fonte */
-    color: #333; /* Cor do texto */
+    font-size: 32px; 
+    color: #333; 
     font-family: 'Anton', sans-serif;
-    text-align: center; /* Alinhamento central */
-    margin-top: 20px; /* Espaçamento superior */
-    margin-bottom: 20px; /* Espaçamento inferior */
+    text-align: center; 
+    margin-top: 20px; 
+    margin-bottom: 20px; 
 }
 
 .product-card {
