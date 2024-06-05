@@ -14,21 +14,17 @@ if (mysqli_num_rows($result) > 0) {
     $counter = 1;
 
     while ($row = mysqli_fetch_assoc($result)) {
-        // Consulta para obter as fotos do produto
+
         $foto_query = "SELECT foto FROM produto_fotos WHERE prod_id = " . $row['prod_id'];
         $foto_result = mysqli_query($conn, $foto_query);
 
-        // Verifica se há fotos disponíveis
         if (mysqli_num_rows($foto_result) > 0) {
-            // Exibe a primeira foto encontrada
             $foto_row = mysqli_fetch_assoc($foto_result);
             $foto = base64_encode($foto_row['foto']);
         } else {
-            // Caso não haja fotos, use uma imagem padrão
-            $foto = ''; // Caminho para a imagem padrão
+            $foto = ''; 
         }
 
-        // Exibe os detalhes do produto, incluindo a foto
         echo '<div class="product-card">';
         echo '<div id="carouselExampleTouch' . $counter . '" class="carousel slide" data-mdb-touch="false" style="max-width: 400px; margin-right: 20px;">';
         echo '<div class="carousel-inner">';

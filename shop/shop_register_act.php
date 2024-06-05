@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
             header("Location: ../shop/shop_login.php");
-            exit(); // Termina o script após redirecionar
+            exit();
         } else {
             echo "Erro ao cadastrar: " . $stmt->errorInfo()[2];
         }
