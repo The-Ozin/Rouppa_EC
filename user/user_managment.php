@@ -30,39 +30,40 @@ $user = mysqli_fetch_assoc($result);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <a href="../welcome.php"><img src="../assets/images/logo1.jpg" alt="Rouppa" class="logo"></a>
-
-
-    <div class="container mt-5">
-        <h1 class="text-center">Editar Perfil</h1>
-        <form action="edit_user.php" method="post" id="editProfileForm" enctype="multipart/form-data">
-            <input type="hidden" name="update_user" value="1">
-            <div class="mb-3">
-                <label for="editNome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="editNome" name="nome" value="<?php echo htmlspecialchars($user['nome']); ?>">
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="container mt-5">
+        <a href="../welcome.php"><img src="../assets/images/logo1.jpg" alt="Rouppa" class="logo"></a>
+            <h1 class="text-center">Editar Perfil</h1>
+            <div class="form-box">
+                <form action="edit_user.php" method="post" id="editProfileForm" enctype="multipart/form-data">
+                    <input type="hidden" name="update_user" value="1">
+                    <div class="mb-3">
+                        <label for="editNome" class="form-label" style="color: white;">Nome</label>
+                        <input type="text" class="form-control" id="editNome" name="nome" value="<?php echo htmlspecialchars($user['nome']); ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label" style="color: white;">Email</label>
+                        <input type="email" class="form-control" id="editEmail" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSenha" class="form-label" style="color: white;">Nova Senha</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control border border-dark" id="editSenha" name="senha">
+                            <button class="btn border border-dark text-white" type="button" id="toggleNewPasswordVisibility" style="background-color: rgb(215, 90, 90);">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editFoto" class="form-label" style="color: white;">Foto de Perfil</label>
+                        <input type="file" class="form-control" id="editFoto" name="foto">
+                        <input type="hidden" name="foto_atual" value="<?php echo htmlspecialchars($user['foto']); ?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="editEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="editEmail" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
-            </div>
-            <div class="mb-3">
-                <label for="editSenha" class="form-label">Nova Senha</label>
-                <div class="input-group">
-                    <input type="password" class="form-control border border-dark" id="editSenha" name="senha">
-                    <button class="btn border border-dark text-white" type="button" id="toggleNewPasswordVisibility" style="background-color: rgb(215, 90, 90);">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="editFoto" class="form-label">Foto de Perfil</label>
-                <input type="file" class="form-control" id="editFoto" name="foto">
-                <input type="hidden" name="foto_atual" value="<?php echo htmlspecialchars($user['foto']); ?>">
-            </div>
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-        </form>
+        </div>
     </div>
-
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         function showAlert(message, type) {
@@ -80,7 +81,7 @@ $user = mysqli_fetch_assoc($result);
         }
 
         function validatePassword(senha) {
-            const passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+            const passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/;
             return passwordRegex.test(senha);
         }
 
@@ -137,7 +138,20 @@ $user = mysqli_fetch_assoc($result);
             display: block;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 20vh;
+            margin-top: 10vh;
             transform: translateY(-50%);
         }
+
+            .form-box {
+                background-color: burlywood;
+                width: 80%;
+                height: 90%;
+                padding: 10vh 10vh;
+                margin: 0 auto; 
+                margin-top: 5vh;
+                margin-bottom: 10vh;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                opacity: 0.9;
+                font-size: 18px;
+            }
 </style>
