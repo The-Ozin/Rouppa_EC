@@ -39,11 +39,19 @@ $_SESSION['foto'] = $user['foto'];
             <div class="form-box">
                 <form action="edit_user.php" method="post" id="editProfileForm" enctype="multipart/form-data">
                     <input type="hidden" name="update_user" value="1">
-                    <div class="mb-3 text-center">
+                    <div class="mb-3 text-center position-relative">
                         <?php if (!empty($_SESSION['foto'])): ?>
                             <?php $avatarPath = 'http://localhost/Rouppa_EC/pfp/' . basename($_SESSION['foto']); ?>
-                            <img src="<?php echo $avatarPath; ?>" class="rounded-circle" height="180" width="180" alt="Foto de Perfil" loading="lazy">
+                            <img src="<?php echo $avatarPath; ?>" class="rounded-circle profile-img" id="profileImage" height="150" width="150" alt="Foto de Perfil" loading="lazy">
                         <?php endif; ?>
+                        <div class="edit-icon" onclick="document.getElementById('editFoto').click();">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-none">
+                        <label for="editFoto" class="form-label" style="color: white;">Foto de Perfil</label>
+                        <input type="file" class="form-control" id="editFoto" name="foto">
+                        <input type="hidden" name="foto_atual" value="<?php echo htmlspecialchars($user['foto']); ?>">
                     </div>
                     <div class="mb-3">
                         <label for="editNome" class="form-label" style="color: white;">Nome</label>
@@ -62,13 +70,10 @@ $_SESSION['foto'] = $user['foto'];
                             </button>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="editFoto" class="form-label" style="color: white;">Foto de Perfil</label>
-                        <input type="file" class="form-control" id="editFoto" name="foto">
-                        <input type="hidden" name="foto_atual" value="<?php echo htmlspecialchars($user['foto']); ?>">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                 </form>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" style="background-color: rgb(215,90, 90)">Salvar Alterações</button>
+                </div>
             </div>
         </div>
     </div>
@@ -125,6 +130,18 @@ $_SESSION['foto'] = $user['foto'];
                 return;
             }
         });
+
+        // Mostrar a visualização da nova foto do perfil
+        document.getElementById('editFoto').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profileImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     });
     </script>
 </body>
@@ -161,5 +178,29 @@ $_SESSION['foto'] = $user['foto'];
         opacity: 0.9;
         font-size: 18px;
     }
+    .profile-img {
+        position: relative;
+    }
+    .edit-icon {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        padding: 10px;
+    }
+    .profile-img:hover + .edit-icon {
+        display: block;
+    }
+    .edit-icon:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
 </style>
+
+
 
