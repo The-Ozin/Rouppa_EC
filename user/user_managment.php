@@ -36,7 +36,7 @@ $user = mysqli_fetch_assoc($result);
     <div class="container mt-5">
         <h1 class="text-center">Editar Perfil</h1>
         <form action="edit_user.php" method="post" id="editProfileForm" enctype="multipart/form-data">
-            <input type="hidden" name="update_user" value="1"> <!-- Adicione um campo oculto para indicar a atualização do usuário -->
+            <input type="hidden" name="update_user" value="1">
             <div class="mb-3">
                 <label for="editNome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="editNome" name="nome" value="<?php echo htmlspecialchars($user['nome']); ?>">
@@ -65,7 +65,6 @@ $user = mysqli_fetch_assoc($result);
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Função para exibir alerta
         function showAlert(message, type) {
             Swal.fire({
                 title: type === 'error' ? 'Erro!' : 'Sucesso!',
@@ -75,15 +74,13 @@ $user = mysqli_fetch_assoc($result);
             });
         }
 
-        // Validação de Expressão Regular para Email
         function validateEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
 
-        // Validação de Expressão Regular para Senha
         function validatePassword(senha) {
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+            const passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
             return passwordRegex.test(senha);
         }
 
@@ -101,39 +98,26 @@ $user = mysqli_fetch_assoc($result);
                 icon.classList.add('fa-eye');
             }
         });
-    });
 
-        // Capturar envio do formulário de edição de perfil
         document.getElementById('editProfileForm').addEventListener('submit', function(event) {
             const nome = document.getElementById('editNome').value;
             const email = document.getElementById('editEmail').value;
             const senha = document.getElementById('editSenha').value;
 
-            // Validação de Expressão Regular para Email
             if (!validateEmail(email)) {
                 showAlert('Por favor, insira um email válido.', 'error');
                 event.preventDefault();
                 return;
             }
 
-            // Verificar se a senha está vazia
-            if (senha.trim() === '') {
-                showAlert('Por favor, insira uma senha.', 'error');
-                event.preventDefault();
-                return;
-            }
-
-            // Validação de Expressão Regular para Senha
-            if (!validatePassword(senha)) {
-                showAlert('A senha deve ter pelo menos 6 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.', 'error');
+            if (senha.trim() !== '' && !validatePassword(senha)) {
+                showAlert('A senha deve ter pelo menos 6 caracteres, incluindo pelo menos uma letra minúscula, um número e um caractere especial.', 'error');
                 event.preventDefault();
                 return;
             }
         });
-</script>
-
-
-
+    });
+    </script>
 </body>
 <footer>
         <?php include('../layouts/footer.php'); ?>
@@ -156,5 +140,4 @@ $user = mysqli_fetch_assoc($result);
             margin-top: 20vh;
             transform: translateY(-50%);
         }
-
 </style>

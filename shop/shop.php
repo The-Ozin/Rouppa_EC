@@ -149,7 +149,7 @@ if ($result === false) {
 
             if (categoria === 'roupa') {
                 tamanhoSelect.innerHTML = '';
-                ['P', 'M', 'G', 'GG'].forEach(size => {
+                ['PP','P', 'M', 'G', 'GG'].forEach(size => {
                     tamanhoSelect.innerHTML += `<option value="${size}">${size}</option>`;
                 });
             } else if (categoria === 'calcado') {
@@ -231,7 +231,7 @@ footer {
 
 
 .carousel {
-    margin-top: 27vh;
+    margin-top: 10vh;
     width: 400px !important;
     height: 400px !important;
 }

@@ -37,7 +37,7 @@ if (isset($_GET['delete_product_id'])) {
         h1 {
             color: rgb(215, 90, 90);
             text-align: center;
-            margin-top: -10vh;
+            margin-top: 5vh;
             font-weight: bold;
             font-family: 'Noto Serif Display', serif;
         }
@@ -134,11 +134,17 @@ if (isset($_GET['delete_product_id'])) {
                         </div>
                         <div class="mb-3">
                             <label for="editProductCategoria" class="form-label">Categoria</label>
-                            <input type="text" class="form-control" id="editProductCategoria" name="categoria">
+                            <select class="form-select" id="editProductCategoria" name="categoria" onchange="populateSizeDropdown(this.value)">
+                                <option value="Roupa">Roupa</option>
+                                <option value="Calçado">Calçado</option>
+                                <option value="Acessório">Acessório</option>
+                            </select>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3" id="tamanhoDropdown">
                             <label for="editProductTamanho" class="form-label">Tamanho</label>
-                            <input type="text" class="form-control" id="editProductTamanho" name="tamanho">
+                            <select class="form-select" id="editProductTamanho" name="tamanho">
+                                <option value="">Selecione a categoria primeiro</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="editProductPreco" class="form-label">Preço</label>
@@ -190,6 +196,32 @@ if (isset($_GET['delete_product_id'])) {
             var editProductModal = new mdb.Modal(document.getElementById('editProductModal'));
             editProductModal.show();
         }
+
+        function populateSizeDropdown(categoria) {
+            var tamanhoDropdown = document.getElementById('tamanhoDropdown');
+            var tamanhoSelect = document.getElementById('editProductTamanho');
+            tamanhoSelect.innerHTML = ''; 
+
+            if (categoria === 'Roupa') {
+                var sizes = ["PP", "P", "M", "G", "GG"];
+                sizes.forEach(function(size) {
+                    var option = document.createElement("option");
+                    option.text = size;
+                    option.value = size;
+                    tamanhoSelect.appendChild(option);
+                });
+            } else if (categoria === 'Calçado') {
+                for (var i = 25; i <= 45; i++) {
+                    var option = document.createElement("option");
+                    option.text = i.toString();
+                    option.value = i.toString();
+                    tamanhoSelect.appendChild(option);
+                }
+            } else {
+                tamanhoDropdown.style.display = 'none';
+            }
+        }
+
     </script>
 
 </body>

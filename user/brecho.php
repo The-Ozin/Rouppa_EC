@@ -12,6 +12,7 @@ if (!isset($_SESSION['user_name']) && !isset($_SESSION['nome_loja'])) {
 $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : '';
 $tamanho = isset($_GET['tamanho']) ? $_GET['tamanho'] : '';
+$condicao_uso = isset($_GET['condicao_uso']) ? $_GET['condicao_uso'] : '';
 
 $query = "SELECT * FROM produto WHERE tipo_usuario = 'usuario'";
 
@@ -21,6 +22,10 @@ if ($categoria) {
 
 if ($tamanho) {
     $query .= " AND tamanho = '" . mysqli_real_escape_string($conn, $tamanho) . "'";
+}
+
+if ($condicao_uso !== '') {
+    $query .= " AND condicao_uso = '" . mysqli_real_escape_string($conn, $condicao_uso) . "'";
 }
 
 if ($ordem == 'preco_asc') {
@@ -79,6 +84,13 @@ if ($result === false) {
             <option value="preco_asc" <?php if ($ordem == 'preco_asc') echo 'selected'; ?>>Menor preço</option>
             <option value="preco_desc" <?php if ($ordem == 'preco_desc') echo 'selected'; ?>>Maior preço</option>
         </select>
+
+        <label for="condicao_uso">Condição de Uso:</label>
+        <select name="condicao_uso" id="condicao_uso">
+            <option value="">Todas</option>
+            <option value="1" <?php if ($condicao_uso == '1') echo 'selected'; ?>>Novo</option>
+            <option value="0" <?php if ($condicao_uso == '0') echo 'selected'; ?>>Usado</option>
+        </select>
         <button type="submit">Filtrar</button>
     </form>
         <?php
@@ -119,6 +131,7 @@ if ($result === false) {
                 echo '<span>Tamanho: ' . htmlspecialchars($row['tamanho']) . '</span>';
                 echo '<span style="float: right;">Preço: R$ ' . htmlspecialchars($row['preco']) . '</span>';
                 echo '</p>';
+                echo '<p>Condição: ' . ($row['condicao_uso'] ? 'Novo' : 'Usado') . '</p>';
                 if (isset($_SESSION['user_name'])){
                     echo '<button class="add-to-cart btn btn-primary mt-3" data-id="' . $row['prod_id'] . '" data-tipo="loja">Adicionar ao Carrinho</button>';
                 }
@@ -147,7 +160,7 @@ if ($result === false) {
 
             if (categoria === 'roupa') {
                 tamanhoSelect.innerHTML = '';
-                ['P', 'M', 'G', 'GG'].forEach(size => {
+                ['PP','P', 'M', 'G', 'GG'].forEach(size => {
                     tamanhoSelect.innerHTML += `<option value="${size}">${size}</option>`;
                 });
             } else if (categoria === 'calcado') {
@@ -221,7 +234,7 @@ footer {
 }
 
 .carousel {
-    margin-top: 27vh;
+    margin-top: 10vh;
     width: 400px !important;
     height: 400px !important;
 }
@@ -242,7 +255,7 @@ footer {
 .product-filter {
     display: flex;
     align-items: center;
-    margin-bottom: -170px;
+    margin-bottom: -60px;
 }
 
 .product-filter label,

@@ -2,8 +2,8 @@
 session_start();
 include('../connect.php');
 
-if (!isset($_SESSION['user_name']) && !isset($_SESSION['nome_loja'])) {
-    header("Location: http://localhost/Rouppa_EC/user/user_login.php");
+if (!isset($_SESSION['user_name'])) {
+    header("Location: http://localhost/Rouppa_EC/welcome.php");
     exit();
 }
 if (!isset($_SESSION['cart'])) {
