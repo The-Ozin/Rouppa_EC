@@ -69,8 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <h1 class="centralize">Seu Carrinho</h1>
-    <div class="container">
+    <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+        <h1 class="centralize">Seu Carrinho</h1>
         <?php
             foreach ($_SESSION['cart'] as $prod_id => $quantidade) {
 
@@ -114,30 +114,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         ?>
+        <div class="total">
+            <?php
+            $total = 0;
+            foreach ($_SESSION['cart'] as $prod_id => $quantidade) {
+
+                $query = "SELECT preco FROM produto WHERE prod_id = $prod_id";
+                $result = mysqli_query($conn, $query);
+
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    $subtotal = $row['preco'] * $quantidade;
+                    $total += $subtotal;
+                }
+            }
+
+            echo 'Valor Total: R$ ' . number_format($total, 2, ',', '.');
+            ?>
+        </div>
+        <div class="checkout-button">
+            <a href="finalizar_compra.php" class="checkout-link">Finalizar Compra</a>
+        </div>
     </div>
-    <div class="total">
-    <?php
-    $total = 0;
-    foreach ($_SESSION['cart'] as $prod_id => $quantidade) {
-
-        $query = "SELECT preco FROM produto WHERE prod_id = $prod_id";
-        $result = mysqli_query($conn, $query);
-
-        if ($result && mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $subtotal = $row['preco'] * $quantidade;
-            $total += $subtotal;
-        }
-    }
-
-    echo 'Valor Total: R$ ' . number_format($total, 2, ',', '.');
-    ?>
-</div>
-<div class="checkout-button">
-    <a href="finalizar_compra.php" class="checkout-link">Finalizar Compra</a>
-</div>
-
-    <footer>
+    <footer style="margin-top: 30vh; text-align: center;"></footer>
         <?php @include('../layouts/footer.php'); ?>
     </footer>
 </body>
@@ -148,145 +147,128 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');    
 
-    .checkout-button {
-    text-align: center;
-    margin-top: 20px;
-    padding-bottom: 20px;
-}
-
-.checkout-link {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    
-}
-
-.checkout-link:hover {
-    background-color: #218838;
-}
-
-h1.centralize {
-    font-size: 32px; 
-    color: #333; 
-    font-family: 'Anton', sans-serif;
-    text-align: center; 
-    margin-top: 20px; 
-    margin-bottom: 20px; 
-}
-
-.product-card {
+/* Estilo para a página do carrinho */
+.cart-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    margin-top: 5vh; /* Reduzindo a margem superior */
+}
+
+.cart-item {
+    display: flex;
+    flex-direction: column; /* Alterando para uma disposição em coluna */
+    align-items: center; /* Centralizando os itens */
+    width: 80%; /* Ajustando a largura */
+    max-width: 600px; /* Largura máxima */
+    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    max-width: 400px;
+    margin-bottom: 20px; /* Aumentando o espaçamento inferior */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.product-card img {
-    max-width: 100px;
-    margin-bottom: 10px;
+.cart-item img {
+    width: 100px; /* Ajustando a largura da imagem */
+    height: auto;
+    margin-bottom: 20px; /* Aumentando o espaçamento abaixo da imagem */
 }
 
-.product-card h3,
-.product-card p {
-    margin: 5px 0;
-    text-align: center;
+.cart-item-info {
+    width: 100%; /* Definindo a largura total */
 }
 
-.product-card button {
-    padding: 8px 16px;
-    background-color: red;
-    color: #fff;
-    border: none;
+.cart-item h3,
+.cart-item p {
+    margin: 10px 0; /* Aumentando o espaçamento vertical */
+    text-align: center; /* Centralizando o texto */
+}
+
+.cart-item-price {
+    font-weight: bold; /* Deixando o preço em negrito */
+}
+
+.cart-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; /* Aumentando a margem superior */
+    width: 100%; /* Largura total */
+}
+
+.cart-buttons button {
+    padding: 10px 20px; /* Ajustando o espaçamento interno */
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
 }
 
-.product-card button:hover {
-    background-color: darkred;
+.cart-buttons button.remove-button {
+    background-color: #dc3545; /* Cor vermelha */
+    border: 1px solid #dc3545; /* Borda vermelha */
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.quantity-update {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.quantity-update input[type="number"] {
-    width: 50px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 0 10px;
-}
-
-.quantity-update button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.quantity-update button:hover {
-    background-color: #0056b3;
+.cart-buttons button.remove-button:hover {
+    background-color: #c82333; /* Cor vermelha escura ao passar o mouse */
+    border: 1px solid #c82333; /* Borda vermelha escura ao passar o mouse */
 }
 
 .total {
-    background-color: #007bff; /* Cor de fundo azul */
-    color: #fff; /* Cor do texto branco */
-    border-radius: 10px; /* Bordas arredondadas */
-    padding: 10px; /* Espaçamento interno */
-    margin: 20px auto; /* Centralizar horizontalmente */
-    text-align: center; /* Texto centralizado */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    width: 80%; /* Largura da div */
-    max-width: 400px; /* Largura máxima */
-}
-
-.update-button {
-    padding: 8px 16px;
-    background-color: #28a745; /* Cor de fundo verde */
-    color: #fff; /* Cor do texto branco */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.update-button:hover {
-    background-color: #218838; /* Cor de fundo verde escuro ao passar o mouse */
-}
-
-.remove-button {
-    padding: 8px 16px;
-    background-color: red;
+    background-color: #007bff;
     color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 10px;
+    padding: 20px; /* Ajustando o espaçamento interno */
+    margin: 40px auto; /* Aumentando o espaçamento externo */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 400px;
 }
 
-.remove-button:hover {
-    background-color: darkred;
+.checkout-button {
+    text-align: center;
+    margin-top: 20px;
 }
+
+.checkout-link {
+    padding: 12px 24px; /* Aumentando o espaçamento interno */
+    background-color: #28a745; /* Cor verde */
+    color: #fff; /* Cor do texto branco */
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
+}
+
+.checkout-link:hover {
+    background-color: #218838; /* Cor verde escura ao passar o mouse */
+}
+
+/* Adicionando ícones aos botões */
+.cart-buttons button:before {
+    content: "\f07a"; /* Ícone do carrinho de lixo do FontAwesome */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+/* Feedback visual ao clicar nos botões */
+.cart-buttons button:active {
+    opacity: 0.7; /* Escurecendo o botão ao ser clicado */
+}
+
+/* Ajustes para dispositivos móveis */
+@media screen and (max-width: 600px) {
+    .cart-item {
+        width: 95%; /* Ajustando a largura */
+    }
+}
+
+
+/* Estilo para o footer */
 
 footer {
-        margin-top: 55vh;
-    }
+    margin-top: 50vh; /* Ajustando margem superior */
+    text-align: center; /* Centralizando texto */
+}
+
 </style>

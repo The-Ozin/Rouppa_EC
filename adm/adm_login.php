@@ -119,11 +119,15 @@ if (isset($_GET['error'])) {
             width: 50%;
             height: 90%;
             padding: 10vh 10vh;
-            margin-top: 5vh;
+            margin-top: 20vh;
             margin-bottom: 10vh;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             opacity: 0.9;
             font-size: 18px;
+        }
+
+        footer {
+            margin-top: 20vh;
         }
 
         
