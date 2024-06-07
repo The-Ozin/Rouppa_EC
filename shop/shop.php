@@ -211,35 +211,30 @@ footer {
     margin-top: 25px;
 }
 
-    .sale {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: orangered;
-        font-family: 'Anton', sans-serif;
-        color: black;
-        font-weight: 400;
-        font-size: 80px;
-        height: 200px;
-        width: 100%;
-        margin: 0;
-        position: absolute;
-        top: 12vh;
-        border: 1px solid black;
-        padding: 20px;
-    }
-
-
 .carousel {
     margin-top: 10vh;
     width: 400px !important;
     height: 400px !important;
+    position: relative; /* Adicionado para garantir que os elementos filhos sejam posicionados corretamente */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: transparent; /* Removendo qualquer cor de fundo */
+    background-image: none; /* Removendo qualquer imagem de fundo */
+    border: none; /* Removendo qualquer borda */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    filter: invert(1); /* Inverte a cor das setas para preto */
+    opacity: 1; /* Garante que as setas sejam completamente opacas */
 }
 
 .d-block {
-    width: 400px !important;
-    height: 400px !important;
-    object-fit: cover;
+    width: 100%; /* Ajusta a largura para 100% do contêiner pai */
+    height: 100%; /* Ajusta a altura para 100% do contêiner pai */
+    object-fit: contain; /* Garante que a imagem seja completamente visível */
 }
 
 h1 {
@@ -251,30 +246,85 @@ h1 {
 .product-filter {
     display: flex;
     align-items: center;
-    margin-bottom: -60px;
+    margin-bottom: 20px; /* Ajustando a margem inferior */
+    background-color: transparent; /* Fundo transparente */
+    padding: 0; /* Removendo espaçamento interno */
+    border-radius: 0; /* Removendo cantos arredondados */
+    box-shadow: none; /* Removendo sombra */
+    margin-left: 12vh;
+    font-size: 20px;
 }
 
 .product-filter label,
 .product-filter select {
     margin-right: 10px;
+    font-family: 'Roboto', sans-serif; /* Fonte moderna */
+    color: rgb(90, 29, 0); /* Cor do texto */
+}
+
+.product-filter select {
+    padding: 8px 12px; /* Espaçamento interno */
+    border: 2px solid rgb(215, 90, 90); /* Borda com cor temática */
+    border-radius: 4px; /* Cantos arredondados */
+    background-color: #fff; /* Fundo branco */
+    color: rgb(215, 90, 90); /* Cor do texto */
+    cursor: pointer;
+    transition: border-color 0.3s; /* Transição suave para mudanças */
+}
+
+.product-filter select:hover,
+.product-filter select:focus {
+    border-color: #a83232; /* Cor de borda ao focar/passar o mouse */
+    outline: none; /* Remover contorno padrão */
 }
 
 .product-filter button {
     padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: rgb(215, 90, 90); /* Cor de fundo temática */
+    color: #fff; /* Cor do texto branco */
     border: none;
-    border-radius: 4px;
+    border-radius: 4px; /* Cantos arredondados */
     cursor: pointer;
+    font-family: 'Roboto', sans-serif; /* Fonte moderna */
+    transition: background-color 0.3s; /* Transição suave para mudanças */
 }
 
 .product-filter button:hover {
-    background-color: #0056b3;
+    background-color: #a83232; /* Cor de fundo ao passar o mouse */
 }
 
 .product-card {
-        padding-right: 25px; 
-        height: 70%;
-        margin: 10;
-    }
+    padding: 20px; /* Ajustando padding para espaço interno */
+    height: auto; /* Ajustando altura conforme o conteúdo */
+    margin: 50px;
+    border-radius: 8px; /* Cantos arredondados */
+    background-color: #fff; /* Fundo branco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+    overflow: hidden; /* Garantir que conteúdo extra não vaze */
+    transition: transform 0.3s; /* Transição suave para mudanças */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centralizando elementos no eixo vertical */
+    justify-content: space-between; /* Espaçando conteúdo uniformemente */
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+.add-to-cart {
+    padding: 10px 20px;
+    background-color: rgb(215, 90, 90); /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto */
+    border: none;
+    border-radius: 4px; /* Cantos arredondados */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transição suave para mudanças */
+    align-self: center; /* Centraliza o botão no card */
+}
+
+.add-to-cart:hover {
+    background-color: #a83232; /* Cor de fundo ao passar o mouse */
+}
+
 </style>

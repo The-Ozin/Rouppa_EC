@@ -95,18 +95,15 @@
     color: rgb(215, 90, 90);
 }
 
-
 .opcoes-container {
     display: flex;
     justify-content: center;
-    gap: 80px;
+    gap: 80px; 
     flex-wrap: wrap; 
     margin-top: 20vh;
 }
 
-
 .opcao {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,7 +113,9 @@
     background-color: rgb(90, 29, 0)!important;
     transition: transform 0.3s ease;
     cursor: pointer;
-    max-width: 450px; 
+    width: 500px; /* Definindo uma largura fixa */
+    max-width: 500px; /* Garantindo que os containers não excedam essa largura */
+    box-sizing: border-box; /* Inclui padding e border na largura total do elemento */
 }
 
 .opcao:hover {
@@ -125,8 +124,9 @@
 
 .opcao img {
     width: 100%; 
-    height: auto;
-    margin-bottom: 20px;
+    height: 700px; 
+    object-fit: cover; 
+    margin-bottom: 40px;
 }
 
 .opcao h2 {
@@ -169,8 +169,8 @@ footer {
 
     .opcao {
         width: 100%;
+        max-width: none;
         margin-bottom: 20px;
-        max-width: none; 
     }
 
     .opcao img {
@@ -182,8 +182,6 @@ footer {
         margin-top: 20vh;
     }
 }
-
-
 </style>
 
 

@@ -287,6 +287,6 @@ h1.centralize {
 }
 
 footer {
-        margin-top: 20%;
+        margin-top: 55vh;
     }
 </style>

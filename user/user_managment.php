@@ -70,10 +70,8 @@ $_SESSION['foto'] = $user['foto'];
                             </button>
                         </div>
                     </div>
-                </form>
-                <div class="text-center">
                     <button type="submit" class="btn btn-primary" style="background-color: rgb(215,90, 90)">Salvar Alterações</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
