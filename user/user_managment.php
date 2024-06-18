@@ -1,5 +1,8 @@
 <?php
 session_start();
+@include('../checarInatividade.php');
+checarInatividade();
+
 
 include('../connect.php');
 if (!isset($_SESSION['user_name'])) {

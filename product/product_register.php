@@ -1,5 +1,7 @@
 <?php
 session_start();
+@include('../checarInatividade.php');
+checarInatividade();
 $isLoja = isset($_SESSION['cnpj']);
 $isUsuario = isset($_SESSION['cpf']);
 

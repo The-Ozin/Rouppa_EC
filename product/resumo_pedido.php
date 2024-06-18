@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_name'])) {
 
 $pedido_id = $_GET['pedido_id'];
 
-// Consulta para obter os detalhes do pedido
+
 $query_pedido = "SELECT data_pedido, fk_usuario_cpf, total,
                         endereco_cep, endereco_rua, endereco_numero,
                         endereco_complemento, endereco_bairro,

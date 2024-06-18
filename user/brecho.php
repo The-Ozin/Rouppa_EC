@@ -1,5 +1,7 @@
 <?php
 session_start();
+@include('../checarInatividade.php');
+checarInatividade();
 include('../connect.php');
 
 if (!isset($_SESSION['user_name']) && !isset($_SESSION['nome_loja'])) {
@@ -128,10 +130,10 @@ if ($result === false) {
                 echo '<h5>' . htmlspecialchars($row['nome']) . '</h5>';
                 echo '<p>' . htmlspecialchars($row['descricao_']) . '</p>';
                 echo '<p>';
-                echo '<span>Tamanho: ' . htmlspecialchars($row['tamanho']) . '</span>';
+                echo '<p>Tamanho: ' . htmlspecialchars($row['tamanho']) . '</p>';
                 echo '<span style="float: right;">Preço: R$ ' . htmlspecialchars($row['preco']) . '</span>';
                 echo '</p>';
-                echo '<p>Condição: ' . ($row['condicao_uso'] ? 'Novo' : 'Usado') . '</p>';
+                echo '<span>Condição: ' . ($row['condicao_uso'] ? 'Novo' : 'Usado') . '</span>';
                 if (isset($_SESSION['user_name'])){
                     echo '<button class="add-to-cart btn btn-primary mt-3" data-id="' . $row['prod_id'] . '" data-tipo="loja">Adicionar ao Carrinho</button>';
                 }

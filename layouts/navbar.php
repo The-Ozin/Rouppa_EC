@@ -127,6 +127,7 @@ session_start();
                         >
                             <i class="fas fa-user" style="color: white;"></i>
                             <span class="ms-2" style="color: white;">Bem-vindo, visitante!</span>
+                            
                         </a>
                     <?php endif; ?>
             
@@ -137,8 +138,8 @@ session_start();
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/adm/adm.php">Gerenciar Usuários e Lojas</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/adm/produtos_adm.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
-                            <?php elseif (isset($_SESSION['user_name'])): ?>
 
+                            <?php elseif (isset($_SESSION['user_name'])): ?>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_managment.php">Gerenciar Perfil</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_product_managment.php">Gerenciar Produtos</a></li>
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/product/product_register.php">Cadastar Produto</a></li>
@@ -150,10 +151,10 @@ session_start();
                                 <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/logout.php">Logout</a></li>
                             <?php endif; ?>
                         <?php else: ?>
-
                             <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login</a></li>
                             <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_register.php">Cadastro</a></li>
                         <?php endif; ?>
+
                     </ul>
                 </div>
             </div>

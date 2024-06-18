@@ -1,11 +1,12 @@
 <?php
-
 if (isset($_GET['error'])) {
 
     $error = urldecode($_GET['error']);
 
     echo "<p style='color: red;'>$error</p>";
 }
+
+
 ?>
 
 <!DOCTYPE html>

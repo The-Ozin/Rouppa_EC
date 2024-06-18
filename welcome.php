@@ -1,7 +1,11 @@
- <?php 
- session_start();
- @include('./layouts/navbar.php');
-  ?>
+<?php
+session_start();
+
+@include('checarInatividade.php');
+checarInatividade();
+@include('./layouts/navbar.php');
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +49,8 @@
     ></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     </head>
     <body>
             <h1 class="titulo">Rouppa</h1>

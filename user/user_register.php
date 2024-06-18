@@ -74,6 +74,7 @@
                     <input type="email" name="registerEmail" id="registerEmail" class="form-control border border-dark" style="background-color: white;" required />
                 </div>
 
+
                 <!-- CPF input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label text-white" for="registerCPF">CPF</label>
