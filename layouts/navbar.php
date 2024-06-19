@@ -115,22 +115,23 @@ session_start();
                                 <i class="fas fa-user" style="color: white;"></i>
                                 <span class="ms-2" style="color: white;">Olá, <?php echo $_SESSION['adm_name']; ?>!</span>
                         </a>
-                    <?php else: ?>
-
-                        <a
-                            data-mdb-dropdown-init
-                            class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                            href="#"
-                            id="navbarDropdownMenuAvatar"
-                            role="button"
-                            aria-expanded="false"
-                        >
-                            <i class="fas fa-user" style="color: white;"></i>
-                            <span class="ms-2" style="color: white;">Bem-vindo, visitante!</span>
-                            
-                        </a>
-                    <?php endif; ?>
-            
+                        <?php else: ?>
+                            <a
+                                data-mdb-dropdown-init
+                                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                                href="#"
+                                id="navbarDropdownMenuAvatar"
+                                role="button"
+                                aria-expanded="false"
+                            >
+                                <i class="fas fa-user" style="color: white;"></i>
+                                <span class="ms-2" style="color: white;">Bem-vindo, visitante!</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login</a></li>
+                                <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_register.php">Cadastro</a></li>
+                            </ul>
+                        <?php endif; ?>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                         <?php if (!empty($_SESSION)): ?>
@@ -154,7 +155,6 @@ session_start();
                             <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_login.php">Login</a></li>
                             <li><a class="dropdown-item" href="http://localhost/Rouppa_EC/user/user_register.php">Cadastro</a></li>
                         <?php endif; ?>
-
                     </ul>
                 </div>
             </div>
